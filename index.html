@@ -556,7 +556,7 @@
   <div class="wrap">
     <div class="block-head">
       <div class="fig">IL PRODOTTO</div>
-      <h2>Cosa fa IQ Finance, in una pagina</h2>
+      <h2>Cosa fa IQ Finance</h2>
       <p>Un motore quantitativo che porta la disciplina di un hedge fund fuori dai suoi confini abituali, restando sempre non-custodial.</p>
     </div>
     <div class="dd-dark-row">
@@ -616,7 +616,7 @@
   <div class="wrap pillar-content">
     <div class="fig">INTELLIGENZA<br>ARTIFICIALE</div>
     <div>
-      <h3>Un'IA che ascolta bene, e sa di non dover decidere</h3>
+      <h3>L'IA interpreta. Il codice decide.</h3>
       <p>Un modello linguistico come Claude interpreta oggi il linguaggio naturale con una flessibilità che nessun modulo decisionale rigido della finanza tradizionale ha mai avuto: capisce sfumature, gestisce ambiguità, chiede chiarimenti se serve. È un salto reale, non marketing — chiunque abbia provato a programmare un sistema a regole "se-allora" per interpretare intenti umani sa quanto sia fragile rispetto a questo.</p>
       <p>Ma la stessa flessibilità che rende un'IA utile a interpretare è anche ciò che la rende pericolosa da lasciar decidere da sola: un modello probabilistico può allucinare, fraintendere una frase ambigua, comportarsi in modo imprevisto proprio nei momenti di mercato più volatili. Per questo nel nostro sistema l'IA ha un solo compito, netto: tradurre l'intento in una struttura dati verificabile. Non decide mai se eseguire.</p>
       <p><b>Il prossimo passo, dichiarato apertamente.</b> Con dati proprietari di parsing finanziario raccolti in produzione, valuteremo il fine-tuning di modelli linguistici open-source (famiglia Qwen, DeepSeek o comparabili) — per ridurre il costo marginale per utente e affinare l'aderenza al dominio. Il fine-tuning cambierebbe lo stile del modello, mai il suo ruolo: resterebbe comunque sottoposto, senza eccezioni, alla validazione del motore deterministico.</p>
@@ -628,7 +628,7 @@
   <div class="wrap pillar-content">
     <div class="fig">BLOCKCHAIN &amp;<br>TOKENIZZAZIONE</div>
     <div>
-      <h3>Un registro pubblico invece di una promessa privata</h3>
+      <h3>Un registro pubblico, non una voce in un database privato</h3>
       <p>Un titolo azionario in un conto tradizionale esiste giuridicamente come voce in un database privato — quello della banca depositaria, della camera di compensazione. Tu vedi un numero sull'app; il registro autorevole che decide se quel numero è vero non lo controlli, non lo puoi ispezionare, e in caso di dissesto dell'intermediario diventa oggetto di una lunga procedura prima che tu recuperi qualcosa — quando va bene.</p>
       <p>Un asset tokenizzato su una blockchain pubblica inverte questa relazione: il registro autorevole è pubblico, chiunque può verificarlo in ogni momento, e la titolarità passa attraverso una firma crittografica che solo tu controlli — non la buona fede di un intermediario. Non è un dettaglio implementativo: è un cambio della domanda "chi decide se questo è davvero mio", dalla risposta "un'istituzione che devi sperare sia solvibile" alla risposta "un protocollo che chiunque può verificare".</p>
       <p>Sul piano pratico questo si traduce in regolamento T+0 invece di T+2, e in un motore di rischio che può bilanciare classi di RWA diverse nello stesso Smart Vault, perché tutte vivono sullo stesso registro verificabile — non su sistemi incompatibili che nessuno riconcilia in tempo reale. Il meccanismo è diretto: ogni asset reale tokenizzato nasce da un mint 1:1 verificabile contro la sua contropartita e può essere riscattato allo stesso modo in qualsiasi momento — non un'approssimazione sintetica, ma una rappresentazione a garanzia piena, con ogni emissione o riscatto scritto pubblicamente sul registro.</p>
@@ -795,14 +795,14 @@
   <div class="wrap">
     <div class="block-head" style="margin-bottom:26px;">
       <div class="fig">APPROFONDIMENTO TECNICO</div>
-      <h2>Come è costruito, senza scorciatoie nella spiegazione</h2>
+      <h2>Come è costruito, in dettaglio</h2>
     </div>
     <p class="dd-intro">Quello che segue non è materiale di marketing semplificato: è la descrizione reale dell'architettura, con gli stessi nomi tecnici, le stesse soglie numeriche e gli stessi limiti che useremmo in una due diligence. Se una startup fintech merita fiducia, deve reggere anche a questo livello di dettaglio.</p>
 
     <div class="dd-block">
       <div class="dd-label">LIVELLO 1<br>Interfaccia &amp; parsing</div>
       <div>
-        <h3>Un modello linguistico che non ha mai l'ultima parola</h3>
+        <h3>Traduce l'intento, non decide l'esecuzione</h3>
         <p>L'interfaccia conversazionale è costruita su Vercel AI SDK con Claude come modello di interpretazione. Il suo unico compito è tradurre l'intento espresso in linguaggio naturale in una struttura dati JSON rigorosa — asset target, pesi percentuali, soglie di stop-loss, frequenza di esecuzione. Non è mai il modello a decidere se un'operazione può procedere.</p>
         <p>Questa distinzione non è cosmetica: nel codice, il tool che sottomette esecuzioni on-chain è tecnicamente accessibile al modello, ma resta strutturalmente impotente finché una riga del database non è già passata allo stato <code>AWAITING_MANAGER_SIGNATURE</code> — uno stato raggiungibile solo dopo una firma crittografica reale dell'utente, verificata off-chain contro il wallet registrato.</p>
         <p><b>La potenza dell'IA, oggi e domani.</b> Un modello linguistico generico come Claude è già in grado di interpretare intenti finanziari espressi in modo naturale e ambiguo — un salto reale rispetto ai moduli decisionali rigidi (i vecchi alberi "se-allora") che la finanza tradizionale usa da decenni. Ma la roadmap non si ferma qui: una volta raccolti dati proprietari di parsing finanziario in produzione, prevediamo di valutare il fine-tuning di modelli linguistici open-source (famiglia Qwen, DeepSeek o comparabili) su infrastruttura dedicata — per ridurre il costo marginale per utente e affinare l'aderenza al dominio specifico (terminologia finanziaria, formati di rischio). Il fine-tuning cambierebbe lo stile del modello, mai il suo ruolo: resterebbe comunque sottoposto, senza eccezioni, alla validazione del Livello 2.</p>
