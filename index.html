@@ -548,7 +548,7 @@
 <div class="stat-strip">
   <hr class="hairline">
   <div class="wrap">
-    <div class="item"><div class="n num">[[N_TEST]]</div><div class="l">test superati</div></div>
+    <div class="item"><div class="n num">896</div><div class="l">test superati</div></div>
     <div class="item"><div class="n num">17</div><div class="l">asset RWA</div></div>
     <div class="item"><div class="n num">3</div><div class="l">livelli di controllo</div></div>
     <div class="item"><div class="n num">0</div><div class="l">fondi reali oggi</div></div>
@@ -635,7 +635,7 @@
       <h3>Un registro pubblico, non una voce in un database privato</h3>
       <p>Un titolo azionario in un conto tradizionale esiste giuridicamente come voce in un database privato — quello della banca depositaria, della camera di compensazione. Tu vedi un numero sull'app; il registro autorevole che decide se quel numero è vero non lo controlli, non lo puoi ispezionare, e in caso di dissesto dell'intermediario diventa oggetto di una lunga procedura prima che tu recuperi qualcosa — quando va bene.</p>
       <p>Un asset tokenizzato su una blockchain pubblica inverte questa relazione: il registro autorevole è pubblico, chiunque può verificarlo in ogni momento, e la titolarità passa attraverso una firma crittografica che solo tu controlli — non la buona fede di un intermediario. Non è un dettaglio implementativo: è un cambio della domanda "chi decide se questo è davvero mio", dalla risposta "un'istituzione che devi sperare sia solvibile" alla risposta "un protocollo che chiunque può verificare".</p>
-      <p>Sul piano pratico questo si traduce in regolamento T+0 invece di T+2, e in un motore di rischio che può bilanciare classi di RWA diverse nello stesso Smart Vault, perché tutte vivono sullo stesso registro verificabile — non su sistemi incompatibili che nessuno riconcilia in tempo reale. Il meccanismo è diretto: ogni token è emesso e riscattato 1:1 contro stablecoin tramite un contratto di mercato primario, con ogni emissione e riscatto registrato pubblicamente. Oggi, su rete di test, i token replicano il prezzo del sottostante senza detenerlo: la custodia del sottostante reale, con un partner regolamentato, è un requisito prima del lancio con capitale reale.</p>
+      <p>Sul piano pratico questo si traduce in regolamento T+0 invece di T+2, e in un motore di rischio che può bilanciare classi di RWA diverse nello stesso Smart Vault, perché tutte vivono sullo stesso registro verificabile — non su sistemi incompatibili che nessuno riconcilia in tempo reale. Il meccanismo è diretto: ogni token è emesso e riscattato 1:1 contro stablecoin tramite un contratto di mercato primario, con ogni emissione e riscatto registrato pubblicamente. Oggi, su rete di test, i token sono emessi e riscattati alla pari con USDC e non seguono ancora il prezzo del sottostante: l'aggancio al prezzo e la custodia del sottostante reale, con un partner regolamentato, sono requisiti prima del lancio con capitale reale.</p>
     </div>
   </div>
 </section>
@@ -839,7 +839,7 @@
       <div class="dd-label">ASSET REALI<br>Mint &amp; redeem</div>
       <div>
         <h3>Titoli tokenizzati, mint e redeem trasparenti on-chain</h3>
-        <p>Gli asset RWA sono coniati e riscattati 1:1 contro una stablecoin attraverso un contratto di mercato primario dedicato, con pattern checks-effects-interactions esplicito (il token viene distrutto prima del trasferimento della contropartita, per prevenire attacchi di reentrancy sulla riserva). Il catalogo attuale conta 17 token RWA, tutti verificabili on-chain, deployati su rete di test. Oggi, su rete di test, i token replicano il prezzo del sottostante senza detenerlo: la custodia del sottostante reale, con un partner regolamentato, è un requisito prima del lancio con capitale reale.</p>
+        <p>Gli asset RWA sono coniati e riscattati 1:1 contro una stablecoin attraverso un contratto di mercato primario dedicato, con pattern checks-effects-interactions esplicito (il token viene distrutto prima del trasferimento della contropartita, per prevenire attacchi di reentrancy sulla riserva). Il catalogo attuale conta 17 token RWA, tutti verificabili on-chain, deployati su rete di test. Oggi, su rete di test, i token sono emessi e riscattati alla pari con USDC e non seguono ancora il prezzo del sottostante: l'aggancio al prezzo e la custodia del sottostante reale, con un partner regolamentato, sono requisiti prima del lancio con capitale reale.</p>
         <div class="dd-tags"><span>Mint/redeem 1:1</span><span>Checks-effects-interactions</span><span>17 RWA</span></div>
       </div>
     </div>
@@ -906,9 +906,8 @@
     </div>
     <div class="status-editorial">
       <div class="status-feature">
-        <!-- [[N_TEST]] [[DATA]]: sostituire con il conteggio reale e la data dell'ultima verifica -->
-        <div class="n num">[[N_TEST]]<span style="font-size:0.4em; color:var(--text-faint);">/[[N_TEST]]</span></div>
-        <div class="l">test automatici superati (verifica del [[DATA]])</div>
+        <div class="n num">896<span style="font-size:0.4em; color:var(--text-faint);">/896</span></div>
+        <div class="l">test automatici superati (verifica del 03/10/2026)</div>
         <div class="callout" style="margin-top:32px;">
           <p><b>Non è un dettaglio rimandato per caso.</b> L'audit di sicurezza esterno e la verifica pubblica del codice sono passaggi che vogliamo completare prima di qualsiasi lancio con fondi reali, non dopo. Preferiamo mostrarti dove siamo oggi piuttosto che promettere dove saremo domani.</p>
         </div>
@@ -928,12 +927,11 @@
       <div class="fr-mock-body">
         <div class="cs-label">OGNI ESECUZIONE PROPOSTA, TRACCIATA COME UN BLOCCO VERIFICABILE</div>
         <div class="chain-node-row">
-          <!-- [[TX_HASH_1]] [[TX_HASH_2]] [[TX_HASH_3]]: sostituire con hash reali di esecuzioni confermate su Arbitrum Sepolia -->
-          <div class="chain-node done"><div class="cn-dot">✓</div><a class="cn-hash" href="https://sepolia.arbiscan.io/tx/[[TX_HASH_1]]" target="_blank" rel="noreferrer" style="text-decoration:none;">[[TX_HASH_1]]</a></div>
+          <div class="chain-node done"><div class="cn-dot">✓</div><a class="cn-hash" href="https://sepolia.arbiscan.io/tx/0x12e3d3833344535f590ee4ccbcbbd21758591d471f78d2ca8fb6af23638e3939" target="_blank" rel="noreferrer" style="text-decoration:none;" title="0x12e3d3833344535f590ee4ccbcbbd21758591d471f78d2ca8fb6af23638e3939">0x12e3…3939</a></div>
           <div class="cn-line"></div>
-          <div class="chain-node done"><div class="cn-dot">✓</div><a class="cn-hash" href="https://sepolia.arbiscan.io/tx/[[TX_HASH_2]]" target="_blank" rel="noreferrer" style="text-decoration:none;">[[TX_HASH_2]]</a></div>
+          <div class="chain-node done"><div class="cn-dot">✓</div><a class="cn-hash" href="https://sepolia.arbiscan.io/tx/0xce87e2015eba94db71b52ccdd520aa548d7414d248e82c0f2971eaa63604b563" target="_blank" rel="noreferrer" style="text-decoration:none;" title="0xce87e2015eba94db71b52ccdd520aa548d7414d248e82c0f2971eaa63604b563">0xce87…b563</a></div>
           <div class="cn-line"></div>
-          <div class="chain-node done"><div class="cn-dot">✓</div><a class="cn-hash" href="https://sepolia.arbiscan.io/tx/[[TX_HASH_3]]" target="_blank" rel="noreferrer" style="text-decoration:none;">[[TX_HASH_3]]</a></div>
+          <div class="chain-node done"><div class="cn-dot">✓</div><a class="cn-hash" href="https://sepolia.arbiscan.io/tx/0x4d6455fd2acdf2fff3e7fa276e2c578f4a9f8b4a17d96813c2f2f4abe3986de7" target="_blank" rel="noreferrer" style="text-decoration:none;" title="0x4d6455fd2acdf2fff3e7fa276e2c578f4a9f8b4a17d96813c2f2f4abe3986de7">0x4d64…6de7</a></div>
           <div class="cn-line pending"></div>
           <div class="chain-node pending"><div class="cn-dot">···</div><div class="cn-hash">in attesa firma</div></div>
         </div>
