@@ -1,0 +1,18 @@
+# Parole vietate nella home (index.html, en/index.html). Una per riga.
+# Sigle in MAIUSCOLO: confronto esatto. Altre: maiuscole/minuscole indifferenti.
+# Il contenuto tecnico va nella pagina Tecnologia, dove queste parole sono ammesse.
+RWA
+DSR
+backstop
+keeper
+keepers
+EIP
+EIP-191
+MEV
+non-custodial
+non custodial
+# Niente prezzi o fee sul sito
+fee
+performance fee
+management fee
+€/mese

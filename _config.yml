@@ -1,0 +1,3 @@
+# Configurazione Jekyll di GitHub Pages: file interni da non pubblicare.
+exclude:
+  - CLAUDE.md

@@ -1,0 +1,5 @@
+#!/bin/sh
+# Controllo prima del push: blocca se il sito ha segnaposto "[[", HTML non valido
+# o parole vietate nella home. Attivazione (una volta per clone):
+#   git config core.hooksPath .githooks
+exec python3 "$(git rev-parse --show-toplevel)/.githooks/check_site.py"
