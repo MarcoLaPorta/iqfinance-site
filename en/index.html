@@ -548,7 +548,7 @@
 <div class="stat-strip">
   <hr class="hairline">
   <div class="wrap">
-    <div class="item"><div class="n num">896</div><div class="l">tests passed</div></div>
+    <div class="item"><div class="n num">911</div><div class="l">tests passed</div></div>
     <div class="item"><div class="n num">17</div><div class="l">RWA assets</div></div>
     <div class="item"><div class="n num">3</div><div class="l">control layers</div></div>
     <div class="item"><div class="n num">0</div><div class="l">real funds today</div></div>
@@ -576,14 +576,12 @@
       <div>
         <div class="dm-tag on">DELEGATED MANAGEMENT</div>
         <h3>AI Agent</h3>
-        <p>Describe the goal once; the engine manages rebalancing over time within the parameters you set — verified at every execution, not just once at the start.</p>
-        <div class="dm-fee"><b>10%</b> performance fee (above the High-Water Mark)</div>
+        <p>Describe the goal; the engine turns it into a strategy and checks it before every execution. Automatic rebalancing over time, within the parameters you set, is planned for a later phase.</p>
       </div>
       <div>
         <div class="dm-tag on">DIRECT EXECUTION</div>
         <h3>Self-directed exchange</h3>
         <p>Buy and sell whitelisted RWA assets manually whenever you want, with no delegation — MEV-protected routing, the same non-custodial custody, no intermediary between you and your Smart Vault.</p>
-        <div class="dm-fee"><b>0.15%</b> execution markup, no management fee</div>
       </div>
     </div>
     <div class="dark-market-head">
@@ -635,7 +633,7 @@
       <h3>A public ledger, not an entry in a private database</h3>
       <p>A share in a traditional account exists legally as an entry in a private database — that of the custodian bank, the clearing house. You see a number in the app; the authoritative ledger that decides whether that number is true is one you do not control and cannot inspect, and if the intermediary fails it becomes the subject of a long procedure before you recover anything — when things go well.</p>
       <p>A tokenized asset on a public blockchain reverses this relationship: the authoritative ledger is public, anyone can verify it at any time, and ownership passes through a cryptographic signature that only you control — not the good faith of an intermediary. It is not an implementation detail: it changes the answer to the question "who decides whether this is really mine", from "an institution you have to hope is solvent" to "a protocol anyone can verify".</p>
-      <p>In practical terms this translates into T+0 settlement instead of T+2, and into a risk engine that can balance different RWA classes within the same Smart Vault, because they all live on the same verifiable ledger — not on incompatible systems that nobody reconciles in real time. The mechanism is direct: every token is issued and redeemed 1:1 against a stablecoin through a primary-market contract, with every issuance and redemption recorded publicly. Today, on the test network, tokens are issued and redeemed at par with USDC and do not yet track the price of the underlying asset: price tracking and custody of the real underlying with a regulated partner are requirements before any launch with real capital.</p>
+      <p>In practical terms this means a risk engine that can balance different RWA classes within the same Smart Vault, because they all live on the same verifiable ledger — not on incompatible systems that nobody reconciles in real time. The mechanism is direct: every token is issued and redeemed 1:1 against a stablecoin through a primary-market contract, with every issuance and redemption recorded publicly. Today, on the test network, tokens are issued and redeemed at par with USDC and do not yet track the price of the underlying asset: price tracking and custody of the real underlying with a regulated partner are requirements before any launch with real capital.</p>
     </div>
   </div>
 </section>
@@ -847,7 +845,7 @@
       <div class="dd-label">HONESTY<br>Stated limits</div>
       <div>
         <h3>What isn't true yet, said before you ask</h3>
-        <p>The system currently operates exclusively on Arbitrum Sepolia, a test network: no real funds have ever been moved. The contract code is not yet publicly verified on a block explorer, and has not received a security audit from an independent third party — both steps explicitly planned before any launch with real capital, not details postponed by chance. Today your signature is verified by our backend; verification directly in the contract, including the minimum price you approved, is in development. We consider transparency about these limits as much a part of the product as the code itself.</p>
+        <p>The system currently operates exclusively on Arbitrum Sepolia, a test network: no real funds have ever been moved. The contract code is not yet publicly verified on a block explorer, and has not received a security audit from an independent third party — both steps explicitly planned before any launch with real capital, not details postponed by chance. Today your signature is verified by our backend; verification directly in the contract, including the minimum price you approved, is planned for a later phase. We consider transparency about these limits as much a part of the product as the code itself.</p>
       </div>
     </div>
   </div>
@@ -867,7 +865,7 @@
       </div>
       <div class="roadmap-row">
         <div class="rn">01</div>
-        <div><h3>Training a Proprietary AI</h3><p>Systematic collection of real interaction data for the vertical training of our own language model on the financial domain, starting from the first real users — not an interface on top of a generic third-party model.</p></div>
+        <div><h3>Proprietary AI</h3><p>Decided after the round, based on real usage data.</p></div>
       </div>
       <div class="roadmap-row">
         <div class="rn">02</div>
@@ -905,8 +903,8 @@
     </div>
     <div class="status-editorial">
       <div class="status-feature">
-        <div class="n num">896<span style="font-size:0.4em; color:var(--text-faint);">/896</span></div>
-        <div class="l">automated tests passed (verified on October 3, 2026)</div>
+        <div class="n num">911<span style="font-size:0.4em; color:var(--text-faint);">/911</span></div>
+        <div class="l">automated tests passed (verified on October 6, 2026)</div>
         <div class="callout" style="margin-top:32px;">
           <p><b>It is not a detail postponed by chance.</b> The external security audit and the public verification of the code are steps we want to complete before any launch with real funds, not after. We prefer to show you where we are today rather than promise where we will be tomorrow.</p>
         </div>

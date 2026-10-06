@@ -548,7 +548,7 @@
 <div class="stat-strip">
   <hr class="hairline">
   <div class="wrap">
-    <div class="item"><div class="n num">896</div><div class="l">test superati</div></div>
+    <div class="item"><div class="n num">911</div><div class="l">test superati</div></div>
     <div class="item"><div class="n num">17</div><div class="l">asset RWA</div></div>
     <div class="item"><div class="n num">3</div><div class="l">livelli di controllo</div></div>
     <div class="item"><div class="n num">0</div><div class="l">fondi reali oggi</div></div>
@@ -576,14 +576,12 @@
       <div>
         <div class="dm-tag on">GESTIONE DELEGATA</div>
         <h3>Agente IA</h3>
-        <p>Descrivi l'obiettivo una volta, il motore gestisce i rebalancing nel tempo dentro i parametri che hai fissato — verificati a ogni esecuzione, mai un'unica volta all'inizio.</p>
-        <div class="dm-fee"><b>10%</b> performance fee (oltre l'High-Water Mark)</div>
+        <p>Descrivi l'obiettivo; il motore lo traduce in una strategia e la verifica prima di ogni esecuzione. Il ribilanciamento automatico nel tempo, dentro i parametri che hai fissato, è previsto in una fase successiva.</p>
       </div>
       <div>
         <div class="dm-tag on">ESECUZIONE DIRETTA</div>
         <h3>Exchange self-directed</h3>
         <p>Compra e vendi manualmente asset RWA whitelisted quando vuoi, senza delega — instradamento protetto MEV, stessa custodia non-custodial, nessun intermediario tra te e il tuo Smart Vault.</p>
-        <div class="dm-fee"><b>0,15%</b> markup di esecuzione, nessuna fee di gestione</div>
       </div>
     </div>
     <div class="dark-market-head">
@@ -635,7 +633,7 @@
       <h3>Un registro pubblico, non una voce in un database privato</h3>
       <p>Un titolo azionario in un conto tradizionale esiste giuridicamente come voce in un database privato — quello della banca depositaria, della camera di compensazione. Tu vedi un numero sull'app; il registro autorevole che decide se quel numero è vero non lo controlli, non lo puoi ispezionare, e in caso di dissesto dell'intermediario diventa oggetto di una lunga procedura prima che tu recuperi qualcosa — quando va bene.</p>
       <p>Un asset tokenizzato su una blockchain pubblica inverte questa relazione: il registro autorevole è pubblico, chiunque può verificarlo in ogni momento, e la titolarità passa attraverso una firma crittografica che solo tu controlli — non la buona fede di un intermediario. Non è un dettaglio implementativo: è un cambio della domanda "chi decide se questo è davvero mio", dalla risposta "un'istituzione che devi sperare sia solvibile" alla risposta "un protocollo che chiunque può verificare".</p>
-      <p>Sul piano pratico questo si traduce in regolamento T+0 invece di T+2, e in un motore di rischio che può bilanciare classi di RWA diverse nello stesso Smart Vault, perché tutte vivono sullo stesso registro verificabile — non su sistemi incompatibili che nessuno riconcilia in tempo reale. Il meccanismo è diretto: ogni token è emesso e riscattato 1:1 contro stablecoin tramite un contratto di mercato primario, con ogni emissione e riscatto registrato pubblicamente. Oggi, su rete di test, i token sono emessi e riscattati alla pari con USDC e non seguono ancora il prezzo del sottostante: l'aggancio al prezzo e la custodia del sottostante reale, con un partner regolamentato, sono requisiti prima del lancio con capitale reale.</p>
+      <p>Sul piano pratico questo significa un motore di rischio che può bilanciare classi di RWA diverse nello stesso Smart Vault, perché tutte vivono sullo stesso registro verificabile — non su sistemi incompatibili che nessuno riconcilia in tempo reale. Il meccanismo è diretto: ogni token è emesso e riscattato 1:1 contro stablecoin tramite un contratto di mercato primario, con ogni emissione e riscatto registrato pubblicamente. Oggi, su rete di test, i token sono emessi e riscattati alla pari con USDC e non seguono ancora il prezzo del sottostante: l'aggancio al prezzo e la custodia del sottostante reale, con un partner regolamentato, sono requisiti prima del lancio con capitale reale.</p>
     </div>
   </div>
 </section>
@@ -848,7 +846,7 @@
       <div class="dd-label">ONESTÀ<br>Limiti dichiarati</div>
       <div>
         <h3>Cosa non è ancora vero, detto prima che lo chiediate</h3>
-        <p>Il sistema opera oggi esclusivamente su Arbitrum Sepolia, una rete di test: nessun fondo reale è mai stato movimentato. Il codice dei contratti non è ancora verificato pubblicamente su un block explorer, e non ha ricevuto un audit di sicurezza da una terza parte indipendente — entrambi passaggi pianificati esplicitamente prima di qualunque lancio con capitale reale, non dettagli rimandati per caso. Oggi la tua firma è verificata dal nostro backend; la verifica diretta nel contratto, con il prezzo minimo da te approvato, è in sviluppo. Consideriamo la trasparenza su questi limiti parte del prodotto quanto il codice stesso.</p>
+        <p>Il sistema opera oggi esclusivamente su Arbitrum Sepolia, una rete di test: nessun fondo reale è mai stato movimentato. Il codice dei contratti non è ancora verificato pubblicamente su un block explorer, e non ha ricevuto un audit di sicurezza da una terza parte indipendente — entrambi passaggi pianificati esplicitamente prima di qualunque lancio con capitale reale, non dettagli rimandati per caso. Oggi la tua firma è verificata dal nostro backend; la verifica diretta nel contratto, con il prezzo minimo da te approvato, è prevista in una fase successiva. Consideriamo la trasparenza su questi limiti parte del prodotto quanto il codice stesso.</p>
       </div>
     </div>
   </div>
@@ -868,7 +866,7 @@
       </div>
       <div class="roadmap-row">
         <div class="rn">01</div>
-        <div><h3>Addestramento di un'IA Proprietaria</h3><p>Raccolta sistematica dei dati di interazione reale per l'addestramento verticale di un modello linguistico proprio sul dominio finanziario, avviata già dai primi utenti reali — non un'interfaccia sopra un modello generico di terzi.</p></div>
+        <div><h3>IA proprietaria</h3><p>Decisa dopo il round, sulla base di dati reali di utilizzo.</p></div>
       </div>
       <div class="roadmap-row">
         <div class="rn">02</div>
@@ -906,8 +904,8 @@
     </div>
     <div class="status-editorial">
       <div class="status-feature">
-        <div class="n num">896<span style="font-size:0.4em; color:var(--text-faint);">/896</span></div>
-        <div class="l">test automatici superati (verifica del 03/10/2026)</div>
+        <div class="n num">911<span style="font-size:0.4em; color:var(--text-faint);">/911</span></div>
+        <div class="l">test automatici superati (verifica del 06/10/2026)</div>
         <div class="callout" style="margin-top:32px;">
           <p><b>Non è un dettaglio rimandato per caso.</b> L'audit di sicurezza esterno e la verifica pubblica del codice sono passaggi che vogliamo completare prima di qualsiasi lancio con fondi reali, non dopo. Preferiamo mostrarti dove siamo oggi piuttosto che promettere dove saremo domani.</p>
         </div>
