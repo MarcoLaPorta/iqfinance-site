@@ -37,6 +37,7 @@ Hook versionato in `.githooks/pre-push` (solo Python standard, nessuna dipendenz
 Blocca il push se:
 - nel sito restano segnaposto `[[`;
 - l'HTML non è valido (tag non chiusi o chiusi male, id duplicati);
+- un'immagine referenziata (img, srcset, icone, og:image, url() nel CSS) non esiste nella cartella;
 - compaiono parole vietate nella home (`index.html`, `en/index.html`, `it/index.html`),
   elencate in `.githooks/parole-vietate.txt` (italiano e inglese).
 

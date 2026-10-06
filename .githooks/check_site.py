@@ -5,6 +5,8 @@
 2. HTML valido: tag non chiusi o chiusi nell'ordine sbagliato, id duplicati.
 3. Parole vietate nelle home (index.html, en/index.html, it/index.html), lette da
    parole-vietate.txt; valgono per entrambe le lingue.
+4. Immagini referenziate (img/source src e srcset, link icon/preload, og:image, url() nel CSS)
+   che non esistono nella cartella del sito.
 
 Uscita 0 = tutto ok, 1 = push bloccato.
 """
@@ -85,6 +87,30 @@ class Checker(HTMLParser):
                 self.errors.append(f"<{t}> aperto a riga {line} non viene mai chiuso")
 
 
+IMG_REF = re.compile(
+    r'<(?:img|source)\b[^>]*?\b(?:src|srcset)="([^"]+)"'
+    r'|<link\b[^>]*?rel="[^"]*(?:icon|preload)[^"]*"[^>]*?href="([^"]+)"'
+    r'|<meta\b[^>]*?property="og:image"[^>]*?content="([^"]+)"'
+    r'|url\(\s*[\'"]?([^\'")]+)[\'"]?\s*\)',
+    re.I | re.S)
+
+
+def missing_images(html_path):
+    html = re.sub(r"<!--.*?-->", " ", html_path.read_text(encoding="utf-8", errors="replace"), flags=re.S)
+    for m in IMG_REF.finditer(html):
+        value = next(g for g in m.groups() if g)
+        if value.strip().lower().startswith("data:"):
+            continue
+        for part in value.split(","):  # srcset: "a.png 1x, b.png 2x"
+            ref = part.strip().split(" ")[0]
+            if not ref or re.match(r"^(?:[a-z]+:|//|#)", ref, re.I):
+                continue  # esterni (https:, data:) o ancore
+            clean = ref.split("#")[0].split("?")[0]
+            target = ROOT / clean.lstrip("/") if clean.startswith("/") else html_path.parent / clean
+            if not target.resolve().is_file():
+                yield ref
+
+
 def load_banned():
     words = []
     f = HOOKS / "parole-vietate.txt"
@@ -121,6 +147,12 @@ def main():
         c.feed(p.read_text(encoding="utf-8", errors="replace"))
         c.finish()
         problems += [f"[html] {rel}: {e}" for e in c.errors]
+
+    for p in ROOT.rglob("*.htm*"):
+        rel = p.relative_to(ROOT)
+        if any(part in SKIP_DIRS for part in rel.parts):
+            continue
+        problems += [f"[immagine mancante] {rel}: {ref}" for ref in missing_images(p)]
 
     banned = load_banned()
     for home in HOMES:
