@@ -3,1021 +3,537 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IQ Finance - Institutional Quant Investing. Built for Everyone.</title>
-<meta name="description" content="IQ Finance turns what you want into an execution verified by a mathematical engine, before any fund moves, and always with your signature.">
+<title>IQ Finance — Describe it. Test it. Then decide.</title>
+<meta name="description" content="Describe how you want to invest in plain words, see how it would have gone on years of past market data, then decide. Working prototype on a test network, no real money involved.">
 <link rel="canonical" href="https://marcolaporta.github.io/iqfinance-site/">
 <link rel="alternate" hreflang="en" href="https://marcolaporta.github.io/iqfinance-site/">
 <link rel="alternate" hreflang="it" href="https://marcolaporta.github.io/iqfinance-site/it/">
 <link rel="alternate" hreflang="x-default" href="https://marcolaporta.github.io/iqfinance-site/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #000000;
     --bg-2: #0C0E13;
+    --bg-3: #13161D;
     --hairline: rgba(228,231,237,0.13);
     --hairline-strong: rgba(228,231,237,0.24);
     --silver: #9BA1AE;
     --silver-bright: #E4E7ED;
-    --silver-deep: #565C68;
     --violet: #7C3AED;
     --violet-bright: #9D6FFF;
     --violet-deep: #2E1A5C;
     --text: #EBEDF1;
     --text-muted: #868C99;
-    --text-faint: #4B505C;
+    --text-faint: #5B606C;
     --green: #34C27B;
+    --red: #E5484D;
     --font-serif: 'Fraunces', serif;
     --font-sans: 'Inter', sans-serif;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
-  }
-  body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font-sans); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font-sans); font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
   a { color: inherit; }
-  img, svg { display: block; max-width: 100%; }
+  img { display: block; max-width: 100%; height: auto; }
   :focus-visible { outline: 1.5px solid var(--violet-bright); outline-offset: 3px; }
   .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
-  section[id] { scroll-margin-top: 88px; }
-  .hairline { border: none; border-top: 1px solid var(--hairline); margin: 0; }
+  section[id] { scroll-margin-top: 80px; }
   .num { font-variant-numeric: tabular-nums; }
 
-  /* ---------- Nav ---------- */
-  .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; padding: 26px 0; transition: background .3s ease, border-color .3s ease, padding .3s ease; }
-  .nav.scrolled { background: rgba(0,0,0,0.86); backdrop-filter: blur(10px); border-bottom: 1px solid var(--hairline); padding: 16px 0; }
+  /* Nav */
+  .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; padding: 22px 0; transition: background .3s ease, padding .3s ease; }
+  .nav.scrolled { background: rgba(0,0,0,0.88); backdrop-filter: blur(10px); border-bottom: 1px solid var(--hairline); padding: 14px 0; }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1180px; margin: 0 auto; padding: 0 32px; }
-  .nav-logo { font-family: var(--font-serif); font-weight: 500; font-size: 19px; letter-spacing: -0.01em; text-decoration: none; }
-  .nav-links { display: flex; align-items: center; gap: 38px; list-style: none; margin: 0; padding: 0; }
-  .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 14px; transition: color .15s ease; }
+  .nav-logo { font-family: var(--font-serif); font-weight: 500; font-size: 19px; text-decoration: none; }
+  .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; margin: 0; padding: 0; }
+  .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 14px; }
   .nav-links a:hover { color: var(--silver-bright); }
-  .nav-cta { color: var(--silver-bright); text-decoration: none; font-size: 14px; padding-bottom: 2px; border-bottom: 1px solid var(--silver-deep); transition: border-color .15s ease; }
-  .nav-cta:hover { border-color: var(--silver-bright); }
-  @media (max-width: 780px) { .nav-links li:not(:last-child) { display: none; } }
+  .nav-links .nav-cta { color: var(--silver-bright); border-bottom: 1px solid var(--violet-bright); padding-bottom: 2px; }
+  @media (max-width: 900px) { .nav-links li.opt { display: none; } }
 
-  /* ---------- Buttons ---------- */
-  .btn-primary, .btn-ghost { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 15px 28px; border-radius: 3px; font-size: 15px; font-weight: 500; text-decoration: none; cursor: pointer; border: 1px solid transparent; transition: transform .12s ease, background .15s ease, border-color .15s ease, color .15s ease; font-family: var(--font-sans); }
-  .btn-primary { background: var(--violet); color: white; }
-  .btn-primary:hover { background: #6D28D9; }
-  .btn-ghost { background: transparent; color: var(--silver-bright); border-color: var(--hairline-strong); }
+  /* Type */
+  h1, h2, h3 { font-weight: 400; margin: 0; }
+  h2 { font-family: var(--font-serif); font-size: clamp(30px, 3.6vw, 44px); letter-spacing: -0.015em; line-height: 1.15; }
+  h3 { font-size: 20px; font-weight: 600; line-height: 1.35; }
+  .lead { color: var(--text-muted); font-size: 19px; max-width: 60ch; margin: 18px 0 0; }
+  .eyebrow { font-size: 13px; color: var(--violet-bright); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 16px; }
+  .block { padding: 110px 0; border-top: 1px solid var(--hairline); }
+  .block-head { max-width: 760px; margin-bottom: 56px; }
+
+  /* Buttons */
+  .btn { display: inline-block; background: var(--violet); color: #FFFFFF; font-weight: 600; font-size: 16px; padding: 15px 30px; border-radius: 100px; text-decoration: none; transition: background .15s ease; }
+  .btn:hover { background: #6D28D9; }
+  .btn-ghost { display: inline-block; color: var(--text); font-size: 16px; padding: 14px 26px; border-radius: 100px; border: 1px solid var(--hairline-strong); text-decoration: none; }
   .btn-ghost:hover { border-color: var(--silver); }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
 
-  /* ---------- Hero drammatico stile TradingView ---------- */
-  .hero-tv { position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; overflow: hidden; padding: 90px 0 110px; }
-  .hero-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; background: #000000; }
-  .hero-bg svg { position: absolute; bottom: -40px; left: -8%; width: 116%; height: 78%; opacity: 0.8; animation: drift 26s ease-in-out infinite alternate; }
-  @keyframes drift { 0% { transform: translateX(0); } 100% { transform: translateX(-8%); } }
-  @media (prefers-reduced-motion: reduce) { .hero-bg svg { animation: none; } }
-  .wick-up, .wick-down { stroke-width: 1.4; }
-  .wick-up { stroke: #A78BFA; }
-  .wick-down { stroke: #C7C5D6; }
-  .body-up { fill: #8B5CF6; opacity: .95; }
-  .body-down { fill: #6B7280; opacity: .65; }
-  .hero-aurora { position: absolute; top: -10%; left: 0; right: 0; height: 55%; z-index: 1; pointer-events: none; opacity: 0.9; animation: auroraPulse 8s ease-in-out infinite; }
-  @keyframes auroraPulse { 0%,100% { opacity: 0.7; } 50% { opacity: 1; } }
-  @media (prefers-reduced-motion: reduce) { .hero-aurora { animation: none; } }
-  .hero-vignette { position: absolute; inset: 0; z-index: 2; background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.96) 100%); pointer-events: none; }
-  .hero-tv-content { position: relative; z-index: 3; text-align: center; max-width: 900px; margin: 0 auto; padding: 0 28px; }
-  .hero-tv-content .eyebrow { font-size: 13.5px; color: var(--silver); margin-bottom: 22px; letter-spacing: 0.01em; }
-  .hero-tv-content .eyebrow .blip { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--violet-bright); margin-right: 8px; animation: blip 2.2s ease-in-out infinite; }
-  .hero-tv-content h1 { font-family: var(--font-serif); font-weight: 600; line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 44px; color: var(--silver-bright); display: flex; flex-direction: column; }
-  .hero-tv-content .h1-brand { font-size: clamp(52px, 8vw, 104px); }
-  .hero-tv-content .h1-tagline { font-size: clamp(26px, 3.4vw, 42px); font-weight: 400; color: var(--silver-bright); margin-top: 22px; }
-  .hero-tv-content p.lede { font-size: 19px; color: var(--text-muted); max-width: 46ch; margin: 0 auto 40px; }
-  .hero-tv-cta { display: inline-flex; flex-direction: column; align-items: center; gap: 14px; }
-  .btn-hero { background: var(--violet); color: white; font-weight: 600; font-size: 16px; padding: 17px 34px; border-radius: 100px; text-decoration: none; transition: transform .15s ease, background .15s ease; display: inline-block; }
-  .btn-hero:hover { background: #6D28D9; transform: translateY(-2px); }
-  .hero-tv-cta .fine { font-size: 12.5px; color: var(--text-faint); }
-  .hero-scroll-cue { position: absolute; bottom: 34px; left: 50%; transform: translateX(-50%); z-index: 3; color: var(--text-faint); animation: bob 2s ease-in-out infinite; }
-  @keyframes bob { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
+  /* Screenshots */
+  .shot { margin: 0; }
+  .shot img { width: 100%; border-radius: 12px; border: 1px solid var(--hairline-strong); background: var(--bg-3); box-shadow: 0 30px 80px -30px rgba(124,58,237,0.35); }
+  .shot figcaption { font-size: 13px; color: var(--text-faint); margin-top: 12px; }
+  .shot figcaption b { color: var(--text-muted); font-weight: 600; }
 
-  /* ---------- Demo panel (mockup con bagliore) ---------- */
-  .demo-section { padding: 130px 0 150px; text-align: center; position: relative; }
-  .demo-section .block-head { margin-left: auto; margin-right: auto; text-align: center; }
-  .demo-panel-wrap { position: relative; max-width: 1180px; margin: 64px auto 0; overflow: hidden; }
-  .demo-glow { position: absolute; inset: -90px; background: radial-gradient(ellipse 70% 80% at 50% 40%, rgba(124,58,237,0.55), rgba(124,58,237,0) 72%); filter: blur(30px); opacity: 1; pointer-events: none; }
-  .demo-glow.show { opacity: 1; }
-  .demo-panel { position: relative; border-radius: 14px; border: 1px solid var(--hairline-strong); background: #0B0D13; overflow: hidden; box-shadow: 0 60px 140px -50px rgba(0,0,0,0.75); text-align: left; }
-  .demo-panel.show { opacity: 1; transform: translateY(0) scale(1); }
-  .demo-panel-bar { display: flex; align-items: center; gap: 8px; padding: 13px 18px; border-bottom: 1px solid var(--hairline); background: #0F1219; }
-  .demo-panel-bar .d { width: 10px; height: 10px; border-radius: 50%; }
-  .demo-panel-bar .d.r { background: #FF5F57; }
-  .demo-panel-bar .d.y { background: #FEBC2E; }
-  .demo-panel-bar .d.g { background: #28C840; }
-  .demo-panel-bar .wordmark { margin-left: 14px; font-size: 12.5px; color: var(--silver); font-weight: 600; }
-  .demo-panel-bar .live { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-faint); }
-  .demo-panel-bar .live i { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: blip 2.2s ease-in-out infinite; }
+  /* Hero */
+  .hero { padding: 160px 0 100px; background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(124,58,237,0.22), transparent 70%), var(--bg); }
+  .hero .status { display: inline-flex; align-items: center; gap: 9px; font-size: 13.5px; color: var(--text-muted); border: 1px solid var(--hairline-strong); border-radius: 100px; padding: 6px 14px; margin-bottom: 28px; }
+  .hero .status i { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+  .hero h1 { font-family: var(--font-serif); font-size: clamp(38px, 5.4vw, 68px); letter-spacing: -0.02em; line-height: 1.08; max-width: 18ch; }
+  .hero .shot { margin-top: 70px; }
 
-  .demo-toolbar { display: flex; align-items: center; gap: 16px; padding: 10px 18px; border-bottom: 1px solid var(--hairline); background: #0D1017; overflow-x: auto; }
-  .demo-toolbar .pair { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--silver-bright); white-space: nowrap; }
-  .demo-toolbar .pair .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--violet); }
-  .demo-toolbar .tf { display: flex; gap: 2px; background: #171B27; border-radius: 6px; padding: 3px; }
-  .demo-toolbar .tf span { font-size: 11px; padding: 4px 9px; border-radius: 4px; color: var(--text-faint); white-space: nowrap; }
-  .demo-toolbar .tf span.on { background: var(--violet); color: white; }
-  .demo-toolbar .tools { margin-left: auto; display: flex; gap: 14px; }
-  .demo-toolbar .tools span { font-size: 11px; color: var(--text-faint); white-space: nowrap; }
+  /* Steps */
+  .steps { display: grid; gap: 90px; }
+  .step { display: grid; grid-template-columns: 5fr 7fr; gap: 56px; align-items: center; }
+  .step .n { font-family: var(--font-serif); font-size: 15px; color: var(--violet-bright); margin-bottom: 12px; }
+  .step p { color: var(--text-muted); margin: 14px 0 0; }
+  .step blockquote { margin: 18px 0 0; padding: 14px 18px; border-left: 2px solid var(--violet-bright); background: var(--bg-2); border-radius: 0 8px 8px 0; color: var(--text); font-style: italic; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
-  .demo-panel-body { display: grid; grid-template-columns: 44px 1fr 280px; min-height: 420px; }
-  @media (max-width: 860px) { .demo-panel-body { grid-template-columns: minmax(0, 1fr); } }
-  .demo-icon-rail { border-right: 1px solid var(--hairline); background: #0B0D13; display: flex; flex-direction: column; align-items: center; padding: 16px 0; gap: 16px; }
-  @media (max-width: 860px) { .demo-icon-rail { display: none; } }
-  .demo-icon-rail .ic { width: 18px; height: 18px; border-radius: 4px; opacity: .35; }
-  .demo-icon-rail .ic.on { opacity: 1; }
-  .demo-icon-rail .ic svg { width: 100%; height: 100%; stroke: var(--silver); }
-  .demo-icon-rail .ic.on svg { stroke: var(--violet-bright); }
+  /* Lists */
+  .points { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; }
+  .points li { padding-left: 26px; position: relative; color: var(--text-muted); }
+  .points li::before { content: ""; position: absolute; left: 0; top: 11px; width: 10px; height: 2px; background: var(--violet-bright); }
+  .points b { color: var(--text); font-weight: 600; }
+  .split { display: grid; grid-template-columns: 5fr 7fr; gap: 56px; align-items: start; }
+  .two-shots { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; }
 
-  .demo-chart-main { padding: 20px; display: flex; flex-direction: column; min-width: 0; }
-  .demo-chart-main .chart-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
-  .demo-chart-main .chart-top b { font-family: var(--font-serif); font-size: 20px; color: var(--silver-bright); }
-  .demo-chart-main .chart-top .ch { font-size: 12.5px; color: var(--green); margin-left: 8px; }
-  .demo-chart-main .chart-top .sub { font-size: 11.5px; color: var(--text-faint); }
-  .demo-chart-area { position: relative; flex: 1; min-width: 0; min-height: 220px; }
-  .demo-chart-area svg { display: block; width: 100%; height: 220px; }
-  .demo-chart-area .price-axis { position: absolute; right: 0; top: 0; bottom: 0; width: 46px; display: flex; flex-direction: column; justify-content: space-between; font-size: 9.5px; color: var(--text-faint); padding: 4px 0; }
-  .cu-b { fill: #7C3AED; } .cu-w { stroke: #9D6FFF; stroke-width: 1.2; }
-  .cd-b { fill: #454B5C; } .cd-w { stroke: #6B7280; stroke-width: 1.2; }
-  .cu-vol { fill: rgba(124,58,237,0.45); } .cd-vol { fill: rgba(107,114,128,0.4); }
-  .demo-vol-row { margin-top: 4px; }
-  .demo-vol-row svg { display: block; width: 100%; height: 40px; }
-  .demo-chart-axis-x { display: flex; justify-content: space-between; font-size: 9.5px; color: var(--text-faint); margin-top: 6px; padding-right: 46px; }
-  @media (max-width: 480px) { .demo-chart-axis-x { font-size: 8px; padding-right: 40px; } .demo-chart-axis-x span:nth-child(2), .demo-chart-axis-x span:nth-child(4) { display: none; } }
+  /* Instruments */
+  .groups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .group { background: var(--bg-2); border: 1px solid var(--hairline); border-radius: 12px; padding: 24px; }
+  .group h3 { font-size: 15px; color: var(--violet-bright); margin-bottom: 14px; }
+  .group ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 15.5px; }
+  .group .tk { display: inline-block; min-width: 54px; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
+  .group li { color: var(--text-muted); }
+  .note { font-size: 15px; color: var(--text-muted); background: var(--bg-2); border: 1px solid var(--hairline); border-radius: 10px; padding: 16px 20px; margin-top: 24px; max-width: 80ch; }
 
-  .demo-side { border-left: 1px solid var(--hairline); padding: 18px 18px 20px; display: flex; flex-direction: column; gap: 12px; background: #0D1017; overflow-y: auto; }
-  @media (max-width: 860px) { .demo-side { border-left: none; border-top: 1px solid var(--hairline); } }
-  .demo-side .sh { font-size: 10.5px; letter-spacing: .04em; color: var(--text-faint); margin-bottom: 8px; }
-  .ds-msg { display: flex; gap: 8px; align-items: flex-start; }
-  .ds-msg.mine { flex-direction: row-reverse; }
-  .ds-av { width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 8.5px; font-weight: 700; margin-top: 2px; }
-  .ds-av.u { background: #2A2F3D; color: var(--silver); }
-  .ds-av.s { background: var(--violet); color: white; }
-  .ds-req { background: var(--violet); color: white; border-radius: 10px; padding: 9px 12px; font-size: 12px; line-height: 1.45; border-bottom-right-radius: 3px; max-width: 84%; }
-  .ds-reply { background: #171B27; border: 1px solid var(--hairline); color: var(--text-muted); border-radius: 10px; border-bottom-left-radius: 3px; padding: 9px 12px; font-size: 12px; line-height: 1.45; max-width: 84%; }
-  .ds-reply b { color: var(--green); display: block; font-size: 10.5px; margin-bottom: 4px; font-weight: 600; }
-  .ds-check { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text); padding: 6px 0; border-top: 1px solid var(--hairline); }
-  .ds-check:first-of-type { border-top: none; }
-  .ds-check .c { width: 15px; height: 15px; border-radius: 50%; background: rgba(21,163,74,0.15); color: var(--green); display: flex; align-items: center; justify-content: center; font-size: 9.5px; flex-shrink: 0; }
-  .ds-cta { margin-top: auto; background: rgba(124,58,237,0.12); border: 1px solid rgba(124,58,237,0.4); color: var(--violet-bright); text-align: center; padding: 10px; border-radius: 8px; font-size: 12.5px; font-weight: 600; }
+  /* Examples */
+  .examples { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .example { background: var(--bg-2); border: 1px solid var(--hairline); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; }
+  .example p { color: var(--text-muted); font-size: 15.5px; margin: 0; }
+  .example dl { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; margin: 0; font-size: 14.5px; }
+  .example dt { color: var(--text-muted); }
+  .example dd { margin: 0; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .fine { font-size: 13.5px; color: var(--text-faint); margin-top: 22px; }
 
-  /* ---------- Stat strip (linea editoriale, non icon-row generico) ---------- */
-  .stat-strip { padding: 0; background: #000000; }
-  .stat-strip .wrap { display: flex; }
-  .stat-strip .item { flex: 1; padding: 30px 28px; text-align: center; position: relative; }
-  .stat-strip .item + .item::before { content: ''; position: absolute; left: 0; top: 20%; bottom: 20%; width: 1px; background: var(--hairline); }
-  .stat-strip .item .n { font-family: var(--font-serif); font-size: 30px; font-weight: 400; color: var(--silver-bright); }
-  .stat-strip .item .l { font-size: 13px; color: var(--text-faint); margin-top: 4px; }
-  @media (max-width: 720px) { .stat-strip .wrap { flex-wrap: wrap; } .stat-strip .item { flex: 1 1 50%; } .stat-strip .item:nth-child(2)::before { display:none; } }
-  .fade-transition { height: 320px; background: linear-gradient(180deg, #000000 0%, #241344 20%, #4C1D9E 40%, #7C3AED 55%, #B9A6F0 72%, #F3ECFF 88%, #FFFFFF 100%); }
-  .fade-transition-rev { height: 280px; background: linear-gradient(180deg, #FFFFFF 0%, #F3ECFF 12%, #B9A6F0 28%, #7C3AED 45%, #4C1D9E 60%, #241344 80%, #000000 100%); }
+  /* Status */
+  .status-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .status-col { background: var(--bg-2); border: 1px solid var(--hairline); border-radius: 12px; padding: 28px; }
+  .status-col h3 { font-size: 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+  .status-col h3 i { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+  .status-col.next h3 i { background: var(--silver); }
+  .status-col ul { margin: 0; padding-left: 18px; color: var(--text-muted); display: grid; gap: 8px; font-size: 15.5px; }
+  .status-col em { color: var(--text-faint); font-style: normal; }
+  .figures { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--hairline); }
+  .figures .v { font-family: var(--font-serif); font-size: 40px; line-height: 1; }
+  .figures .l { color: var(--text-muted); font-size: 14.5px; margin-top: 10px; }
+  .figures a { color: var(--violet-bright); font-size: 14px; }
+  .more { margin-top: 32px; }
+  .more a { color: var(--violet-bright); }
 
-  /* ---------- Approfondimento scuro: prodotto, AI, blockchain — in continuità con hero/demo ---------- */
-  .dark-deepdive { background: #000000; padding: 110px 0; position: relative; overflow: hidden; }
+  /* Investors */
+  .inv { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+  .inv table { width: 100%; border-collapse: collapse; font-size: 15.5px; margin-top: 18px; }
+  .inv td { padding: 10px 0; border-bottom: 1px solid var(--hairline); color: var(--text-muted); }
+  .inv td.num { text-align: right; color: var(--text); }
+  .person { padding: 18px 0; border-bottom: 1px solid var(--hairline); }
+  .person .role { color: var(--text-muted); font-size: 15px; }
 
-  /* ---------- Pilastri illustrati: AI (rete neurale) e Blockchain, stile hero ---------- */
-  .pillar-illustrated { position: relative; background: #000000; padding: 100px 0; overflow: hidden; }
-  .pillar-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
-  .pillar-vignette { position: absolute; inset: 0; z-index: 0; background: linear-gradient(90deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.75) 38%, rgba(0,0,0,0.25) 62%, rgba(0,0,0,0) 78%); }
-  .pillar-bg svg.pattern { position: absolute; bottom: -30px; left: -5%; width: 110%; height: 82%; opacity: 0.85; animation: drift 30s ease-in-out infinite alternate; }
-  .pillar-bg svg.aurora { position: absolute; top: -8%; left: 0; right: 0; height: 55%; opacity: 0.85; animation: auroraPulse2 8s ease-in-out infinite; }
-  @keyframes auroraPulse2 { 0%,100% { opacity: 0.65; } 50% { opacity: 1; } }
-  .obs-pulse { animation: nodePulseObs 3.4s ease-in-out infinite; }
-  @keyframes nodePulseObs { 0%,100% { opacity: 0.55; } 50% { opacity: 1; } }
-  @media (prefers-reduced-motion: reduce) { .pillar-bg svg.pattern, .pillar-bg svg.aurora, .obs-pulse { animation: none; } }
-  .pillar-content { position: relative; z-index: 1; display: grid; grid-template-columns: 200px 1fr; gap: 40px; }
-  @media (max-width: 760px) { .pillar-content { grid-template-columns: 1fr; gap: 16px; } }
-  .pillar-content .fig { font-size: 12.5px; color: #A78BFA; font-weight: 600; letter-spacing: .02em; line-height: 1.5; margin-bottom: 0; }
-  .pillar-content h3 { font-family: var(--font-serif); font-weight: 500; font-size: 22px; color: #F3ECFF; margin: 0 0 14px; letter-spacing: -0.01em; max-width: none; }
-  .pillar-content p { color: #B9BEC9; font-size: 15px; line-height: 1.78; margin: 0 0 16px; max-width: 74ch; }
-  .pillar-content p:last-child { margin-bottom: 0; }
-  .pillar-content p b { color: #F3ECFF; }
-  .dd-aurora { position: absolute; top: 0; left: 0; right: 0; height: 340px; z-index: 0; pointer-events: none; opacity: 0.8; }
-  .dark-deepdive .wrap { position: relative; z-index: 1; }
-  .dark-deepdive .block-head { max-width: 640px; margin: 0 auto 56px; text-align: center; }
-  .dark-deepdive .block-head .fig { font-size: 13px; color: #A78BFA; font-weight: 600; letter-spacing: .04em; margin-bottom: 16px; }
-  .dark-deepdive .block-head h2 { font-family: var(--font-serif); font-weight: 500; font-size: clamp(26px, 3.2vw, 38px); color: #F3ECFF; margin: 0 0 16px; letter-spacing: -0.015em; line-height: 1.2; }
-  .dark-deepdive .block-head p { color: #9BA1AE; font-size: 16px; margin: 0; }
+  /* Closing */
+  .closing { text-align: center; }
+  .closing .lead { margin-left: auto; margin-right: auto; }
+  .closing .cta-row { justify-content: center; }
+  .disclaimer { font-size: 12.5px; color: var(--text-faint); line-height: 1.8; margin: 80px auto 0; padding-top: 28px; border-top: 1px solid var(--hairline); max-width: 90ch; text-align: left; }
+  footer { padding: 36px 0; border-top: 1px solid var(--hairline); }
+  .footer-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-size: 13px; color: var(--text-faint); }
+  .footer-row a { color: var(--text-muted); text-decoration: none; margin-left: 18px; }
 
-  .dd-dark-row { display: grid; grid-template-columns: 200px 1fr; gap: 40px; padding: 38px 0; border-top: 1px solid rgba(255,255,255,0.09); }
-  .dd-dark-row:last-child { border-bottom: 1px solid rgba(255,255,255,0.09); }
-  @media (max-width: 760px) { .dd-dark-row { grid-template-columns: 1fr; gap: 14px; } }
-  .dd-dark-row .ddr-label { font-size: 12.5px; color: #A78BFA; font-weight: 600; line-height: 1.5; letter-spacing: .02em; }
-  .dd-dark-row h3 { font-family: var(--font-serif); font-weight: 500; font-size: 22px; color: #F3ECFF; margin: 0 0 14px; letter-spacing: -0.01em; }
-  .dd-dark-row p { color: #B9BEC9; font-size: 15px; line-height: 1.78; margin: 0 0 14px; max-width: 68ch; }
-  .dd-dark-row p:last-child { margin-bottom: 0; }
-  .dd-dark-row p b { color: #F3ECFF; }
-
-  .dark-modes { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.09); border-bottom: 1px solid rgba(255,255,255,0.09); margin: 44px 0 56px; }
-  @media (max-width: 760px) { .dark-modes { grid-template-columns: 1fr; gap: 36px; } }
-  .dark-modes .dm-tag { font-size: 11.5px; color: #6E6880; font-weight: 600; letter-spacing: .03em; margin-bottom: 14px; }
-  .dark-modes .dm-tag.on { color: #A78BFA; }
-  .dark-modes h3 { font-family: var(--font-serif); font-weight: 500; font-size: 22px; color: #F3ECFF; margin: 0 0 14px; }
-  .dark-modes p { color: #B9BEC9; font-size: 14.5px; line-height: 1.7; margin: 0 0 18px; }
-  .dark-modes .dm-fee { font-size: 13px; color: #9BA1AE; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.09); }
-  .dark-modes .dm-fee b { color: #A78BFA; }
-
-  .dark-market-head { margin: 0 0 24px; }
-  .dark-market-head h3 { font-family: var(--font-serif); font-weight: 500; font-size: 20px; color: #F3ECFF; margin: 0 0 8px; }
-  .dark-market-head p { color: #9BA1AE; font-size: 14.5px; margin: 0; }
-
-  /* ---------- Section shell (editoriale, senza kicker) ---------- */
-  .block { padding: 90px 0; }
-  .block-head { max-width: 640px; margin: 0 auto 44px; text-align: center; }
-  .block-head .fig { font-size: 12.5px; color: var(--violet-bright); font-weight: 600; letter-spacing: .04em; margin-bottom: 16px; }
-  .block.light-zone.with-divider { border-top: 1px solid var(--hairline); }
-  .block-head .fig { font-size: 13px; color: var(--text-faint); margin-bottom: 18px; }
-  .block-head h2 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.4vw, 42px); letter-spacing: -0.015em; margin: 0 0 18px; line-height: 1.15; }
-  .block-head p { color: var(--text-muted); font-size: 17px; margin: 0; max-width: 56ch; }
-
-  /* ---------- Flusso statico (ex scena a scorrimento) ---------- */
-  .flow-rows { display: flex; flex-direction: column; }
-  .flow-row { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; padding: 40px 0; border-top: 1px solid var(--hairline); }
-  .flow-row:last-child { border-bottom: 1px solid var(--hairline); }
-  @media (max-width: 860px) { .flow-row { grid-template-columns: 1fr; gap: 24px; } }
-  .fr-text .fs-num { font-family: var(--font-serif); font-size: 20px; color: var(--violet-bright); font-weight: 500; margin-bottom: 8px; }
-  .fr-text .fs-fig { font-size: 11.5px; color: var(--text-faint); font-weight: 600; letter-spacing: .03em; margin-bottom: 10px; }
-  .fr-text h3 { font-family: var(--font-serif); font-weight: 500; font-size: 19px; margin: 0 0 10px; letter-spacing: -0.01em; }
-  .fr-text p { color: var(--text-muted); font-size: 14.5px; line-height: 1.65; margin: 0; max-width: 46ch; }
-  .fr-mock { min-width: 0; }
-  .mini-bar { display: flex; align-items: center; gap: 8px; padding: 13px 18px; border-bottom: 1px solid var(--hairline-strong); background: #FAFAFB; }
-  .mini-bar .d { width: 10px; height: 10px; border-radius: 50%; }
-  .mini-bar .wordmark { margin-left: 10px; font-size: 12.5px; color: #8A8D96; }
-  .flow-mockup { background: #FFFFFF; border: 1px solid var(--hairline-strong); border-radius: 10px; overflow: hidden; box-shadow: 0 30px 70px -40px rgba(20,21,27,0.18); }
-  .fv-label { font-size: 10px; fill: #9396A3; font-family: var(--font-sans); }
-  .flow-mockup text { font-family: var(--font-sans); }
-  .fr-mock-body { padding: 20px 22px; }
-  .scrub-label { font-size: 11px; fill: var(--text-faint); }
-  .scrub-strong { font-size: 13px; fill: var(--silver-bright); font-weight: 600; }
-  .scrub-card { fill: var(--bg-2); stroke: var(--hairline); stroke-width: 1; }
-
-  /* ---------- Due modi di operare ---------- */
-  .modes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 44px; }
-  @media (max-width: 760px) { .modes-grid { grid-template-columns: 1fr; } }
-  .mode-card { background: #fff; border: 1.5px solid var(--hairline-strong); border-radius: 14px; padding: 30px; }
-  .mode-card.on { border-color: var(--violet); box-shadow: 0 0 0 1px var(--violet); }
-  .mode-card .mode-tag { font-size: 11.5px; color: var(--text-faint); font-weight: 600; letter-spacing: .03em; }
-  .mode-card.on .mode-tag { color: var(--violet-bright); }
-  .mode-card h3 { font-family: var(--font-serif); font-weight: 500; font-size: 24px; margin: 12px 0 14px; }
-  .mode-card p { color: var(--text-muted); font-size: 15px; line-height: 1.65; margin: 0 0 20px; }
-  .mode-fee { font-size: 13.5px; color: var(--text); background: var(--bg-2); border-radius: 8px; padding: 10px 14px; }
-  .mode-card.on .mode-fee { background: var(--violet-deep); }
-  .mode-fee b { color: var(--violet-bright); font-weight: 700; }
-
-  .exchange-mock { background: #0B0D13; overflow: hidden; }
-  .em-head { display: grid; grid-template-columns: 2fr 1fr 1.4fr; padding: 14px 22px; font-size: 11.5px; color: #5B5F6B; border-bottom: 1px solid #1E222E; }
-  .em-row { display: grid; grid-template-columns: 2fr 1fr 1.4fr; align-items: center; padding: 16px 22px; border-bottom: 1px solid #1A1E28; }
-  .em-row:last-child { border-bottom: none; }
-  .em-name { color: #EDEFF5; font-size: 14.5px; font-weight: 500; display: flex; align-items: center; gap: 10px; }
-  .em-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
-  .em-name em { font-style: normal; color: #6B7280; font-size: 11.5px; margin-left: 4px; }
-  .em-price { font-family: var(--font-serif); color: #E4E7ED; font-size: 15px; }
-  .em-actions { display: flex; gap: 8px; justify-content: flex-end; }
-  .em-buy { background: rgba(21,163,74,0.14); color: #34C27B; border: 1px solid rgba(21,163,74,0.3); padding: 6px 14px; border-radius: 6px; font-size: 12.5px; font-weight: 600; }
-  .em-sell { background: rgba(240,85,90,0.1); color: #F0555A; border: 1px solid rgba(240,85,90,0.28); padding: 6px 14px; border-radius: 6px; font-size: 12.5px; font-weight: 600; }
-  @media (max-width: 640px) { .em-head span:nth-child(2), .em-row .em-price { display:none; } .em-head { grid-template-columns: 2fr 1.4fr; } .em-row { grid-template-columns: 2fr 1.4fr; } }
-  .market-panel { border-radius: 14px; overflow: hidden; border: 1px solid var(--hairline-strong); box-shadow: 0 40px 100px -50px rgba(76,29,149,0.3); }
-
-  /* ---------- Vision ---------- */
-  .vision-lede { font-size: 17px; color: var(--text-muted); max-width: 62ch; margin: 0 auto 44px; line-height: 1.75; text-align: center; }
-  .vision-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px; }
-  @media (max-width: 800px) { .vision-pillars { grid-template-columns: 1fr; gap: 36px; } }
-  .vision-pillars > div { padding: 28px 0 0; border-top: 2px solid var(--violet-bright); }
-  .vision-pillars .vn { font-family: var(--font-serif); font-size: 15px; color: var(--text-faint); margin-bottom: 16px; }
-  .vision-pillars h4 { font-family: var(--font-sans); font-weight: 600; font-size: 17px; margin: 0 0 12px; letter-spacing: -0.005em; }
-  .vision-pillars p { color: var(--text-muted); font-size: 15px; line-height: 1.7; margin: 0; }
-
-  /* ---------- Roadmap ---------- */
-  .roadmap-list { display: flex; flex-direction: column; }
-  .roadmap-row { display: grid; grid-template-columns: 220px 1fr; gap: 40px; padding: 30px 0; border-top: 1px solid var(--hairline); }
-  .roadmap-row:last-child { border-bottom: 1px solid var(--hairline); }
-  @media (max-width: 700px) { .roadmap-row { grid-template-columns: 60px 1fr; } }
-  .roadmap-row .rn { font-family: var(--font-serif); font-size: 16px; color: var(--violet-bright); }
-  .roadmap-row .rn .active-tag { display: block; font-family: var(--font-sans); font-size: 10.5px; color: var(--green); margin-top: 6px; }
-  .roadmap-row h3 { font-family: var(--font-serif); font-weight: 500; font-size: 24px; margin: 0 0 16px; letter-spacing: -0.01em; }
-  .roadmap-row p { color: var(--text-muted); font-size: 15px; margin: 0; max-width: 62ch; }
-
-  /* ---------- Cosa succede in pratica: editoriale, non chat UI ---------- */
-  .demo { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-  @media (max-width: 900px) { .demo { grid-template-columns: 1fr; gap: 40px; } }
-  .demo-quote { font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: clamp(22px, 2.6vw, 30px); line-height: 1.4; color: var(--silver-bright); margin: 0 0 24px; }
-  .demo-quote::before { content: '“'; color: var(--text-faint); }
-  .demo-quote::after { content: '”'; color: var(--text-faint); }
-  .demo-caption { font-size: 14px; color: var(--text-faint); }
-  .alloc-result { border-top: 1px solid var(--hairline); padding-top: 28px; }
-  .alloc-result .label { font-size: 13px; color: var(--green); margin-bottom: 16px; }
-  .alloc-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--hairline); }
-  .alloc-row .name { display: flex; align-items: center; gap: 10px; font-size: 15px; }
-  .alloc-row .sw { width: 9px; height: 9px; border-radius: 50%; }
-  .alloc-row .pct { font-family: var(--font-serif); font-size: 18px; color: var(--silver-bright); }
-
-  /* ---------- Stato del progetto: editoriale, non 4 card ---------- */
-  .status-editorial { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: start; }
-  @media (max-width: 900px) { .status-editorial { grid-template-columns: 1fr; gap: 40px; } }
-  .status-feature .n { font-family: var(--font-serif); font-weight: 300; font-size: clamp(64px, 9vw, 108px); line-height: 1; background: linear-gradient(160deg, var(--violet-bright) 10%, var(--violet) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .status-feature .l { font-size: 15px; color: var(--text-muted); margin-top: 8px; }
-  .status-list { display: flex; flex-direction: column; }
-  .status-list .row { display: flex; justify-content: space-between; align-items: baseline; padding: 18px 0; border-top: 1px solid var(--hairline); }
-  .status-list .row:last-child { border-bottom: 1px solid var(--hairline); }
-  .status-list .row .k { font-size: 15px; color: var(--text); }
-  .status-list .row .v { font-family: var(--font-serif); font-size: 20px; color: var(--silver-bright); }
-  .callout { border-left: 2px solid var(--violet); padding: 4px 0 4px 24px; margin-top: 36px; }
-  .callout p { margin: 0; font-size: 14.5px; color: var(--text-muted); line-height: 1.7; max-width: 60ch; }
-  .callout b { color: var(--silver-bright); font-weight: 500; }
-
-  /* ---------- Team ---------- */
-  .team-list { display: flex; flex-direction: column; }
-  .team-row { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; padding: 34px 0; border-top: 1px solid var(--hairline); }
-  .team-row:last-child { border-bottom: 1px solid var(--hairline); }
-  @media (max-width: 700px) { .team-row { grid-template-columns: 1fr; gap: 12px; } }
-  .team-row h3 { font-family: var(--font-serif); font-weight: 400; font-size: 22px; margin: 0 0 4px; }
-  .team-row .role { font-size: 13.5px; color: var(--violet-bright); }
-  .team-row p.bio { color: var(--text-muted); font-size: 15px; margin: 8px 0 0; max-width: 56ch; }
-
-  /* ---------- Closing / waitlist ---------- */
-  .closing { text-align: left; }
-  .closing h2 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(32px, 4.6vw, 52px); letter-spacing: -0.015em; margin: 0 0 40px; max-width: 16ch; line-height: 1.12; }
-  .closing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
-  @media (max-width: 900px) { .closing-grid { grid-template-columns: 1fr; gap: 44px; } }
-  .closing-col .h { font-size: 14px; color: var(--text-faint); margin-bottom: 18px; }
-  .closing-col p.d { color: var(--text-muted); font-size: 15px; margin: 0 0 22px; max-width: 42ch; }
-  .form-row { display: flex; gap: 0; border-bottom: 1px solid var(--hairline-strong); padding-bottom: 4px; max-width: 420px; }
-  input[type=email] { flex: 1; background: transparent; border: none; color: var(--text); padding: 10px 0; font-family: var(--font-sans); font-size: 16px; }
-  input[type=email]::placeholder { color: var(--text-faint); }
-  input[type=email]:focus { outline: none; }
-  .form-row button { background: none; border: none; color: var(--violet-bright); font-size: 15px; font-weight: 500; cursor: pointer; padding: 10px 4px; font-family: var(--font-sans); }
-  .form-row button:hover { color: var(--silver-bright); }
-  .form-success { display: none; align-items: center; gap: 8px; color: var(--green); font-size: 14px; margin-top: 14px; }
-  .form-success.show { display: flex; }
-  .form-error { display: none; align-items: center; gap: 8px; color: #F0555A; font-size: 14px; margin-top: 14px; }
-  .form-error.show { display: flex; }
-  .form-note { font-size: 12.5px; color: var(--text-faint); margin-top: 16px; }
-  .investor-email { font-size: 16px; color: var(--silver-bright); text-decoration: none; border-bottom: 1px solid var(--hairline-strong); padding-bottom: 3px; }
-  .investor-email:hover { border-color: var(--silver); }
-  .disclaimer { font-size: 12.5px; color: var(--text-faint); line-height: 1.8; margin-top: 60px; padding-top: 28px; border-top: 1px solid var(--hairline); max-width: 90ch; }
-
-  footer { padding: 40px 0 56px; }
-  .footer-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-  .footer-row .flogo { font-family: var(--font-serif); font-size: 15px; }
-  .footer-row .fmeta { color: var(--text-faint); font-size: 12.5px; }
-
-  /* ============================================================
-     ZONA CHIARA — override delle variabili per le sezioni su sfondo bianco.
-     I componenti esistenti (roadmap-row, team-row, status-list, edit-row,
-     vision-pillars, callout...) usano già var(--text)/var(--hairline)/ecc,
-     quindi ereditano automaticamente la palette chiara da questo scope.
-     ============================================================ */
-  .light-zone {
-    --bg: #FFFFFF;
-    --bg-2: #F7F7F8;
-    --hairline: rgba(20,21,27,0.10);
-    --hairline-strong: rgba(20,21,27,0.20);
-    --silver: #6B6F7C;
-    --silver-bright: #121319;
-    --silver-deep: #C7C6D2;
-    --violet-bright: #6D28D9;
-    --violet-deep: #EDE0FD;
-    --text: #14151B;
-    --text-muted: #55596A;
-    --text-faint: #9396A3;
-    --green: #15803D;
-    background: var(--bg);
-    color: var(--text);
-    position: relative;
+  @media (max-width: 900px) {
+    .wrap, .nav-inner { padding: 0 16px; }
+    .block { padding: 80px 0; }
+    .step, .split, .inv, .status-cols { grid-template-columns: 1fr; gap: 32px; }
+    .groups, .examples { grid-template-columns: 1fr; }
+    .two-shots, .pair { grid-template-columns: 1fr; }
+    .figures { grid-template-columns: 1fr 1fr; }
   }
-  .light-zone .btn-ghost { color: var(--text); border-color: var(--hairline-strong); }
-  .light-zone .btn-ghost:hover { border-color: var(--silver); }
-  .light-zone .nav-cta { color: var(--text); border-color: var(--silver-deep); }
-  .section-glow { position: absolute; top: 0; z-index: 0; pointer-events: none; width: 900px; height: 700px; background: radial-gradient(ellipse, rgba(124,58,237,0.16) 0%, rgba(124,58,237,0) 68%); }
-  .section-glow.left { left: -300px; }
-  .section-glow.right { right: -300px; }
-  .block.light-zone > .wrap, .block.light-zone > .cinema, .demo-section.light-zone > .wrap { position: relative; z-index: 1; }
-
-  /* ---------- Descrizione generale del prodotto ---------- */
-  .pg-lede { font-size: 18px; color: var(--text-muted); max-width: 72ch; margin: 0 0 50px; line-height: 1.75; }
-  .pg-sub-h { font-family: var(--font-serif); font-weight: 500; font-size: 24px; margin: 0 0 12px; }
-
-  /* ---------- Approfondimento tecnico (deep-dive) ---------- */
-  .deepdive { padding: 40px 0 130px; }
-  .dd-intro { font-size: 17px; color: var(--text-muted); max-width: 68ch; margin: 0 auto 70px; line-height: 1.75; text-align: center; }
-  .dd-block { display: grid; grid-template-columns: 220px 1fr; gap: 40px; padding: 46px 0; border-top: 1px solid var(--hairline); }
-  .dd-block:last-child { border-bottom: 1px solid var(--hairline); }
-  @media (max-width: 760px) { .dd-block { grid-template-columns: 1fr; gap: 16px; } }
-  .dd-block .dd-label { font-size: 12.5px; color: var(--violet-bright); font-weight: 600; line-height: 1.5; }
-  .dd-block h3 { font-family: var(--font-serif); font-weight: 500; font-size: 24px; margin: 0 0 16px; letter-spacing: -0.01em; }
-  .dd-block p { color: var(--text-muted); font-size: 15.5px; line-height: 1.75; margin: 0 0 14px; max-width: 68ch; }
-  .dd-block p:last-child { margin-bottom: 0; }
-  .dd-block code { font-family: var(--font-sans); font-size: 13.5px; background: var(--bg-2); border: 1px solid var(--hairline); padding: 1px 7px; border-radius: 4px; color: var(--text); }
-  .dd-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
-  .dd-tags span { font-size: 11.5px; color: var(--text-faint); background: var(--bg-2); border: 1px solid var(--hairline); padding: 4px 10px; border-radius: 100px; }
-
-  /* ---------- Tocco blockchain: catena di nodi verificati ---------- */
-  .cs-label { font-size: 11.5px; color: var(--text-faint); margin-bottom: 22px; letter-spacing: .02em; }
-  .chain-node-row { display: flex; align-items: flex-start; }
-  .chain-node { display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; }
-  .cn-dot { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; }
-  .chain-node.done .cn-dot { border: 1.5px solid #15803D; background: rgba(21,128,61,0.08); color: #15803D; }
-  .chain-node.pending .cn-dot { border: 1.5px solid var(--hairline-strong); color: var(--text-faint); letter-spacing: 1px; }
-  .cn-hash { font-size: 10.5px; color: var(--text-faint); white-space: nowrap; }
-  .chain-node.pending .cn-hash { color: var(--violet-bright); font-weight: 600; }
-  .cn-line { flex: 1; height: 1.5px; background: var(--hairline-strong); margin: 17px 10px 0; min-width: 16px; }
-  .cn-line.pending { background-image: repeating-linear-gradient(90deg, var(--hairline-strong) 0 4px, transparent 4px 8px); background-color: transparent; }
 </style>
 </head>
 <body>
 
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a href="#hero" class="nav-logo">IQF</a>
+    <a href="#top" class="nav-logo">IQ Finance</a>
     <ul class="nav-links">
-      <li><a href="#prodotto-generale">Product</a></li>
-      <li><a href="#come-funziona">How it works</a></li>
-      <li><a href="#approfondimento">Deep dive</a></li>
-      <li><a href="#stato">Project status</a></li>
-      <li><a href="#team">Team</a></li>
+      <li class="opt"><a href="#how">How it works</a></li>
+      <li class="opt"><a href="#instruments">Instruments</a></li>
+      <li class="opt"><a href="#status">Where we are</a></li>
+      <li class="opt"><a href="technology/">Technology</a></li>
+      <li class="opt"><a href="#investors">Investors</a></li>
       <li><a href="it/" hreflang="it" lang="it">IT</a></li>
-<li><a href="#waitlist" class="nav-cta">Early access</a></li>
+      <li><a href="#early-access" class="nav-cta">Early access</a></li>
     </ul>
   </div>
 </nav>
 
-<section id="hero" class="hero-tv">
-  <div class="hero-bg">
-    <svg viewBox="0 0 1800 640" preserveAspectRatio="none" width="100%" height="100%"><line x1="6.9" y1="547.3" x2="6.9" y2="597.1" class="wick-up"/><rect x="1.7" y="574.8" width="10.5" height="15.3" class="body-up"/><line x1="20.8" y1="540.2" x2="20.8" y2="596.2" class="wick-up"/><rect x="15.5" y="560.0" width="10.5" height="14.7" class="body-up"/><line x1="34.6" y1="531.8" x2="34.6" y2="601.3" class="wick-down"/><rect x="29.4" y="560.0" width="10.5" height="36.8" class="body-down"/><line x1="48.5" y1="573.2" x2="48.5" y2="624.0" class="wick-up"/><rect x="43.2" y="581.9" width="10.5" height="14.9" class="body-up"/><line x1="62.3" y1="558.9" x2="62.3" y2="588.1" class="wick-up"/><rect x="57.0" y="571.9" width="10.5" height="9.9" class="body-up"/><line x1="76.2" y1="543.0" x2="76.2" y2="581.6" class="wick-up"/><rect x="70.9" y="562.2" width="10.5" height="9.8" class="body-up"/><line x1="90.0" y1="542.3" x2="90.0" y2="583.9" class="wick-down"/><rect x="84.7" y="562.2" width="10.5" height="5.3" class="body-down"/><line x1="103.8" y1="538.8" x2="103.8" y2="595.5" class="wick-up"/><rect x="98.6" y="544.7" width="10.5" height="22.8" class="body-up"/><line x1="117.7" y1="484.5" x2="117.7" y2="551.2" class="wick-up"/><rect x="112.4" y="512.7" width="10.5" height="32.0" class="body-up"/><line x1="131.5" y1="506.7" x2="131.5" y2="572.4" class="wick-down"/><rect x="126.3" y="512.7" width="10.5" height="33.4" class="body-down"/><line x1="145.4" y1="497.3" x2="145.4" y2="565.8" class="wick-up"/><rect x="140.1" y="523.4" width="10.5" height="22.7" class="body-up"/><line x1="159.2" y1="492.7" x2="159.2" y2="536.9" class="wick-down"/><rect x="154.0" y="523.4" width="10.5" height="8.1" class="body-down"/><line x1="173.1" y1="441.7" x2="173.1" y2="550.6" class="wick-up"/><rect x="167.8" y="472.7" width="10.5" height="58.9" class="body-up"/><line x1="186.9" y1="455.3" x2="186.9" y2="518.8" class="wick-down"/><rect x="181.7" y="472.7" width="10.5" height="21.1" class="body-down"/><line x1="200.8" y1="489.0" x2="200.8" y2="528.6" class="wick-down"/><rect x="195.5" y="493.7" width="10.5" height="16.8" class="body-down"/><line x1="214.6" y1="490.7" x2="214.6" y2="542.9" class="wick-up"/><rect x="209.4" y="504.8" width="10.5" height="5.8" class="body-up"/><line x1="228.5" y1="459.0" x2="228.5" y2="510.1" class="wick-up"/><rect x="223.2" y="482.6" width="10.5" height="22.2" class="body-up"/><line x1="242.3" y1="458.9" x2="242.3" y2="492.2" class="wick-down"/><rect x="237.0" y="482.6" width="10.5" height="3.1" class="body-down"/><line x1="256.2" y1="432.9" x2="256.2" y2="516.1" class="wick-up"/><rect x="250.9" y="463.0" width="10.5" height="22.7" class="body-up"/><line x1="270.0" y1="402.0" x2="270.0" y2="468.5" class="wick-up"/><rect x="264.7" y="422.3" width="10.5" height="40.6" class="body-up"/><line x1="283.8" y1="414.0" x2="283.8" y2="426.3" class="wick-up"/><rect x="278.6" y="418.5" width="10.5" height="3.9" class="body-up"/><line x1="297.7" y1="388.1" x2="297.7" y2="483.8" class="wick-down"/><rect x="292.4" y="418.5" width="10.5" height="58.4" class="body-down"/><line x1="311.5" y1="469.2" x2="311.5" y2="534.5" class="wick-down"/><rect x="306.3" y="476.8" width="10.5" height="46.4" class="body-down"/><line x1="325.4" y1="490.1" x2="325.4" y2="531.7" class="wick-up"/><rect x="320.1" y="496.3" width="10.5" height="26.9" class="body-up"/><line x1="339.2" y1="478.1" x2="339.2" y2="524.7" class="wick-down"/><rect x="334.0" y="496.3" width="10.5" height="13.7" class="body-down"/><line x1="353.1" y1="455.4" x2="353.1" y2="531.1" class="wick-up"/><rect x="347.8" y="479.7" width="10.5" height="30.3" class="body-up"/><line x1="366.9" y1="473.0" x2="366.9" y2="503.6" class="wick-down"/><rect x="361.7" y="479.7" width="10.5" height="2.3" class="body-down"/><line x1="380.8" y1="441.9" x2="380.8" y2="498.8" class="wick-up"/><rect x="375.5" y="453.6" width="10.5" height="28.3" class="body-up"/><line x1="394.6" y1="449.4" x2="394.6" y2="485.5" class="wick-down"/><rect x="389.4" y="453.6" width="10.5" height="24.0" class="body-down"/><line x1="408.5" y1="448.6" x2="408.5" y2="524.3" class="wick-down"/><rect x="403.2" y="477.7" width="10.5" height="28.2" class="body-down"/><line x1="422.3" y1="458.0" x2="422.3" y2="520.7" class="wick-up"/><rect x="417.0" y="489.2" width="10.5" height="16.7" class="body-up"/><line x1="436.2" y1="471.4" x2="436.2" y2="524.9" class="wick-down"/><rect x="430.9" y="489.2" width="10.5" height="11.9" class="body-down"/><line x1="450.0" y1="451.5" x2="450.0" y2="512.1" class="wick-up"/><rect x="444.7" y="467.6" width="10.5" height="33.5" class="body-up"/><line x1="463.8" y1="376.1" x2="463.8" y2="496.1" class="wick-up"/><rect x="458.6" y="404.9" width="10.5" height="62.6" class="body-up"/><line x1="477.7" y1="351.6" x2="477.7" y2="430.5" class="wick-up"/><rect x="472.4" y="383.3" width="10.5" height="21.6" class="body-up"/><line x1="491.5" y1="348.7" x2="491.5" y2="408.6" class="wick-up"/><rect x="486.3" y="366.2" width="10.5" height="17.1" class="body-up"/><line x1="505.4" y1="350.9" x2="505.4" y2="397.8" class="wick-down"/><rect x="500.1" y="366.2" width="10.5" height="2.9" class="body-down"/><line x1="519.2" y1="343.8" x2="519.2" y2="397.8" class="wick-down"/><rect x="514.0" y="369.0" width="10.5" height="8.8" class="body-down"/><line x1="533.1" y1="341.4" x2="533.1" y2="385.8" class="wick-up"/><rect x="527.8" y="364.6" width="10.5" height="13.3" class="body-up"/><line x1="546.9" y1="337.0" x2="546.9" y2="369.8" class="wick-up"/><rect x="541.7" y="363.2" width="10.5" height="1.4" class="body-up"/><line x1="560.8" y1="332.7" x2="560.8" y2="368.6" class="wick-up"/><rect x="555.5" y="356.0" width="10.5" height="7.3" class="body-up"/><line x1="574.6" y1="331.4" x2="574.6" y2="418.9" class="wick-down"/><rect x="569.4" y="356.0" width="10.5" height="42.3" class="body-down"/><line x1="588.5" y1="370.8" x2="588.5" y2="429.9" class="wick-up"/><rect x="583.2" y="379.1" width="10.5" height="19.1" class="body-up"/><line x1="602.3" y1="360.5" x2="602.3" y2="441.3" class="wick-down"/><rect x="597.0" y="379.1" width="10.5" height="40.4" class="body-down"/><line x1="616.2" y1="353.8" x2="616.2" y2="436.4" class="wick-up"/><rect x="610.9" y="359.8" width="10.5" height="59.7" class="body-up"/><line x1="630.0" y1="304.5" x2="630.0" y2="364.9" class="wick-up"/><rect x="624.7" y="332.7" width="10.5" height="27.1" class="body-up"/><line x1="643.8" y1="269.3" x2="643.8" y2="361.0" class="wick-up"/><rect x="638.6" y="301.3" width="10.5" height="31.4" class="body-up"/><line x1="657.7" y1="297.5" x2="657.7" y2="314.0" class="wick-down"/><rect x="652.4" y="301.3" width="10.5" height="8.0" class="body-down"/><line x1="671.5" y1="226.3" x2="671.5" y2="336.7" class="wick-up"/><rect x="666.3" y="253.4" width="10.5" height="56.0" class="body-up"/><line x1="685.4" y1="191.6" x2="685.4" y2="280.9" class="wick-up"/><rect x="680.1" y="213.6" width="10.5" height="39.8" class="body-up"/><line x1="699.2" y1="192.2" x2="699.2" y2="245.9" class="wick-up"/><rect x="694.0" y="211.8" width="10.5" height="1.8" class="body-up"/><line x1="713.1" y1="187.4" x2="713.1" y2="231.9" class="wick-down"/><rect x="707.8" y="211.8" width="10.5" height="11.3" class="body-down"/><line x1="726.9" y1="210.0" x2="726.9" y2="272.6" class="wick-down"/><rect x="721.7" y="223.1" width="10.5" height="32.3" class="body-down"/><line x1="740.8" y1="235.0" x2="740.8" y2="312.7" class="wick-down"/><rect x="735.5" y="255.4" width="10.5" height="26.5" class="body-down"/><line x1="754.6" y1="272.5" x2="754.6" y2="324.3" class="wick-down"/><rect x="749.4" y="281.8" width="10.5" height="18.7" class="body-down"/><line x1="768.5" y1="279.1" x2="768.5" y2="370.9" class="wick-down"/><rect x="763.2" y="300.5" width="10.5" height="38.0" class="body-down"/><line x1="782.3" y1="316.2" x2="782.3" y2="366.7" class="wick-down"/><rect x="777.0" y="338.5" width="10.5" height="18.9" class="body-down"/><line x1="796.2" y1="331.1" x2="796.2" y2="380.7" class="wick-down"/><rect x="790.9" y="357.4" width="10.5" height="13.4" class="body-down"/><line x1="810.0" y1="347.8" x2="810.0" y2="403.4" class="wick-down"/><rect x="804.7" y="370.9" width="10.5" height="4.9" class="body-down"/><line x1="823.8" y1="342.7" x2="823.8" y2="388.2" class="wick-up"/><rect x="818.6" y="359.3" width="10.5" height="16.4" class="body-up"/><line x1="837.7" y1="328.2" x2="837.7" y2="371.1" class="wick-up"/><rect x="832.4" y="351.6" width="10.5" height="7.7" class="body-up"/><line x1="851.5" y1="347.6" x2="851.5" y2="390.7" class="wick-down"/><rect x="846.3" y="351.6" width="10.5" height="26.8" class="body-down"/><line x1="865.4" y1="354.7" x2="865.4" y2="438.0" class="wick-down"/><rect x="860.1" y="378.4" width="10.5" height="30.6" class="body-down"/><line x1="879.2" y1="366.8" x2="879.2" y2="436.0" class="wick-up"/><rect x="874.0" y="390.3" width="10.5" height="18.7" class="body-up"/><line x1="893.1" y1="360.8" x2="893.1" y2="444.5" class="wick-down"/><rect x="887.8" y="390.3" width="10.5" height="39.3" class="body-down"/><line x1="906.9" y1="379.0" x2="906.9" y2="455.0" class="wick-up"/><rect x="901.7" y="395.1" width="10.5" height="34.5" class="body-up"/><line x1="920.8" y1="378.8" x2="920.8" y2="493.3" class="wick-down"/><rect x="915.5" y="395.1" width="10.5" height="69.3" class="body-down"/><line x1="934.6" y1="460.1" x2="934.6" y2="483.6" class="wick-down"/><rect x="929.4" y="464.4" width="10.5" height="13.2" class="body-down"/><line x1="948.5" y1="435.5" x2="948.5" y2="506.2" class="wick-up"/><rect x="943.2" y="456.5" width="10.5" height="21.2" class="body-up"/><line x1="962.3" y1="448.5" x2="962.3" y2="485.4" class="wick-down"/><rect x="957.0" y="456.5" width="10.5" height="12.3" class="body-down"/><line x1="976.2" y1="415.1" x2="976.2" y2="482.8" class="wick-up"/><rect x="970.9" y="427.3" width="10.5" height="41.5" class="body-up"/><line x1="990.0" y1="397.4" x2="990.0" y2="441.6" class="wick-down"/><rect x="984.7" y="427.3" width="10.5" height="3.2" class="body-down"/><line x1="1003.8" y1="394.4" x2="1003.8" y2="451.2" class="wick-up"/><rect x="998.6" y="398.8" width="10.5" height="31.7" class="body-up"/><line x1="1017.7" y1="360.1" x2="1017.7" y2="408.3" class="wick-up"/><rect x="1012.4" y="376.3" width="10.5" height="22.5" class="body-up"/><line x1="1031.5" y1="300.3" x2="1031.5" y2="397.6" class="wick-up"/><rect x="1026.3" y="318.0" width="10.5" height="58.3" class="body-up"/><line x1="1045.4" y1="305.2" x2="1045.4" y2="322.6" class="wick-up"/><rect x="1040.1" y="309.5" width="10.5" height="8.4" class="body-up"/><line x1="1059.2" y1="289.3" x2="1059.2" y2="338.4" class="wick-up"/><rect x="1054.0" y="308.5" width="10.5" height="1.3" class="body-up"/><line x1="1073.1" y1="285.0" x2="1073.1" y2="329.1" class="wick-up"/><rect x="1067.8" y="303.7" width="10.5" height="4.8" class="body-up"/><line x1="1086.9" y1="226.6" x2="1086.9" y2="328.1" class="wick-up"/><rect x="1081.7" y="246.9" width="10.5" height="56.8" class="body-up"/><line x1="1100.8" y1="219.3" x2="1100.8" y2="286.7" class="wick-down"/><rect x="1095.5" y="246.9" width="10.5" height="13.1" class="body-down"/><line x1="1114.6" y1="240.6" x2="1114.6" y2="271.6" class="wick-down"/><rect x="1109.4" y="260.0" width="10.5" height="5.3" class="body-down"/><line x1="1128.5" y1="243.2" x2="1128.5" y2="309.1" class="wick-down"/><rect x="1123.2" y="265.4" width="10.5" height="19.7" class="body-down"/><line x1="1142.3" y1="266.1" x2="1142.3" y2="299.8" class="wick-up"/><rect x="1137.0" y="282.8" width="10.5" height="2.2" class="body-up"/><line x1="1156.2" y1="243.1" x2="1156.2" y2="297.2" class="wick-up"/><rect x="1150.9" y="260.2" width="10.5" height="22.6" class="body-up"/><line x1="1170.0" y1="233.6" x2="1170.0" y2="330.0" class="wick-down"/><rect x="1164.7" y="260.2" width="10.5" height="38.5" class="body-down"/><line x1="1183.8" y1="266.4" x2="1183.8" y2="316.2" class="wick-up"/><rect x="1178.6" y="279.6" width="10.5" height="19.1" class="body-up"/><line x1="1197.7" y1="251.4" x2="1197.7" y2="311.3" class="wick-up"/><rect x="1192.4" y="256.4" width="10.5" height="23.2" class="body-up"/><line x1="1211.5" y1="187.5" x2="1211.5" y2="277.5" class="wick-up"/><rect x="1206.3" y="213.5" width="10.5" height="42.9" class="body-up"/><line x1="1225.4" y1="186.2" x2="1225.4" y2="238.8" class="wick-up"/><rect x="1220.1" y="195.9" width="10.5" height="17.6" class="body-up"/><line x1="1239.2" y1="147.1" x2="1239.2" y2="213.7" class="wick-up"/><rect x="1234.0" y="157.4" width="10.5" height="38.5" class="body-up"/><line x1="1253.1" y1="115.6" x2="1253.1" y2="164.5" class="wick-up"/><rect x="1247.8" y="141.4" width="10.5" height="16.0" class="body-up"/><line x1="1266.9" y1="114.5" x2="1266.9" y2="159.5" class="wick-up"/><rect x="1261.7" y="135.3" width="10.5" height="6.1" class="body-up"/><line x1="1280.8" y1="115.1" x2="1280.8" y2="162.6" class="wick-up"/><rect x="1275.5" y="124.2" width="10.5" height="11.1" class="body-up"/><line x1="1294.6" y1="120.0" x2="1294.6" y2="162.9" class="wick-down"/><rect x="1289.4" y="124.2" width="10.5" height="24.4" class="body-down"/><line x1="1308.5" y1="120.3" x2="1308.5" y2="160.4" class="wick-up"/><rect x="1303.2" y="126.6" width="10.5" height="22.0" class="body-up"/><line x1="1322.3" y1="43.7" x2="1322.3" y2="133.1" class="wick-up"/><rect x="1317.0" y="72.2" width="10.5" height="54.4" class="body-up"/><line x1="1336.2" y1="36.2" x2="1336.2" y2="103.7" class="wick-up"/><rect x="1330.9" y="50.6" width="10.5" height="21.6" class="body-up"/><line x1="1350.0" y1="24.8" x2="1350.0" y2="97.0" class="wick-down"/><rect x="1344.7" y="50.6" width="10.5" height="15.7" class="body-down"/><line x1="1363.8" y1="27.7" x2="1363.8" y2="90.0" class="wick-up"/><rect x="1358.6" y="34.8" width="10.5" height="31.5" class="body-up"/><line x1="1377.7" y1="16.0" x2="1377.7" y2="52.4" class="wick-down"/><rect x="1372.4" y="34.8" width="10.5" height="13.5" class="body-down"/><line x1="1391.5" y1="23.6" x2="1391.5" y2="87.6" class="wick-down"/><rect x="1386.3" y="48.2" width="10.5" height="30.6" class="body-down"/><line x1="1405.4" y1="56.2" x2="1405.4" y2="132.9" class="wick-down"/><rect x="1400.1" y="78.9" width="10.5" height="21.8" class="body-down"/><line x1="1419.2" y1="77.6" x2="1419.2" y2="139.2" class="wick-down"/><rect x="1414.0" y="100.7" width="10.5" height="11.9" class="body-down"/><line x1="1433.1" y1="88.5" x2="1433.1" y2="185.9" class="wick-down"/><rect x="1427.8" y="112.6" width="10.5" height="57.1" class="body-down"/><line x1="1446.9" y1="139.3" x2="1446.9" y2="197.9" class="wick-down"/><rect x="1441.7" y="169.6" width="10.5" height="1.3" class="body-down"/><line x1="1460.8" y1="126.1" x2="1460.8" y2="180.7" class="wick-up"/><rect x="1455.5" y="156.3" width="10.5" height="14.4" class="body-up"/><line x1="1474.6" y1="102.9" x2="1474.6" y2="163.1" class="wick-up"/><rect x="1469.4" y="126.2" width="10.5" height="30.1" class="body-up"/><line x1="1488.5" y1="121.8" x2="1488.5" y2="145.5" class="wick-down"/><rect x="1483.2" y="126.2" width="10.5" height="1.3" class="body-down"/><line x1="1502.3" y1="115.3" x2="1502.3" y2="166.0" class="wick-down"/><rect x="1497.0" y="127.0" width="10.5" height="31.5" class="body-down"/><line x1="1516.2" y1="115.7" x2="1516.2" y2="184.6" class="wick-up"/><rect x="1510.9" y="134.7" width="10.5" height="23.9" class="body-up"/><line x1="1530.0" y1="99.8" x2="1530.0" y2="160.6" class="wick-up"/><rect x="1524.7" y="118.6" width="10.5" height="16.1" class="body-up"/><line x1="1543.8" y1="103.9" x2="1543.8" y2="162.4" class="wick-down"/><rect x="1538.6" y="118.6" width="10.5" height="28.6" class="body-down"/><line x1="1557.7" y1="132.2" x2="1557.7" y2="184.1" class="wick-down"/><rect x="1552.4" y="147.2" width="10.5" height="20.9" class="body-down"/><line x1="1571.5" y1="155.9" x2="1571.5" y2="197.1" class="wick-up"/><rect x="1566.3" y="164.0" width="10.5" height="4.1" class="body-up"/><line x1="1585.4" y1="143.8" x2="1585.4" y2="195.6" class="wick-down"/><rect x="1580.1" y="164.0" width="10.5" height="6.2" class="body-down"/><line x1="1599.2" y1="123.3" x2="1599.2" y2="187.1" class="wick-up"/><rect x="1594.0" y="154.6" width="10.5" height="15.6" class="body-up"/><line x1="1613.1" y1="150.9" x2="1613.1" y2="194.8" class="wick-down"/><rect x="1607.8" y="154.6" width="10.5" height="14.0" class="body-down"/><line x1="1626.9" y1="132.2" x2="1626.9" y2="180.9" class="wick-up"/><rect x="1621.7" y="143.7" width="10.5" height="25.0" class="body-up"/><line x1="1640.8" y1="81.6" x2="1640.8" y2="159.2" class="wick-up"/><rect x="1635.5" y="109.1" width="10.5" height="34.6" class="body-up"/><line x1="1654.6" y1="50.0" x2="1654.6" y2="123.2" class="wick-up"/><rect x="1649.4" y="65.4" width="10.5" height="43.7" class="body-up"/><line x1="1668.5" y1="58.2" x2="1668.5" y2="90.1" class="wick-down"/><rect x="1663.2" y="65.4" width="10.5" height="12.1" class="body-down"/><line x1="1682.3" y1="51.0" x2="1682.3" y2="163.7" class="wick-down"/><rect x="1677.0" y="77.5" width="10.5" height="53.9" class="body-down"/><line x1="1696.2" y1="68.9" x2="1696.2" y2="147.5" class="wick-up"/><rect x="1690.9" y="78.9" width="10.5" height="52.5" class="body-up"/><line x1="1710.0" y1="74.4" x2="1710.0" y2="100.5" class="wick-down"/><rect x="1704.7" y="78.9" width="10.5" height="5.5" class="body-down"/><line x1="1723.8" y1="34.6" x2="1723.8" y2="96.2" class="wick-up"/><rect x="1718.6" y="58.2" width="10.5" height="26.2" class="body-up"/><line x1="1737.7" y1="48.6" x2="1737.7" y2="106.8" class="wick-down"/><rect x="1732.4" y="58.2" width="10.5" height="19.4" class="body-down"/><line x1="1751.5" y1="48.4" x2="1751.5" y2="91.3" class="wick-up"/><rect x="1746.3" y="72.0" width="10.5" height="5.6" class="body-up"/><line x1="1765.4" y1="45.8" x2="1765.4" y2="99.3" class="wick-down"/><rect x="1760.1" y="72.0" width="10.5" height="4.3" class="body-down"/><line x1="1779.2" y1="48.5" x2="1779.2" y2="93.5" class="wick-down"/><rect x="1774.0" y="76.3" width="10.5" height="6.6" class="body-down"/><line x1="1793.1" y1="63.2" x2="1793.1" y2="95.7" class="wick-down"/><rect x="1787.8" y="82.9" width="10.5" height="4.4" class="body-down"/></svg>
-  </div>
-  <svg class="hero-aurora" viewBox="0 0 1200 400" preserveAspectRatio="none" width="100%" height="100%">
-    <defs>
-      <linearGradient id="auroraGrad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#9D6FFF" stop-opacity="0.5"/>
-        <stop offset="100%" stop-color="#9D6FFF" stop-opacity="0"/>
-      </linearGradient>
-    </defs>
-    <g stroke="url(#auroraGrad)" stroke-width="2">
-      <line x1="140" y1="0" x2="120" y2="260"/><line x1="220" y1="0" x2="210" y2="180"/>
-      <line x1="330" y1="0" x2="345" y2="300"/><line x1="470" y1="0" x2="460" y2="150"/>
-      <line x1="600" y1="0" x2="610" y2="280"/><line x1="720" y1="0" x2="705" y2="170"/>
-      <line x1="860" y1="0" x2="875" y2="260"/><line x1="990" y1="0" x2="980" y2="140"/>
-      <line x1="1080" y1="0" x2="1095" y2="240"/>
-    </g>
-  </svg>
-  <div class="hero-vignette"></div>
-  <div class="hero-tv-content">
-    <h1><span class="h1-brand">IQ Finance</span><span class="h1-tagline">Institutional Quant Investing.<br>Built for Everyone.</span></h1>
-
-    <div class="hero-tv-cta">
-      <a href="#waitlist" class="btn-hero">Request early access</a>
-      <div class="fine">No real funds involved today</div>
+<!-- 1. What it is -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="status"><i></i>Working prototype on a test network · no real money involved</div>
+    <h1>Describe how you want to invest. See how it would have gone. Then decide.</h1>
+    <p class="lead">IQ Finance turns a goal written in plain words into an investment strategy, tests it on years of past market data, and shows you the results before anything happens. Nothing starts without your approval.</p>
+    <div class="cta-row">
+      <a class="btn" href="#early-access">Request early access</a>
+      <a class="btn-ghost" href="#how">How it works ↓</a>
     </div>
+    <figure class="shot">
+      <img src="screenshots/01-hero-chat-strategy.png" width="1440" height="900" alt="The IQ Finance prototype: a goal written in the chat and the strategy the platform built from it, ready for approval.">
+      <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
+    </figure>
   </div>
-  <div class="hero-scroll-cue">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-  </div>
-</section>
+</header>
 
-<section id="demo" class="demo-section">
+<!-- 2. How it works -->
+<section class="block" id="how">
   <div class="wrap">
     <div class="block-head">
-      <h2>A hedge fund desk, in a single chat</h2>
-      <p>The same validation discipline a strategist would apply for an institutional client — available to anyone who writes a sentence.</p>
+      <div class="eyebrow">How it works</div>
+      <h2>Four steps, and the last one is always yours.</h2>
     </div>
-    <div class="demo-panel-wrap">
-      <div class="demo-glow" id="demoGlow"></div>
-      <div class="demo-panel" id="demoPanel">
-        <div class="demo-panel-bar">
-          <span class="d r"></span><span class="d y"></span><span class="d g"></span>
-          <span class="wordmark">IQ Finance — Terminal</span>
-          <span class="live"><i></i>testnet live</span>
-        </div>
-        <div class="demo-toolbar">
-          <div class="pair"><span class="dot"></span>QQQ / USDC · Dual-Momentum</div>
-          <div class="tf"><span>1H</span><span>4H</span><span class="on">1D</span><span>1S</span></div>
-          <div class="tools"><span>Indicators</span><span>Alert</span><span>Replay</span></div>
-        </div>
-        <div class="demo-panel-body">
-          <div class="demo-icon-rail">
-            <div class="ic on"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 20l4-4 4 2 8-10"/></svg></div>
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></div>
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/></svg></div>
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 4v16M4 12h16"/></svg></div>
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="8"/></svg></div>
-          </div>
-          <div class="demo-chart-main">
-            <div class="chart-top">
-              <!-- [[BACKTEST_REALE]]: replace +24.3% with the engine's real output when available -->
-              <div><b>+24.3%</b><span class="ch">▲ cumulative return · illustrative</span></div>
-              <div class="sub">24 simulated months</div>
-            </div>
-            <div class="demo-chart-area">
-              <svg viewBox="0 0 700 220" width="100%" height="220" preserveAspectRatio="none" style="display:block;">
-                <g stroke="#1B1F2B" stroke-width="1">
-                  <line x1="0" y1="40" x2="700" y2="40"/><line x1="0" y1="110" x2="700" y2="110"/><line x1="0" y1="180" x2="700" y2="180"/>
-                </g>
-                <line x1="7.6" y1="85.5" x2="7.6" y2="149.0" class="cd-w"/><rect x="2.7" y="99.4" width="9.7" height="34.8" class="cd-b"/><line x1="22.8" y1="119.3" x2="22.8" y2="180.6" class="cd-w"/><rect x="18.0" y="134.2" width="9.7" height="28.9" class="cd-b"/><line x1="38.0" y1="141.6" x2="38.0" y2="204.6" class="cd-w"/><rect x="33.2" y="163.1" width="9.7" height="22.7" class="cd-b"/><line x1="53.3" y1="124.0" x2="53.3" y2="203.7" class="cu-w"/><rect x="48.4" y="148.8" width="9.7" height="36.9" class="cu-b"/><line x1="68.5" y1="140.4" x2="68.5" y2="156.7" class="cu-w"/><rect x="63.6" y="145.4" width="9.7" height="3.4" class="cu-b"/><line x1="83.7" y1="131.5" x2="83.7" y2="180.8" class="cd-w"/><rect x="78.8" y="145.4" width="9.7" height="22.0" class="cd-b"/><line x1="98.9" y1="149.2" x2="98.9" y2="189.6" class="cd-w"/><rect x="94.0" y="167.4" width="9.7" height="8.5" class="cd-b"/><line x1="114.1" y1="134.4" x2="114.1" y2="198.0" class="cu-w"/><rect x="109.3" y="159.9" width="9.7" height="16.0" class="cu-b"/><line x1="129.3" y1="154.7" x2="129.3" y2="186.4" class="cd-w"/><rect x="124.5" y="159.9" width="9.7" height="6.0" class="cd-b"/><line x1="144.6" y1="117.8" x2="144.6" y2="190.6" class="cu-w"/><rect x="139.7" y="130.0" width="9.7" height="35.9" class="cu-b"/><line x1="159.8" y1="116.0" x2="159.8" y2="171.7" class="cd-w"/><rect x="154.9" y="130.0" width="9.7" height="16.5" class="cd-b"/><line x1="175.0" y1="115.5" x2="175.0" y2="167.3" class="cu-w"/><rect x="170.1" y="133.0" width="9.7" height="13.5" class="cu-b"/><line x1="190.2" y1="112.7" x2="190.2" y2="181.0" class="cd-w"/><rect x="185.3" y="133.0" width="9.7" height="41.8" class="cd-b"/><line x1="205.4" y1="152.8" x2="205.4" y2="195.9" class="cu-w"/><rect x="200.6" y="157.7" width="9.7" height="17.0" class="cu-b"/><line x1="220.7" y1="138.0" x2="220.7" y2="168.3" class="cd-w"/><rect x="215.8" y="157.7" width="9.7" height="4.0" class="cd-b"/><line x1="235.9" y1="148.9" x2="235.9" y2="185.6" class="cd-w"/><rect x="231.0" y="161.8" width="9.7" height="15.5" class="cd-b"/><line x1="251.1" y1="120.1" x2="251.1" y2="185.6" class="cu-w"/><rect x="246.2" y="143.2" width="9.7" height="34.1" class="cu-b"/><line x1="266.3" y1="115.8" x2="266.3" y2="149.1" class="cu-w"/><rect x="261.4" y="133.6" width="9.7" height="9.6" class="cu-b"/><line x1="281.5" y1="122.7" x2="281.5" y2="158.8" class="cd-w"/><rect x="276.7" y="133.6" width="9.7" height="15.0" class="cd-b"/><line x1="296.7" y1="124.3" x2="296.7" y2="157.6" class="cu-w"/><rect x="291.9" y="140.8" width="9.7" height="7.8" class="cu-b"/><line x1="312.0" y1="126.5" x2="312.0" y2="201.5" class="cd-w"/><rect x="307.1" y="140.8" width="9.7" height="44.4" class="cd-b"/><line x1="327.2" y1="178.2" x2="327.2" y2="212.0" class="cd-w"/><rect x="322.3" y="185.2" width="9.7" height="3.2" class="cd-b"/><line x1="342.4" y1="164.1" x2="342.4" y2="197.9" class="cd-w"/><rect x="337.5" y="188.4" width="9.7" height="1.5" class="cd-b"/><line x1="357.6" y1="123.4" x2="357.6" y2="202.8" class="cu-w"/><rect x="352.7" y="140.3" width="9.7" height="49.5" class="cu-b"/><line x1="372.8" y1="121.2" x2="372.8" y2="161.2" class="cd-w"/><rect x="368.0" y="140.3" width="9.7" height="11.6" class="cd-b"/><line x1="388.0" y1="136.4" x2="388.0" y2="159.5" class="cu-w"/><rect x="383.2" y="146.5" width="9.7" height="5.4" class="cu-b"/><line x1="403.3" y1="124.2" x2="403.3" y2="182.6" class="cd-w"/><rect x="398.4" y="146.5" width="9.7" height="18.9" class="cd-b"/><line x1="418.5" y1="109.9" x2="418.5" y2="169.4" class="cu-w"/><rect x="413.6" y="118.1" width="9.7" height="47.3" class="cu-b"/><line x1="433.7" y1="97.1" x2="433.7" y2="134.3" class="cu-w"/><rect x="428.8" y="108.9" width="9.7" height="9.2" class="cu-b"/><line x1="448.9" y1="85.7" x2="448.9" y2="135.4" class="cd-w"/><rect x="444.0" y="108.9" width="9.7" height="1.3" class="cd-b"/><line x1="464.1" y1="99.9" x2="464.1" y2="114.2" class="cu-w"/><rect x="459.3" y="104.4" width="9.7" height="5.8" class="cu-b"/><line x1="479.3" y1="70.0" x2="479.3" y2="108.5" class="cu-w"/><rect x="474.5" y="94.8" width="9.7" height="9.6" class="cu-b"/><line x1="494.6" y1="69.2" x2="494.6" y2="100.2" class="cd-w"/><rect x="489.7" y="94.8" width="9.7" height="1.2" class="cd-b"/><line x1="509.8" y1="69.5" x2="509.8" y2="114.7" class="cu-w"/><rect x="504.9" y="93.0" width="9.7" height="1.9" class="cu-b"/><line x1="525.0" y1="41.7" x2="525.0" y2="116.4" class="cu-w"/><rect x="520.1" y="60.4" width="9.7" height="32.6" class="cu-b"/><line x1="540.2" y1="39.4" x2="540.2" y2="92.8" class="cd-w"/><rect x="535.3" y="60.4" width="9.7" height="9.8" class="cd-b"/><line x1="555.4" y1="53.1" x2="555.4" y2="81.8" class="cd-w"/><rect x="550.6" y="70.1" width="9.7" height="6.3" class="cd-b"/><line x1="570.7" y1="8.0" x2="570.7" y2="96.1" class="cu-w"/><rect x="565.8" y="31.0" width="9.7" height="45.4" class="cu-b"/><line x1="585.9" y1="8.3" x2="585.9" y2="36.5" class="cu-w"/><rect x="581.0" y="30.4" width="9.7" height="1.2" class="cu-b"/><line x1="601.1" y1="13.5" x2="601.1" y2="77.2" class="cd-w"/><rect x="596.2" y="30.4" width="9.7" height="32.6" class="cd-b"/><line x1="616.3" y1="39.1" x2="616.3" y2="81.0" class="cd-w"/><rect x="611.4" y="63.0" width="9.7" height="8.7" class="cd-b"/><line x1="631.5" y1="53.2" x2="631.5" y2="88.0" class="cd-w"/><rect x="626.7" y="71.7" width="9.7" height="8.2" class="cd-b"/><line x1="646.7" y1="40.4" x2="646.7" y2="90.7" class="cu-w"/><rect x="641.9" y="63.7" width="9.7" height="16.2" class="cu-b"/><line x1="662.0" y1="50.5" x2="662.0" y2="114.4" class="cd-w"/><rect x="657.1" y="63.7" width="9.7" height="29.4" class="cd-b"/><line x1="677.2" y1="74.4" x2="677.2" y2="99.7" class="cu-w"/><rect x="672.3" y="85.0" width="9.7" height="8.0" class="cu-b"/><line x1="692.4" y1="26.4" x2="692.4" y2="104.3" class="cu-w"/><rect x="687.5" y="48.7" width="9.7" height="36.3" class="cu-b"/>
-              </svg>
-              <div class="price-axis"><span>124.3</span><span>118.2</span><span>112.2</span><span>106.1</span><span>100.0</span></div>
-            </div>
-            <div class="demo-vol-row">
-              <svg viewBox="0 0 700 40" width="100%" height="40" preserveAspectRatio="none" style="display:block;">
-                <rect x="2.7" y="13.0" width="9.7" height="27.0" class="cd-vol"/><rect x="18.0" y="6.3" width="9.7" height="33.7" class="cd-vol"/><rect x="33.2" y="30.6" width="9.7" height="9.4" class="cd-vol"/><rect x="48.4" y="12.1" width="9.7" height="27.9" class="cu-vol"/><rect x="63.6" y="24.1" width="9.7" height="15.9" class="cu-vol"/><rect x="78.8" y="4.7" width="9.7" height="35.3" class="cd-vol"/><rect x="94.0" y="23.0" width="9.7" height="17.0" class="cd-vol"/><rect x="109.3" y="9.1" width="9.7" height="30.9" class="cu-vol"/><rect x="124.5" y="19.0" width="9.7" height="21.0" class="cd-vol"/><rect x="139.7" y="4.6" width="9.7" height="35.4" class="cu-vol"/><rect x="154.9" y="19.1" width="9.7" height="20.9" class="cd-vol"/><rect x="170.1" y="23.2" width="9.7" height="16.8" class="cu-vol"/><rect x="185.3" y="24.0" width="9.7" height="16.0" class="cd-vol"/><rect x="200.6" y="26.2" width="9.7" height="13.8" class="cu-vol"/><rect x="215.8" y="11.2" width="9.7" height="28.8" class="cd-vol"/><rect x="231.0" y="23.2" width="9.7" height="16.8" class="cd-vol"/><rect x="246.2" y="19.2" width="9.7" height="20.8" class="cu-vol"/><rect x="261.4" y="0.0" width="9.7" height="40.0" class="cu-vol"/><rect x="276.7" y="29.6" width="9.7" height="10.4" class="cd-vol"/><rect x="291.9" y="12.5" width="9.7" height="27.5" class="cu-vol"/><rect x="307.1" y="4.0" width="9.7" height="36.0" class="cd-vol"/><rect x="322.3" y="5.5" width="9.7" height="34.5" class="cd-vol"/><rect x="337.5" y="1.3" width="9.7" height="38.7" class="cd-vol"/><rect x="352.7" y="28.6" width="9.7" height="11.4" class="cu-vol"/><rect x="368.0" y="5.3" width="9.7" height="34.7" class="cd-vol"/><rect x="383.2" y="8.7" width="9.7" height="31.3" class="cu-vol"/><rect x="398.4" y="22.9" width="9.7" height="17.1" class="cd-vol"/><rect x="413.6" y="23.2" width="9.7" height="16.8" class="cu-vol"/><rect x="428.8" y="27.7" width="9.7" height="12.3" class="cu-vol"/><rect x="444.0" y="10.7" width="9.7" height="29.3" class="cd-vol"/><rect x="459.3" y="2.6" width="9.7" height="37.4" class="cu-vol"/><rect x="474.5" y="11.4" width="9.7" height="28.6" class="cu-vol"/><rect x="489.7" y="14.3" width="9.7" height="25.7" class="cd-vol"/><rect x="504.9" y="9.2" width="9.7" height="30.8" class="cu-vol"/><rect x="520.1" y="3.8" width="9.7" height="36.2" class="cu-vol"/><rect x="535.3" y="13.4" width="9.7" height="26.6" class="cd-vol"/><rect x="550.6" y="11.3" width="9.7" height="28.7" class="cd-vol"/><rect x="565.8" y="19.4" width="9.7" height="20.6" class="cu-vol"/><rect x="581.0" y="7.7" width="9.7" height="32.3" class="cu-vol"/><rect x="596.2" y="24.5" width="9.7" height="15.5" class="cd-vol"/><rect x="611.4" y="31.6" width="9.7" height="8.4" class="cd-vol"/><rect x="626.7" y="26.5" width="9.7" height="13.5" class="cd-vol"/><rect x="641.9" y="10.4" width="9.7" height="29.6" class="cu-vol"/><rect x="657.1" y="2.4" width="9.7" height="37.6" class="cd-vol"/><rect x="672.3" y="15.9" width="9.7" height="24.1" class="cu-vol"/><rect x="687.5" y="1.3" width="9.7" height="38.7" class="cu-vol"/>
-              </svg>
-            </div>
-            <div class="demo-chart-axis-x"><span>Sep 2024</span><span>Feb 2025</span><span>Jul 2025</span><span>Dec 2025</span><span>Aug 2026</span></div>
-          </div>
-          <div class="demo-side">
-            <div class="sh">CHAT</div>
-            <div class="ds-msg mine">
-              <div class="ds-av u">YOU</div>
-              <div class="ds-req">"50% QQQ, 50% GLD, stop if the drop exceeds 10%"</div>
-            </div>
-            <div class="ds-msg">
-              <div class="ds-av s">IQ</div>
-              <div class="ds-reply"><b>✓ verified by the risk engine</b>Proposal ready — QQQ 50%, GLD 50%, stop-loss 10%. Awaiting your signature.</div>
-            </div>
-            <div style="margin-top:6px;">
-              <div class="sh">RISK ENGINE CHECK</div>
-              <div class="ds-check"><span class="c">✓</span>Risk thresholds (Sharpe, drawdown)</div>
-              <div class="ds-check"><span class="c">✓</span>Absolute backstop 35%</div>
-              <div class="ds-check"><span class="c">✓</span>Statistical gate DSR ≥ 0.99</div>
-            </div>
-            <div class="ds-cta">Ready — awaiting your signature</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="stat-strip">
-  <hr class="hairline">
-  <div class="wrap">
-    <div class="item"><div class="n num">911</div><div class="l">tests passed</div></div>
-    <div class="item"><div class="n num">17</div><div class="l">RWA assets</div></div>
-    <div class="item"><div class="n num">3</div><div class="l">control layers</div></div>
-    <div class="item"><div class="n num">0</div><div class="l">real funds today</div></div>
-  </div>
-  <hr class="hairline">
-</div>
-
-<section id="prodotto-generale" class="dark-deepdive" style="background:#000000;">
-  <div class="wrap">
-    <div class="block-head">
-      <div class="fig">THE PRODUCT</div>
-      <h2>What IQ Finance does</h2>
-      <p>A quantitative engine that takes hedge-fund discipline beyond its usual boundaries, while always remaining non-custodial.</p>
-    </div>
-    <div class="dd-dark-row">
-      <div class="ddr-label">WHAT IT IS</div>
-      <div>
-        <p><b>IQ Finance is a quantitative, non-custodial wealth management platform.</b> Here is how it works: describe in a single sentence the goal you want to reach — for example a balanced exposure between tokenized tech equities and tokenized commodities, with a maximum acceptable loss — or choose to buy and sell assets directly, with no delegation.</p>
-        <p>If you describe a goal, a deterministic risk engine checks every proposal before it is executed: precise mathematical thresholds — if even one is not met, the operation simply does not go ahead. If you operate on your own instead, execution is direct and immediate, without that layer of verification, but still protected by secure routing and the same non-custodial custody. In both cases, no operation starts without your signature — always staying inside a personal digital contract (the Smart Vault) that belongs exclusively to you, never in an account we manage.</p>
-        <p>Two ways to use it, then: have the engine build and check a strategy from your goal — with ongoing management within your parameters planned for a later phase — or operate on your own.</p>
-        <p><b>Our ambition, stated plainly: we want to become the reference artificial intelligence for finance</b> — the infrastructure on which private investors and institutions learn to rely, not yet another trading app.</p>
-      </div>
-    </div>
-    <div class="dark-modes">
-      <div>
-        <div class="dm-tag on">DELEGATED MANAGEMENT</div>
-        <h3>AI Agent</h3>
-        <p>Describe the goal; the engine turns it into a strategy and checks it before every execution. Automatic rebalancing over time, within the parameters you set, is planned for a later phase.</p>
-      </div>
-      <div>
-        <div class="dm-tag on">DIRECT EXECUTION</div>
-        <h3>Self-directed exchange</h3>
-        <p>Buy and sell whitelisted RWA assets manually whenever you want, with no delegation — MEV-protected routing, the same non-custodial custody, no intermediary between you and your Smart Vault.</p>
-      </div>
-    </div>
-    <div class="dark-market-head">
-      <h3>Markets covered today</h3>
-      <p>A whitelisted catalog of tokenized real-world assets, the same for both modes.</p>
-    </div>
-    <div class="market-panel">
-      <div class="demo-panel-bar">
-        <span class="d r"></span><span class="d y"></span><span class="d g"></span>
-        <span class="wordmark">IQ Finance — Markets</span>
-        <span class="live"><i></i>17 RWA assets</span>
-      </div>
-      <div class="exchange-mock">
-        <div class="em-head" style="grid-template-columns:2fr 1.4fr;"><span>Watchlist</span><span></span></div>
-        <div class="em-row" style="grid-template-columns:2fr 1.4fr;"><span class="em-name"><i class="em-dot" style="background:#8B5CF6"></i>QQQ <em>RWA</em></span><div class="em-actions"><button class="em-buy">Buy</button><button class="em-sell">Sell</button></div></div>
-        <div class="em-row" style="grid-template-columns:2fr 1.4fr;"><span class="em-name"><i class="em-dot" style="background:#F5A623"></i>SPY <em>RWA</em></span><div class="em-actions"><button class="em-buy">Buy</button><button class="em-sell">Sell</button></div></div>
-        <div class="em-row" style="grid-template-columns:2fr 1.4fr;"><span class="em-name"><i class="em-dot" style="background:#9BA1AE"></i>GLD <em>RWA</em></span><div class="em-actions"><button class="em-buy">Buy</button><button class="em-sell">Sell</button></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="dark-deepdive" style="background:#000000; padding-bottom:60px;">
-  <div class="wrap">
-    <div class="block-head" style="margin-bottom:0;">
-      <div class="fig">OUR TWO PILLARS</div>
-      <h2 style="font-size:clamp(20px, 2.2vw, 26px);">Why AI and blockchain, together, change the rules</h2>
-      <p>Not two trendy technologies placed side by side for marketing — two guarantees that complete each other.</p>
-    </div>
-  </div>
-</section>
-
-<section id="ai-blockchain-deep" class="pillar-illustrated">
-  <div class="wrap pillar-content">
-    <div class="fig">ARTIFICIAL<br>INTELLIGENCE</div>
-    <div>
-      <h3>The AI interprets. The code decides.</h3>
-      <p>A language model like Claude today interprets natural language with a flexibility that no rigid decision module in traditional finance has ever had: it grasps nuance, handles ambiguity, asks for clarification when needed. It is a real leap, not marketing — anyone who has tried to program an "if-then" rule system to interpret human intent knows how fragile it is by comparison.</p>
-      <p>But the same flexibility that makes an AI useful for interpreting is also what makes it dangerous to let it decide on its own: a probabilistic model can hallucinate, misread an ambiguous sentence, behave unpredictably precisely in the most volatile market moments. That is why in our system the AI has a single, clear task: translate intent into a verifiable data structure. It never decides whether to execute.</p>
-      <p><b>The next step, stated openly.</b> With proprietary financial-parsing data collected in production, we will evaluate fine-tuning open-source language models (the Qwen family, DeepSeek or comparable) — to reduce the marginal cost per user and sharpen domain fit. Fine-tuning would change the model's style, never its role: it would remain subject, without exception, to validation by the deterministic engine.</p>
-    </div>
-  </div>
-</section>
-
-<section class="pillar-illustrated" style="background:#000000;">
-  <div class="wrap pillar-content">
-    <div class="fig">BLOCKCHAIN &amp;<br>TOKENIZATION</div>
-    <div>
-      <h3>A public ledger, not an entry in a private database</h3>
-      <p>A share in a traditional account exists legally as an entry in a private database — that of the custodian bank, the clearing house. You see a number in the app; the authoritative ledger that decides whether that number is true is one you do not control and cannot inspect, and if the intermediary fails it becomes the subject of a long procedure before you recover anything — when things go well.</p>
-      <p>A tokenized asset on a public blockchain reverses this relationship: the authoritative ledger is public, anyone can verify it at any time, and ownership passes through a cryptographic signature that only you control — not the good faith of an intermediary. It is not an implementation detail: it changes the answer to the question "who decides whether this is really mine", from "an institution you have to hope is solvent" to "a protocol anyone can verify".</p>
-      <p>In practical terms this means a risk engine that can balance different RWA classes within the same Smart Vault, because they all live on the same verifiable ledger — not on incompatible systems that nobody reconciles in real time. The mechanism is direct: every token is issued and redeemed 1:1 against a stablecoin through a primary-market contract, with every issuance and redemption recorded publicly. Today, on the test network, tokens are issued and redeemed at par with USDC and do not yet track the price of the underlying asset: price tracking and custody of the real underlying with a regulated partner are requirements before any launch with real capital.</p>
-    </div>
-  </div>
-</section>
-
-<div class="fade-transition"></div>
-
-<section id="vision" class="block light-zone" style="position:relative; overflow:hidden;">
-  <div class="wrap">
-    <div class="block-head">
-      <div class="fig">WHY WE EXIST</div>
-      <h2>Why we exist</h2>
-      <p>Not an abstract idea of "innovation" — a direct answer to a gap that has existed for decades.</p>
-    </div>
-    <p class="vision-lede">A hedge fund can afford a team that validates every strategy before risking a single euro. An ordinary saver cannot — and so far has had to choose between blindly trusting someone else, or giving up active management altogether. We want to close that gap, without ever asking anyone to give up control of their funds to do it.</p>
-    <div class="vision-pillars">
-      <div>
-        <div class="vn">I</div>
-        <h4>Non-custodial by principle</h4>
-        <p>Custody always remains with the user. Not a temporary competitive advantage, but a constraint written into the contract itself: when an intermediary gets into difficulty, client funds often end up frozen or lost — a structural problem that our code makes impossible by construction, not just by policy.</p>
-      </div>
-      <div>
-        <div class="vn">II</div>
-        <h4>Deterministic, not probabilistic</h4>
-        <p>The AI interprets natural language. A rigid mathematical engine — not a language model, not a black box — decides whether an execution is admissible. Always verifiable, never an act of faith.</p>
-      </div>
-      <div>
-        <div class="vn">III</div>
-        <h4>Real assets, diversified by nature</h4>
-        <p>Equities, index ETFs, gold, oil and the dollar, all tokenized and verifiable on the same ledger — the same rigor a fund would apply to a diversified book, made available to everyone.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<section id="come-funziona" class="block light-zone with-divider">
-  <div class="wrap">
-    <div class="block-head">
-      <div class="fig">HOW IT WORKS</div>
-      <h2>Between what you ask and what happens, three checks — never one fewer.</h2>
-      <p>Every single proposal goes through the same sequence, without exceptions.</p>
-    </div>
-    <div class="flow-rows">
-      <div class="flow-row">
-        <div class="fr-text">
-          <div class="fs-num">01</div>
-          <div class="fs-fig">CONVERSATIONAL INTERFACE</div>
-          <h3>You say what you want, in one sentence</h3>
-          <p>A language model (Claude, via Vercel AI SDK) interprets the intent and translates it into a precise data structure — but decides nothing about what to do with your capital.</p>
-        </div>
-        <div class="fr-mock">
-          <div class="flow-mockup">
-            <div class="mini-bar">
-              <span class="d" style="background:#FF5F57;"></span><span class="d" style="background:#FEBC2E;"></span><span class="d" style="background:#28C840;"></span>
-              <span class="wordmark">Chat</span>
-            </div>
-            <div class="fr-mock-body" style="display:flex; gap:12px; align-items:flex-start;">
-              <div style="width:26px; height:26px; border-radius:50%; background:#EFECF9; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:600; color:#6D28D9; flex-shrink:0;">YOU</div>
-              <div style="background:#8257D6; color:#FFFFFF; padding:11px 15px; border-radius:12px; border-bottom-left-radius:3px; font-size:12.5px; line-height:1.55;">Build a balanced portfolio between tokenized equity indices and tokenized commodities, with quarterly rebalancing and a protective stop at 15% drawdown.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="flow-row">
-        <div class="fr-text">
-          <div class="fs-num">02</div>
-          <div class="fs-fig">TURNING IT INTO A PROPOSAL</div>
-          <h3>The request becomes a tested strategy</h3>
-          <p>Exact weights per asset, numerical thresholds, exit conditions — and a verifiable historical backtest, not a promise.</p>
-        </div>
-        <div class="fr-mock">
-          <div class="flow-mockup">
-            <div class="mini-bar">
-              <span class="d" style="background:#FF5F57;"></span><span class="d" style="background:#FEBC2E;"></span><span class="d" style="background:#28C840;"></span>
-              <span class="wordmark">Backtest</span>
-            </div>
-            <div class="fr-mock-body">
-              <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px;">
-                <!-- [[BACKTEST_REALE]]: replace +11.9% with the engine's real output when available --><span style="font-family:var(--font-serif); font-size:19px; color:#14151B;">+11.9%</span>
-                <span style="font-size:10.5px; color:#9396A3;">24 simulated months · illustrative</span>
-              </div>
-              <svg viewBox="0 0 360 70" width="100%" height="auto" preserveAspectRatio="none" style="height:56px; display:block;">
-                <defs>
-                  <linearGradient id="miniBtFill" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.35"/>
-                    <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"/>
-                  </linearGradient>
-                </defs>
-                <path d="M 0.0,64.4 L 9.2,57.4 L 18.5,51.6 L 27.7,57.0 L 36.9,65.0 L 46.2,64.3 L 55.4,59.5 L 64.6,59.1 L 73.8,64.8 L 83.1,66.0 L 92.3,58.0 L 101.5,63.4 L 110.8,57.3 L 120.0,53.6 L 129.2,50.2 L 138.5,45.4 L 147.7,46.8 L 156.9,46.2 L 166.2,36.5 L 175.4,37.1 L 184.6,37.9 L 193.8,43.4 L 203.1,44.5 L 212.3,39.8 L 221.5,32.7 L 230.8,28.5 L 240.0,24.3 L 249.2,20.3 L 258.5,17.6 L 267.7,11.6 L 276.9,11.1 L 286.2,4.9 L 295.4,4.0 L 304.6,10.3 L 313.8,15.2 L 323.1,14.9 L 332.3,15.9 L 341.5,20.4 L 350.8,22.8 L 360.0,20.8 L 360.0,70.0 L 0,70.0 Z" fill="url(#miniBtFill)" stroke="none"/>
-                <path d="M 0.0,64.4 L 9.2,57.4 L 18.5,51.6 L 27.7,57.0 L 36.9,65.0 L 46.2,64.3 L 55.4,59.5 L 64.6,59.1 L 73.8,64.8 L 83.1,66.0 L 92.3,58.0 L 101.5,63.4 L 110.8,57.3 L 120.0,53.6 L 129.2,50.2 L 138.5,45.4 L 147.7,46.8 L 156.9,46.2 L 166.2,36.5 L 175.4,37.1 L 184.6,37.9 L 193.8,43.4 L 203.1,44.5 L 212.3,39.8 L 221.5,32.7 L 230.8,28.5 L 240.0,24.3 L 249.2,20.3 L 258.5,17.6 L 267.7,11.6 L 276.9,11.1 L 286.2,4.9 L 295.4,4.0 L 304.6,10.3 L 313.8,15.2 L 323.1,14.9 L 332.3,15.9 L 341.5,20.4 L 350.8,22.8 L 360.0,20.8" fill="none" stroke="#6D28D9" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="flow-row">
-        <div class="fr-text">
-          <div class="fs-num">03</div>
-          <div class="fs-fig">DETERMINISTIC RISK ENGINE</div>
-          <h3>Three mathematical thresholds, in sequence</h3>
-          <p>Sharpe and historical drawdown, absolute 35% backstop, statistical gate on the Deflated Sharpe Ratio (0.99 threshold). If even one fails, execution stops here.</p>
-        </div>
-        <div class="fr-mock">
-          <div class="flow-mockup">
-            <div class="mini-bar">
-              <span class="d" style="background:#FF5F57;"></span><span class="d" style="background:#FEBC2E;"></span><span class="d" style="background:#28C840;"></span>
-              <span class="wordmark">Check</span>
-            </div>
-            <div class="fr-mock-body" style="padding-top:14px; padding-bottom:14px;">
-              <div style="display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid #EEEEF0;">
-                <div style="width:22px; height:22px; border-radius:50%; border:1.3px solid #15803D; background:rgba(21,128,61,0.08); display:flex; align-items:center; justify-content:center; color:#15803D; font-size:11px; flex-shrink:0;">✓</div>
-                <div><div style="font-size:12.5px; color:#25262C;">Risk thresholds</div><div style="font-size:10px; color:#9396A3;">Sharpe, historical drawdown</div></div>
-              </div>
-              <div style="display:flex; align-items:center; gap:12px; padding:8px 0; border-bottom:1px solid #EEEEF0;">
-                <div style="width:22px; height:22px; border-radius:50%; border:1.3px solid #15803D; background:rgba(21,128,61,0.08); display:flex; align-items:center; justify-content:center; color:#15803D; font-size:11px; flex-shrink:0;">✓</div>
-                <div><div style="font-size:12.5px; color:#25262C;">Absolute backstop</div><div style="font-size:10px; color:#9396A3;">maximum drawdown 35%</div></div>
-              </div>
-              <div style="display:flex; align-items:center; gap:12px; padding:8px 0;">
-                <div style="width:22px; height:22px; border-radius:50%; border:1.3px solid #15803D; background:rgba(21,128,61,0.08); display:flex; align-items:center; justify-content:center; color:#15803D; font-size:11px; flex-shrink:0;">✓</div>
-                <div><div style="font-size:12.5px; color:#25262C;">Statistical gate</div><div style="font-size:10px; color:#9396A3;">Deflated Sharpe Ratio ≥ 0.99</div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="flow-row">
-        <div class="fr-text">
-          <div class="fs-num">04</div>
-          <div class="fs-fig">SMART VAULT ON-CHAIN</div>
-          <h3>No operation starts without your signature</h3>
-          <p>The operation starts from your personal contract. No one — not even the IQ Finance team — can withdraw or move your funds elsewhere.</p>
-        </div>
-        <div class="fr-mock">
-          <div class="flow-mockup">
-            <div class="mini-bar">
-              <span class="d" style="background:#FF5F57;"></span><span class="d" style="background:#FEBC2E;"></span><span class="d" style="background:#28C840;"></span>
-              <span class="wordmark">Smart Vault</span>
-            </div>
-            <div class="fr-mock-body" style="display:flex; align-items:center; gap:14px;">
-              <svg width="34" height="34" viewBox="0 0 34 34" style="flex-shrink:0;">
-                <rect x="7" y="15" width="20" height="14" rx="3" fill="none" stroke="#6D28D9" stroke-width="1.6"/>
-                <path d="M11 15 v-4.5 a6 6 0 0 1 12 0 v4.5" fill="none" stroke="#6D28D9" stroke-width="1.6"/>
-                <circle cx="17" cy="21" r="1.6" fill="#6D28D9"/>
-              </svg>
-              <div>
-                <div style="font-size:12.5px; color:#14151B; font-weight:500;">Smart Vault signature</div>
-                <div style="font-size:10px; color:#7C5EC7;">Awaiting your approval</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="approfondimento" class="block light-zone deepdive with-divider" style="position:relative; overflow:hidden;">
-  <div class="wrap">
-    <div class="block-head" style="margin-bottom:26px;">
-      <div class="fig">TECHNICAL DEEP DIVE</div>
-      <h2>How it is built, in detail</h2>
-    </div>
-    <p class="dd-intro">What follows is not simplified marketing material: it is the real description of the architecture, with the same technical names, the same numerical thresholds and the same limits we would use in due diligence. If a fintech startup deserves trust, it must hold up at this level of detail too.</p>
-
-    <div class="dd-block">
-      <div class="dd-label">LEVEL 1<br>Interface &amp; parsing</div>
-      <div>
-        <h3>Translates intent, does not decide execution</h3>
-        <p>The conversational interface is built on Vercel AI SDK with Claude as the interpretation model. Its sole task is to translate intent expressed in natural language into a rigorous JSON data structure — target assets, percentage weights, stop-loss thresholds, execution frequency. It is never the model that decides whether an operation can proceed.</p>
-        <p>This distinction is not cosmetic: in the code, the tool that submits on-chain executions is technically accessible to the model, but remains structurally powerless until a database row has already moved to the <code>AWAITING_MANAGER_SIGNATURE</code> state — a state reachable only after a real cryptographic signature from the user, verified off-chain against the registered wallet.</p>
-        <p><b>The power of AI, today and tomorrow.</b> A generic language model like Claude is already able to interpret financial intents expressed in a natural and ambiguous way — a real leap compared to the rigid decision modules (the old "if-then" trees) that traditional finance has used for decades. But the roadmap does not stop here: once proprietary financial-parsing data has been collected in production, we plan to evaluate fine-tuning open-source language models (the Qwen family, DeepSeek or comparable) on dedicated infrastructure — to reduce the marginal cost per user and sharpen fit to the specific domain (financial terminology, risk formats). Fine-tuning would change the model's style, never its role: it would remain subject, without exception, to Level 2 validation.</p>
-        <div class="dd-tags"><span>Vercel AI SDK</span><span>Claude</span><span>Parsing → JSON</span><span>Proprietary fine-tuning — roadmap</span></div>
-      </div>
-    </div>
-
-    <div class="dd-block">
-      <div class="dd-label">LEVEL 2<br>Risk engine</div>
-      <div>
-        <h3>Three independent gates, all fail-closed</h3>
-        <p>Every proposal goes through three checks in sequence, each capable on its own of blocking execution. <b>Gate 1</b> verifies direct risk thresholds: it rejects if the historical Sharpe ratio falls below -0.5 or if maximum drawdown exceeds the configured threshold (default 35%). <b>Gate 2</b> is an absolute backstop, independent of any exemption applied elsewhere: if the backtest ever touched a permanent liquidation marker, the proposal is rejected regardless of everything else. <b>Gate 3</b> recomputes the Deflated Sharpe Ratio server-side (Bailey/López de Prado formula) from raw data — never trusting a value the model might copy from a previous answer — with an acceptance threshold of 0.99 and a minimum of 750 bars of history (about 3 years).</p>
-        <p>The quantitative stack also includes Combinatorial Purged Cross-Validation and Monte Carlo simulations (10,000 paths) for estimating confidence intervals — computed and returned, even though today they are not part of the binary acceptance criterion of the three gates. Final position sizing uses the Kelly criterion, capped for prudence at a quarter of the full value (¼-Kelly), a standard practice to reduce variance compared to full Kelly.</p>
-        <div class="dd-tags"><span>DSR ≥ 0.99</span><span>Drawdown ≤ 35%</span><span>CPCV</span><span>Monte Carlo 10k</span><span>¼-Kelly</span></div>
-      </div>
-    </div>
-
-    <div class="dd-block">
-      <div class="dd-label">LEVEL 3<br>On-chain Smart Vault</div>
-      <div>
-        <h3>One contract per user, one role that updates everywhere</h3>
-        <p>Each user receives their own Smart Vault, deployed as a minimal clone (EIP-1167 pattern) of a single verified implementation — cheap to create, impossible to alter individually after deployment. Two distinct roles govern the contract: the <b>owner</b> (the user) is the only one who can deposit, withdraw and define the router whitelist; the <b>manager</b> is resolved dynamically by reading the current address from the Factory on every call — a single manager-rotation transaction applies instantly to all existing vaults, with no need to re-initialize them.</p>
-        <p>The only function the manager can call is <code>executeTrade</code>, protected by a percentage cap on the balance per single trade and by an on-chain router whitelist — a compromised manager could route funds only to contracts pre-approved by the owner, never elsewhere, and never beyond the configured threshold.</p>
-        <div class="dd-tags"><span>EIP-1167 clone</span><span>RBAC owner/manager</span><span>Router whitelist</span><span>Per-trade cap</span></div>
-      </div>
-    </div>
-
-    <div class="dd-block">
-      <div class="dd-label">REAL ASSETS<br>Mint &amp; redeem</div>
-      <div>
-        <h3>Tokenized securities, transparent mint and redeem on-chain</h3>
-        <p>RWA assets are minted and redeemed 1:1 against a stablecoin through a dedicated primary-market contract, with an explicit checks-effects-interactions pattern (the token is burned before the counterpart transfer, to prevent reentrancy attacks on the reserve). The current catalog counts 17 RWA tokens, all verifiable on-chain, deployed on a test network. Today, on the test network, tokens are issued and redeemed at par with USDC and do not yet track the price of the underlying asset: price tracking and custody of the real underlying with a regulated partner are requirements before any launch with real capital.</p>
-        <div class="dd-tags"><span>Mint/redeem 1:1</span><span>Checks-effects-interactions</span><span>17 RWA</span></div>
-      </div>
-    </div>
-
-    <div class="dd-block">
-      <div class="dd-label">HONESTY<br>Stated limits</div>
-      <div>
-        <h3>What isn't true yet, said before you ask</h3>
-        <p>The system currently operates exclusively on Arbitrum Sepolia, a test network: no real funds have ever been moved. The contract code is not yet publicly verified on a block explorer, and has not received a security audit from an independent third party — both steps explicitly planned before any launch with real capital, not details postponed by chance. Today your signature is verified by our backend; verification directly in the contract, including the minimum price you approved, is planned for a later phase. We consider transparency about these limits as much a part of the product as the code itself.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="roadmap" class="block light-zone with-divider">
-  <div class="wrap">
-    <div class="block-head">
-      <div class="fig">ROADMAP</div>
-      <h2>Where we're going</h2>
-      <p>Seven phases, from today's technical verification to a quantitative engine for funds and banks too.</p>
-    </div>
-    <div class="roadmap-list">
-      <div class="roadmap-row">
-        <div class="rn">00<span class="active-tag">● in progress</span></div>
-        <div><h3>Foundations and Compliance</h3><p>Legal opinion, smart contract security audit, incorporation of the company.</p></div>
-      </div>
-      <div class="roadmap-row">
-        <div class="rn">01</div>
-        <div><h3>Proprietary AI</h3><p>Decided after the round, based on real usage data.</p></div>
-      </div>
-      <div class="roadmap-row">
-        <div class="rn">02</div>
-        <div><h3>Mainnet Launch and Traction</h3><p>Move from testnet to the main Arbitrum network, first real users, building the first verifiable track record.</p></div>
-      </div>
-      <div class="roadmap-row">
-        <div class="rn">03</div>
-        <div><h3>Scaling and Global Holding</h3><p>EU regulatory licensing, regulatory hubs in key jurisdictions, corporate restructuring to support growth.</p></div>
-      </div>
-      <div class="roadmap-row">
-        <div class="rn">04</div>
-        <div><h3>B2B — engine for funds and banks</h3><p>The same risk engine, built for individual investors, made available as infrastructure to hedge funds and banks with digital exposures.</p></div>
-      </div>
-      <div class="roadmap-row">
-        <div class="rn">05</div>
-        <div><h3>Direct Tokenization of Securities</h3><p>Extension of the mint/redeem infrastructure already built: becoming the tokenization channel ourselves for third-party issuers, once the user base and the track record of the previous phases are consolidated.</p></div>
-      </div>
-      <div class="roadmap-row">
-        <div class="rn">06</div>
-        <div><h3>Native DEX and Ecosystem</h3><p>Proprietary liquidity pools and an execution network that reduces dependence on third-party protocols.</p></div>
-      </div>
-    </div>
-    <div class="callout">
-      <p><b>The parallel that guides us:</b> the great institutional risk-management engines were born as internal infrastructure, before becoming a product for the market. It is the same path we envisage — not a promise, a sequence of steps verifiable one at a time.</p>
-    </div>
-  </div>
-</section>
-
-<section id="stato" class="block light-zone with-divider">
-  <div class="wrap">
-    <div class="block-head">
-      <div class="fig">PROJECT STATUS</div>
-      <h2>We show you where we really are</h2>
-      <p>Not where we'd like to be. Every number below was verified by running the code, not inferred.</p>
-    </div>
-    <div class="status-editorial">
-      <div class="status-feature">
-        <div class="n num">911<span style="font-size:0.4em; color:var(--text-faint);">/911</span></div>
-        <div class="l">automated tests passed (verified on October 6, 2026)</div>
-        <div class="callout" style="margin-top:32px;">
-          <p><b>It is not a detail postponed by chance.</b> The external security audit and the public verification of the code are steps we want to complete before any launch with real funds, not after. We prefer to show you where we are today rather than promise where we will be tomorrow.</p>
-        </div>
-      </div>
-      <div class="status-list">
-        <div class="row"><div class="k">Network</div><div class="v">Arbitrum Sepolia — testnet</div></div>
-        <div class="row"><div class="k">Real funds involved</div><div class="v num">0</div></div>
-        <div class="row"><div class="k">Public verification on Arbiscan</div><div class="v">not yet done</div></div>
-        <div class="row"><div class="k">External security audit</div><div class="v">not yet done</div></div>
-      </div>
-    </div>
-    <div class="flow-mockup" style="max-width:640px; margin:48px auto 0;">
-      <div class="mini-bar">
-        <span class="d" style="background:#FF5F57;"></span><span class="d" style="background:#FEBC2E;"></span><span class="d" style="background:#28C840;"></span>
-        <span class="wordmark">Ledger</span>
-      </div>
-      <div class="fr-mock-body">
-        <div class="cs-label">EVERY PROPOSED EXECUTION, TRACKED AS A VERIFIABLE BLOCK</div>
-        <div class="chain-node-row">
-          <div class="chain-node done"><div class="cn-dot">✓</div><a class="cn-hash" href="https://sepolia.arbiscan.io/tx/0x12e3d3833344535f590ee4ccbcbbd21758591d471f78d2ca8fb6af23638e3939" target="_blank" rel="noreferrer" style="text-decoration:none;" title="0x12e3d3833344535f590ee4ccbcbbd21758591d471f78d2ca8fb6af23638e3939">0x12e3…3939</a></div>
-          <div class="cn-line"></div>
-          <div class="chain-node done"><div class="cn-dot">✓</div><a class="cn-hash" href="https://sepolia.arbiscan.io/tx/0xce87e2015eba94db71b52ccdd520aa548d7414d248e82c0f2971eaa63604b563" target="_blank" rel="noreferrer" style="text-decoration:none;" title="0xce87e2015eba94db71b52ccdd520aa548d7414d248e82c0f2971eaa63604b563">0xce87…b563</a></div>
-          <div class="cn-line"></div>
-          <div class="chain-node done"><div class="cn-dot">✓</div><a class="cn-hash" href="https://sepolia.arbiscan.io/tx/0x4d6455fd2acdf2fff3e7fa276e2c578f4a9f8b4a17d96813c2f2f4abe3986de7" target="_blank" rel="noreferrer" style="text-decoration:none;" title="0x4d6455fd2acdf2fff3e7fa276e2c578f4a9f8b4a17d96813c2f2f4abe3986de7">0x4d64…6de7</a></div>
-          <div class="cn-line pending"></div>
-          <div class="chain-node pending"><div class="cn-dot">···</div><div class="cn-hash">awaiting signature</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="team" class="block light-zone with-divider">
-  <div class="wrap">
-    <div class="block-head">
-      <div class="fig">WHO WE ARE</div>
-      <h2>Team</h2>
-    </div>
-    <div class="team-list">
-      <div class="team-row">
+    <div class="steps">
+      <div class="step">
         <div>
-          <h3>Marco La Porta</h3>
+          <div class="n">01</div>
+          <h3>Describe your goal</h3>
+          <p>Write it the way you'd say it. No forms, no jargon.</p>
+          <blockquote>“Half in big US tech, half in gold, rebalanced every three months.”</blockquote>
+        </div>
+        <figure class="shot">
+          <img src="screenshots/02-step1-describe.png" width="1440" height="900" loading="lazy" alt="The chat box with the goal written in plain words, before sending it.">
+          <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div>
+          <div class="n">02</div>
+          <h3>The platform builds and tests the strategy</h3>
+          <p>An AI model turns your words into a precise plan: which instruments, how much in each, when to rebalance. Then a separate engine, built on fixed mathematical rules, tests it on the past five years of market data.</p>
+          <p><b>The AI suggests. The rules decide.</b></p>
+        </div>
+        <figure class="shot">
+          <img src="screenshots/03-step2-built.png" width="1440" height="900" loading="lazy" alt="The strategy built from the goal: instruments, weights and rebalancing schedule.">
+          <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div>
+          <div class="n">03</div>
+          <h3>See what would have happened</h3>
+          <p>You see how the strategy would have performed: what it would have gained or lost, its worst drop, and whether it passes our safety checks.</p>
+          <p>These are simulated results on past data, not a promise about the future. Rebalancing is applied inside the simulation; automatic rebalancing and watching a strategy after it goes live are coming later.</p>
+        </div>
+        <figure class="shot">
+          <img src="screenshots/04-step3-analysis.png" width="1440" height="900" loading="lazy" alt="The analysis of the strategy over the past five years: growth curve, result, worst drop and the outcome of the safety checks.">
+          <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
+        </figure>
+      </div>
+      <div class="step">
+        <div>
+          <div class="n">04</div>
+          <h3>You decide. Your money stays yours.</h3>
+          <p>If you like it, approve it with your signature. If you don't, nothing happens. Funds sit in a personal account that belongs only to you, never in an account we manage.</p>
+        </div>
+        <div class="pair">
+          <figure class="shot">
+            <img src="screenshots/05-step4-signature.png" width="1440" height="900" loading="lazy" alt="The signature request in the wallet, on top of the proposed operation.">
+            <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="screenshots/06-step4-confirmed.png" width="1440" height="900" loading="lazy" alt="The operation confirmed, with a link to its public record.">
+            <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. What you see before deciding -->
+<section class="block" id="before">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <div class="eyebrow">Before you decide</div>
+        <h2>The full picture, in plain numbers.</h2>
+        <p class="lead">Before you approve anything, you see exactly how the strategy would have behaved.</p>
+      </div>
+      <ul class="points">
+        <li><b>Growth over time.</b> How €100 would have changed over the last five years.</li>
+        <li><b>The worst drop.</b> The biggest fall from a high point along the way.</li>
+        <li><b>How steady the ride was.</b> Whether gains came smoothly or in big swings.</li>
+        <li><b>Luck or skill?</b> A statistical test checks whether the results hold up or could be chance. It needs at least three years of data.</li>
+        <li><b>Safety checks: pass or fail.</b> If the strategy would ever have fallen more than 35% from its peak, it is blocked. If any check fails, it cannot run.</li>
+      </ul>
+    </div>
+    <div class="two-shots">
+      <figure class="shot">
+        <img src="screenshots/07-analysis-passed.png" width="1440" height="900" loading="lazy" alt="A strategy that passes every safety check.">
+        <figcaption><b>A strategy that passes.</b> Screenshot of the MVP on a test network · simulated results</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="screenshots/08-analysis-blocked.png" width="1440" height="900" loading="lazy" alt="A strategy the engine blocks because it would have fallen more than 35% from its peak.">
+        <figcaption><b>A strategy the engine blocks.</b> Screenshot of the MVP on a test network · simulated results</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Your money stays yours -->
+<section class="block" id="yours">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <div class="eyebrow">Your money stays yours</div>
+        <h2>We never hold your money.</h2>
+      </div>
+      <ul class="points">
+        <li><b>A personal account only you own.</b> Each user gets their own digital vault on the blockchain, not a shared account controlled by us.</li>
+        <li><b>Nothing starts without your signature.</b></li>
+        <li><b>Every operation leaves a public record</b> anyone can check. <a href="https://sepolia.arbiscan.io/tx/0x12e3d3833344535f590ee4ccbcbbd21758591d471f78d2ca8fb6af23638e3939" target="_blank" rel="noreferrer" style="color:var(--violet-bright);">See an example ↗</a></li>
+        <li><b>Where we are, honestly.</b> Today we run on a test network with test funds. Your signature is checked by our servers; checking it directly inside your vault comes later. An independent security review of the code is planned before any real money is involved.</li>
+      </ul>
+    </div>
+    <div class="two-shots">
+      <figure class="shot">
+        <img src="screenshots/09-portfolio.png" width="1440" height="900" loading="lazy" alt="The personal portfolio: value, allocation and the note about test tokens.">
+        <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="screenshots/11-public-record.png" width="1440" height="900" loading="lazy" alt="The public record of an operation on the test network.">
+        <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 5. What you can build strategies with -->
+<section class="block" id="instruments">
+  <div class="wrap">
+    <div class="block-head">
+      <div class="eyebrow">Instruments</div>
+      <h2>What you can build strategies with</h2>
+      <p class="lead">17 instruments, in plain words.</p>
+    </div>
+    <div class="groups">
+      <div class="group">
+        <h3>US market indexes</h3>
+        <ul>
+          <li><span class="tk">QQQ</span>Nasdaq-100</li>
+          <li><span class="tk">SPY</span>S&amp;P 500</li>
+          <li><span class="tk">DIA</span>Dow Jones</li>
+          <li><span class="tk">IWM</span>Russell 2000, smaller companies</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Large companies</h3>
+        <ul>
+          <li><span class="tk">AAPL</span>Apple</li>
+          <li><span class="tk">MSFT</span>Microsoft</li>
+          <li><span class="tk">NVDA</span>Nvidia</li>
+          <li><span class="tk">GOOGL</span>Alphabet (Google)</li>
+          <li><span class="tk">AMZN</span>Amazon</li>
+          <li><span class="tk">META</span>Meta</li>
+          <li><span class="tk">TSLA</span>Tesla</li>
+          <li><span class="tk">JPM</span>JPMorgan Chase</li>
+          <li><span class="tk">BRK-B</span>Berkshire Hathaway</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Gold, oil, dollar, volatility</h3>
+        <ul>
+          <li><span class="tk">GLD</span>Gold</li>
+          <li><span class="tk">USO</span>Oil</li>
+          <li><span class="tk">UUP</span>US dollar</li>
+          <li><span class="tk">VXX</span>Market volatility</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note">Strategy tests use real historical market data, adjusted for dividends and splits. Today, on the test network, the instruments are test versions: they're issued and redeemed one-for-one with a digital dollar (USDC) and don't yet follow the real price.</p>
+    <figure class="shot" style="margin-top:56px;">
+      <img src="screenshots/10-markets-catalog.png" width="1440" height="900" loading="lazy" alt="The catalog of the 17 instruments in the prototype.">
+      <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 6. Example strategies -->
+<section class="block" id="examples">
+  <div class="wrap">
+    <div class="block-head">
+      <div class="eyebrow">Examples</div>
+      <h2>Example strategies</h2>
+      <p class="lead">Three goals, written in plain words, tested by the prototype on the past five years.</p>
+    </div>
+    <div class="examples">
+      <article class="example">
+        <h3>Balanced: half tech, half gold</h3>
+        <p>50% Nasdaq-100, 50% gold, rebalanced every three months.</p>
+        <dl>
+          <dt>Period</dt><dd>5 years</dd>
+          <dt>Result</dt><dd>[[EX1_RESULT]]</dd>
+          <dt>Worst drop</dt><dd>[[EX1_WORST_DROP]]</dd>
+          <dt>Safety checks</dt><dd>[[EX1_CHECKS]]</dd>
+        </dl>
+        <figure class="shot">
+          <img src="screenshots/12-example-1.png" width="1440" height="900" loading="lazy" alt="Analysis of the balanced strategy: half Nasdaq-100, half gold.">
+          <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
+        </figure>
+      </article>
+      <article class="example">
+        <h3>Broad market, rebalanced</h3>
+        <p>60% S&amp;P 500, 20% smaller US companies, 20% gold, rebalanced every three months.</p>
+        <dl>
+          <dt>Period</dt><dd>5 years</dd>
+          <dt>Result</dt><dd>[[EX2_RESULT]]</dd>
+          <dt>Worst drop</dt><dd>[[EX2_WORST_DROP]]</dd>
+          <dt>Safety checks</dt><dd>[[EX2_CHECKS]]</dd>
+        </dl>
+        <figure class="shot">
+          <img src="screenshots/13-example-2.png" width="1440" height="900" loading="lazy" alt="Analysis of the broad-market strategy.">
+          <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
+        </figure>
+      </article>
+      <article class="example">
+        <!-- [[EX3_CHOICE]]: if the engine blocks this basket, use the approved alternative:
+             "Equal parts S&P 500, Dow Jones and gold, held without changes." -->
+        <h3>Big-tech basket, held</h3>
+        <p>Equal parts Apple, Microsoft, Nvidia, Alphabet and Amazon, held without changes.</p>
+        <dl>
+          <dt>Period</dt><dd>5 years</dd>
+          <dt>Result</dt><dd>[[EX3_RESULT]]</dd>
+          <dt>Worst drop</dt><dd>[[EX3_WORST_DROP]]</dd>
+          <dt>Safety checks</dt><dd>[[EX3_CHECKS]]</dd>
+        </dl>
+        <figure class="shot">
+          <img src="screenshots/14-example-3.png" width="1440" height="900" loading="lazy" alt="Analysis of the third example strategy.">
+          <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
+        </figure>
+      </article>
+    </div>
+    <p class="fine">Simulated on past market data over five years · not a forecast · past results do not predict future results.</p>
+  </div>
+</section>
+
+<!-- 7. Where we are today -->
+<section class="block" id="status">
+  <div class="wrap">
+    <div class="block-head">
+      <div class="eyebrow">Where we are today</div>
+      <h2>What works now, and what comes next.</h2>
+    </div>
+    <div class="status-cols">
+      <div class="status-col">
+        <h3><i></i>Working today, on a test network (no real money)</h3>
+        <ul>
+          <li>Describing a goal and getting a strategy</li>
+          <li>Full test on past market data</li>
+          <li>Saving strategies and analyses</li>
+          <li>Conversation history</li>
+          <li>Safety checks before anything runs</li>
+          <li>Approval with your signature</li>
+          <li>Execution on the blockchain</li>
+          <li>Buying and selling instruments yourself</li>
+        </ul>
+      </div>
+      <div class="status-col next">
+        <h3><i></i>Coming next</h3>
+        <ul>
+          <li>Approving once and letting a strategy run within limits you set <em>(in design)</em></li>
+          <li>Watching strategies after they go live</li>
+          <li>Automatic rebalancing</li>
+          <li>Test instruments that follow the real price</li>
+          <li>Signature checked inside your vault</li>
+          <li>Independent security review of the code</li>
+          <li>Launch with real money</li>
+        </ul>
+      </div>
+    </div>
+    <div class="figures">
+      <div><div class="v num">911</div><div class="l">automated tests passed (October 6, 2026)</div></div>
+      <div><div class="v num">17</div><div class="l">instruments</div></div>
+      <div><div class="v num">0</div><div class="l">real funds moved</div></div>
+      <div><div class="v num">3</div><div class="l">public example transactions:
+        <a href="https://sepolia.arbiscan.io/tx/0x12e3d3833344535f590ee4ccbcbbd21758591d471f78d2ca8fb6af23638e3939" target="_blank" rel="noreferrer">1 ↗</a>
+        <a href="https://sepolia.arbiscan.io/tx/0xce87e2015eba94db71b52ccdd520aa548d7414d248e82c0f2971eaa63604b563" target="_blank" rel="noreferrer">2 ↗</a>
+        <a href="https://sepolia.arbiscan.io/tx/0x4d6455fd2acdf2fff3e7fa276e2c578f4a9f8b4a17d96813c2f2f4abe3986de7" target="_blank" rel="noreferrer">3 ↗</a></div></div>
+    </div>
+    <p class="more"><a href="technology/">How it is built, stated limits and roadmap → Technology</a></p>
+  </div>
+</section>
+
+<!-- 8. For investors -->
+<section class="block" id="investors">
+  <div class="wrap">
+    <div class="block-head">
+      <div class="eyebrow">For investors</div>
+      <h2>We're raising a €250,000 Pre-Seed round.</h2>
+      <p class="lead">A SAFE, released in verifiable milestones, for 18 months of runway.</p>
+    </div>
+    <div class="inv">
+      <div>
+        <h3>Use of funds</h3>
+        <table>
+          <tr><td>Legal &amp; compliance</td><td class="num">€45k</td></tr>
+          <tr><td>Independent security review</td><td class="num">€35k</td></tr>
+          <tr><td>Founders &amp; development</td><td class="num">€110k</td></tr>
+          <tr><td>Infrastructure, marketing &amp; reserve</td><td class="num">€60k</td></tr>
+        </table>
+        <div class="cta-row">
+          <a class="btn" href="mailto:marco.laporta06@gmail.com?subject=Deck%20request%20%E2%80%94%20IQ%20Finance">Request the deck</a>
+        </div>
+      </div>
+      <div>
+        <h3>Team</h3>
+        <div class="person">
+          <div><b>Marco La Porta</b></div>
           <div class="role">Founder, CEO &amp; CTO</div>
         </div>
-        <p class="bio">20 years old. Computer Engineering student, Full-Stack developer and Quantitative Developer specialized in Smart Contracts and Web3 infrastructure. Oversees software architecture and security.</p>
-      </div>
-      <div class="team-row">
-        <div>
-          <h3>External Advisory</h3>
-          <div class="role">Finance &amp; Regulation <span style="color:var(--text-faint); font-weight:400;">— not part of the founding team</span></div>
+        <div class="person">
+          <div><b>External advisory</b></div>
+          <div class="role">Finance and regulation</div>
         </div>
-        <p class="bio">Dedicated support on risk modeling, structuring of financial products and institutional relationships.</p>
+        <p style="color:var(--text-muted); font-size:15.5px; margin-top:22px;">Contact: <a href="mailto:marco.laporta06@gmail.com" style="color:var(--violet-bright);">marco.laporta06@gmail.com</a></p>
       </div>
     </div>
   </div>
 </section>
 
-<div class="fade-transition-rev"></div>
-
-<section id="waitlist" class="block closing" style="background:#000000;">
+<!-- Early access -->
+<section class="block closing" id="early-access">
+  <span id="waitlist"></span>
   <div class="wrap">
-    <h2>You'll be among the first to access the launch.</h2>
-    <div class="closing-grid">
-      <div class="closing-col">
-        <div class="h">Early access</div>
-        <p class="d">Write to us and we'll let you know when real access becomes available. No spam, no financial solicitation.</p>
-        <a class="btn-hero" href="mailto:marco.laporta06@gmail.com?subject=Early%20access%20request%20%E2%80%94%20IQ%20Finance&amp;body=Hi%2C%20I%27d%20like%20early%20access%20to%20IQ%20Finance%20when%20it%20becomes%20available." style="display:inline-block;">Request early access →</a>
-        <div class="form-note">No real funds can be moved today: we're on testnet.</div>
-      </div>
-      <div class="closing-col" id="investitori">
-        <div class="h">For investors</div>
-        <p class="d">Business plan, technical document and code verification status available on request.</p>
-        <a class="investor-email" href="mailto:marco.laporta06@gmail.com">marco.laporta06@gmail.com</a>
-      </div>
+    <h2>Be among the first to try it.</h2>
+    <p class="lead">Write to us and we'll let you know when real access becomes available. No spam, no financial solicitation.</p>
+    <div class="cta-row">
+      <a class="btn" href="mailto:marco.laporta06@gmail.com?subject=Early%20access%20request%20%E2%80%94%20IQ%20Finance&amp;body=Hi%2C%20I%27d%20like%20early%20access%20to%20IQ%20Finance%20when%20it%20becomes%20available.">Request early access →</a>
     </div>
+    <p class="fine">No real funds can be moved today: we're on a test network.</p>
     <div class="disclaimer">This document and website are for purely informational and strategic purposes. They do not constitute a solicitation of public savings, a public offering of financial products, or investment advice. The product currently operates exclusively on a test network (Arbitrum Sepolia): no real funds are involved or can be moved.</div>
   </div>
 </section>
 
 <footer>
   <div class="wrap footer-row">
-    <div class="flogo">IQ Finance</div>
-    <div class="fmeta">© 2026 IQ Finance</div>
+    <div>© 2026 IQ Finance</div>
+    <div><a href="technology/">Technology</a><a href="it/" hreflang="it" lang="it">Italiano</a></div>
   </div>
 </footer>
 
 <script>
-  // Nav: background only after the initial scroll
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
-
-  // Decorative glow behind the demo panel: purely aesthetic; the chart panel itself does not depend on this script.
-  const demoPanel = document.getElementById('demoPanel');
-  const demoGlow = document.getElementById('demoGlow');
-  if ('IntersectionObserver' in window) {
-    const demoObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          demoGlow.classList.add('show');
-          demoObserver.disconnect();
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -10% 0px' });
-    demoObserver.observe(demoPanel);
-  } else {
-    demoGlow.classList.add('show');
-  }
-
 </script>
-
 </body>
 </html>
