@@ -1,18 +1,26 @@
-# Parole vietate nella home (index.html, en/index.html). Una per riga.
-# Sigle in MAIUSCOLO: confronto esatto. Altre: maiuscole/minuscole indifferenti.
+# Parole vietate nella home, in entrambe le lingue (index.html, en/index.html, it/index.html).
+# Una per riga. Sigle in MAIUSCOLO: confronto esatto. Altre: maiuscole/minuscole indifferenti.
 # Il contenuto tecnico va nella pagina Tecnologia, dove queste parole sono ammesse.
+
+# Gergo (le sigle valgono uguali in italiano e in inglese)
 RWA
+real-world asset
+real-world assets
 DSR
+Deflated Sharpe
 backstop
 keeper
 keepers
 EIP
-EIP-191
 MEV
 non-custodial
 non custodial
+noncustodial
+
 # Niente prezzi o fee sul sito
 fee
-performance fee
-management fee
+fees
 €/mese
+€/month
+per month
+al mese

@@ -3,7 +3,8 @@
 
 1. Segnaposto "[[" in qualsiasi file del sito (.html, .css, .js, .md, .txt, .xml, .json).
 2. HTML valido: tag non chiusi o chiusi nell'ordine sbagliato, id duplicati.
-3. Parole vietate nelle home (index.html, en/index.html), lette da parole-vietate.txt.
+3. Parole vietate nelle home (index.html, en/index.html, it/index.html), lette da
+   parole-vietate.txt; valgono per entrambe le lingue.
 
 Uscita 0 = tutto ok, 1 = push bloccato.
 """
@@ -17,7 +18,7 @@ HOOKS = ROOT / ".githooks"
 SITE_EXT = {".html", ".htm", ".css", ".js", ".md", ".txt", ".xml", ".json", ".svg"}
 SKIP_DIRS = {".git", ".githooks", "node_modules"}
 SKIP_FILES = {"CLAUDE.md"}  # regole interne: citano "[[" e le parole vietate
-HOMES = ["index.html", "en/index.html"]
+HOMES = ["index.html", "en/index.html", "it/index.html"]
 
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta",
         "source", "track", "wbr"}
@@ -130,7 +131,8 @@ def main():
         for w in banned:
             # Sigle tutte maiuscole: maiuscole/minuscole contano; le altre no
             flags = 0 if w.isupper() else re.I
-            hits = re.findall(r"(?<![\w-])" + re.escape(w) + r"(?![\w-])", text, flags)
+            # Confine di parola senza escludere il trattino: "MEV-protected" contiene MEV
+            hits = re.findall(r"(?<!\w)" + re.escape(w) + r"(?!\w)", text, flags)
             if hits:
                 problems.append(f"[parola vietata] {home}: '{w}' ({len(hits)} volte)")
 
