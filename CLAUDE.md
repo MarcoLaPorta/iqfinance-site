@@ -5,6 +5,8 @@ Sito statico pubblicato con GitHub Pages: **ciò che arriva su `main` va online.
 ## Lingue
 
 - **L'inglese è la versione ufficiale del sito; l'italiano è la traduzione.**
+- Struttura: `index.html` = inglese (indirizzo principale), `it/index.html` = italiano,
+  `en/index.html` = reindirizzamento alla radice (vecchio indirizzo dell'inglese).
 - Ogni contenuto nuovo si scrive prima in inglese. Si traduce in italiano solo dopo
   l'approvazione di Marco sul testo inglese.
 - Ogni correzione di fatti va applicata a entrambe le lingue nello stesso commit.
