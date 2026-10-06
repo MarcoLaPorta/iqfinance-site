@@ -434,7 +434,7 @@
       <li><a href="#stato">Stato del progetto</a></li>
       <li><a href="#team">Team</a></li>
       <li><a href="en/">EN</a></li>
-<li><a href="#waitlist" class="nav-cta">Waitlist</a></li>
+<li><a href="#waitlist" class="nav-cta">Accesso anticipato</a></li>
     </ul>
   </div>
 </nav>
@@ -463,8 +463,8 @@
     <h1><span class="h1-brand">IQ Finance</span><span class="h1-tagline">Institutional Quant Investing.<br>Built for Everyone.</span></h1>
 
     <div class="hero-tv-cta">
-      <a href="#waitlist" class="btn-hero">Unisciti alla waitlist</a>
-      <div class="fine">Nessun fondo reale coinvolto oggi — accesso gratuito alla waitlist</div>
+      <a href="#waitlist" class="btn-hero">Richiedi l'accesso anticipato</a>
+      <div class="fine">Nessun fondo reale coinvolto oggi</div>
     </div>
   </div>
   <div class="hero-scroll-cue">
@@ -970,16 +970,9 @@
     <h2>Sarai tra i primi ad accedere al lancio.</h2>
     <div class="closing-grid">
       <div class="closing-col">
-        <div class="h">Waitlist utenti</div>
-        <p class="d">Lascia la tua email: ti avviseremo quando l'accesso reale sarà disponibile. Nessuno spam, nessuna sollecitazione finanziaria.</p>
-        <form id="waitlistForm">
-          <div class="form-row">
-            <input type="email" id="waitlistEmail" name="email" placeholder="tua@email.com" required aria-label="Il tuo indirizzo email">
-            <button type="submit">Iscrivimi →</button>
-          </div>
-        </form>
-        <div class="form-success" id="waitlistSuccess">Iscrizione registrata. A presto.</div>
-        <div class="form-error" id="waitlistError">Qualcosa è andato storto. Riprova tra poco, o scrivici direttamente.</div>
+        <div class="h">Accesso anticipato</div>
+        <p class="d">Scrivici e ti avviseremo quando l'accesso reale sarà disponibile. Nessuno spam, nessuna sollecitazione finanziaria.</p>
+        <a class="btn-hero" href="mailto:marco.laporta06@gmail.com?subject=Richiesta%20di%20accesso%20anticipato%20%E2%80%94%20IQ%20Finance&amp;body=Ciao%2C%20vorrei%20l%E2%80%99accesso%20anticipato%20a%20IQ%20Finance%20quando%20sar%C3%A0%20disponibile." style="display:inline-block;">Richiedi l'accesso anticipato →</a>
         <div class="form-note">Nessun fondo reale è oggi movimentabile: siamo su testnet.</div>
       </div>
       <div class="closing-col" id="investitori">
@@ -1005,42 +998,6 @@
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
-
-  // Waitlist form: invio reale via FormSubmit (nessun backend proprio necessario).
-  // Al primo invio in assoluto, FormSubmit manda una mail di conferma una tantum
-  // a marco.laporta06@gmail.com con un link di attivazione: dopo quel click,
-  // ogni iscrizione successiva viene inoltrata automaticamente.
-  const waitlistForm = document.getElementById('waitlistForm');
-  const waitlistSuccess = document.getElementById('waitlistSuccess');
-  const waitlistError = document.getElementById('waitlistError');
-  waitlistForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    waitlistSuccess.classList.remove('show');
-    waitlistError.classList.remove('show');
-    const email = document.getElementById('waitlistEmail').value;
-    const submitBtn = waitlistForm.querySelector('button[type="submit"]');
-    submitBtn.disabled = true;
-    fetch('https://formsubmit.co/ajax/marco.laporta06@gmail.com', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: email,
-        _subject: 'Nuova iscrizione waitlist — IQ Finance',
-        source: 'iqfinance-sito, sezione waitlist'
-      })
-    })
-      .then(res => { if (!res.ok) throw new Error('network'); return res.json(); })
-      .then(() => {
-        waitlistSuccess.classList.add('show');
-        waitlistForm.reset();
-      })
-      .catch(() => {
-        waitlistError.classList.add('show');
-      })
-      .finally(() => {
-        submitBtn.disabled = false;
-      });
-  });
 
   // Bagliore decorativo dietro il pannello demo: puro effetto estetico, attivato
   // al primo scroll nei suoi pressi. Il pannello con il grafico, invece, è sempre

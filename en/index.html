@@ -434,7 +434,7 @@
       <li><a href="#stato">Project status</a></li>
       <li><a href="#team">Team</a></li>
       <li><a href="../">IT</a></li>
-<li><a href="#waitlist" class="nav-cta">Waitlist</a></li>
+<li><a href="#waitlist" class="nav-cta">Early access</a></li>
     </ul>
   </div>
 </nav>
@@ -463,8 +463,8 @@
     <h1><span class="h1-brand">IQ Finance</span><span class="h1-tagline">Institutional Quant Investing.<br>Built for Everyone.</span></h1>
 
     <div class="hero-tv-cta">
-      <a href="#waitlist" class="btn-hero">Join the waitlist</a>
-      <div class="fine">No real funds involved today — free waitlist access</div>
+      <a href="#waitlist" class="btn-hero">Request early access</a>
+      <div class="fine">No real funds involved today</div>
     </div>
   </div>
   <div class="hero-scroll-cue">
@@ -969,16 +969,9 @@
     <h2>You'll be among the first to access the launch.</h2>
     <div class="closing-grid">
       <div class="closing-col">
-        <div class="h">User waitlist</div>
-        <p class="d">Leave your email: we'll notify you when real access becomes available. No spam, no financial solicitation.</p>
-        <form id="waitlistForm">
-          <div class="form-row">
-            <input type="email" id="waitlistEmail" name="email" placeholder="you@email.com" required aria-label="Your email address">
-            <button type="submit">Sign me up →</button>
-          </div>
-        </form>
-        <div class="form-success" id="waitlistSuccess">You're on the list. See you soon.</div>
-        <div class="form-error" id="waitlistError">Something went wrong. Please try again shortly, or write to us directly.</div>
+        <div class="h">Early access</div>
+        <p class="d">Write to us and we'll let you know when real access becomes available. No spam, no financial solicitation.</p>
+        <a class="btn-hero" href="mailto:marco.laporta06@gmail.com?subject=Early%20access%20request%20%E2%80%94%20IQ%20Finance&amp;body=Hi%2C%20I%27d%20like%20early%20access%20to%20IQ%20Finance%20when%20it%20becomes%20available." style="display:inline-block;">Request early access →</a>
         <div class="form-note">No real funds can be moved today: we're on testnet.</div>
       </div>
       <div class="closing-col" id="investitori">
@@ -1004,39 +997,6 @@
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
-
-  // Waitlist form: real submission via FormSubmit (no own backend needed).
-  const waitlistForm = document.getElementById('waitlistForm');
-  const waitlistSuccess = document.getElementById('waitlistSuccess');
-  const waitlistError = document.getElementById('waitlistError');
-  waitlistForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    waitlistSuccess.classList.remove('show');
-    waitlistError.classList.remove('show');
-    const email = document.getElementById('waitlistEmail').value;
-    const submitBtn = waitlistForm.querySelector('button[type="submit"]');
-    submitBtn.disabled = true;
-    fetch('https://formsubmit.co/ajax/marco.laporta06@gmail.com', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: email,
-        _subject: 'New waitlist signup — IQ Finance (EN site)',
-        source: 'iqfinance-site, waitlist section (EN)'
-      })
-    })
-      .then(res => { if (!res.ok) throw new Error('network'); return res.json(); })
-      .then(() => {
-        waitlistSuccess.classList.add('show');
-        waitlistForm.reset();
-      })
-      .catch(() => {
-        waitlistError.classList.add('show');
-      })
-      .finally(() => {
-        submitBtn.disabled = false;
-      });
-  });
 
   // Decorative glow behind the demo panel: purely aesthetic; the chart panel itself does not depend on this script.
   const demoPanel = document.getElementById('demoPanel');
