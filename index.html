@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IQ Finance — Describe it. Test it. Then decide.</title>
-<meta name="description" content="Describe how you want to invest in plain words, see how it would have gone on years of past market data, then decide. Working prototype on a test network, no real money involved.">
+<title>IQ Finance — Institutional quant investing. Built for everyone.</title>
+<meta name="description" content="Tell us your goal in one sentence. See how it would have survived the last five years of markets before you risk a single cent. Working prototype on a test network, no real money involved.">
 <link rel="canonical" href="https://marcolaporta.github.io/iqfinance-site/">
 <link rel="alternate" hreflang="en" href="https://marcolaporta.github.io/iqfinance-site/">
 <link rel="alternate" hreflang="it" href="https://marcolaporta.github.io/iqfinance-site/it/">
@@ -14,526 +14,1067 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #000000;
-    --bg-2: #0C0E13;
-    --bg-3: #13161D;
-    --hairline: rgba(228,231,237,0.13);
-    --hairline-strong: rgba(228,231,237,0.24);
-    --silver: #9BA1AE;
-    --silver-bright: #E4E7ED;
-    --violet: #7C3AED;
-    --violet-bright: #9D6FFF;
-    --violet-deep: #2E1A5C;
+    /* Light (opening and closing) */
+    --white: #FFFFFF;
+    --ink: #0B0B12;
+    --ink-violet: #2A1563;
+    --light-text: #3A3A48;
+    --light-muted: #5A5668;
+    --light-nav: #4A4658;
+    --light-faint: #6B6878;
+    /* Dark */
+    --bg: #08090C;
+    --bg-2: #0A0B10;
+    --bg-3: #0B0C11;
+    --panel: #0B0C10;
+    --panel-2: #0E1016;
+    --card-top: #13151C;
+    --card-bottom: #0D0F14;
+    --line: #20232C;
+    --line-2: #262A35;
+    --hair: rgba(228,231,237,0.08);
+    --hair-2: rgba(228,231,237,0.13);
+    --hair-3: rgba(228,231,237,0.24);
     --text: #EBEDF1;
-    --text-muted: #868C99;
-    --text-faint: #5B606C;
+    --soft: #C7C6D2;
+    --muted: #868C99;
+    --violet: #7C3AED;
+    --violet-2: #9D6FFF;
+    --lilac: #C4B1FF;
+    --silver: #C9CCD4;
     --green: #34C27B;
-    --red: #E5484D;
-    --font-serif: 'Fraunces', serif;
-    --font-sans: 'Inter', sans-serif;
+    --red: #F0555A;
+    --gold: #D9B76A;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    --wrap: 1200px;
+    --gutter: 32px;
+    --header-h: 76px;
+    --glow-text: linear-gradient(100deg, #FFFFFF 0%, #E6DEFF 35%, #B39BFF 70%, #7C3AED 100%);
+    --ink-text: linear-gradient(100deg, #0B0B12 0%, #2A1563 55%, #7C3AED 100%);
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-  body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font-sans); font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
-  a { color: inherit; }
-  img { display: block; max-width: 100%; height: auto; }
-  :focus-visible { outline: 1.5px solid var(--violet-bright); outline-offset: 3px; }
-  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
-  section[id] { scroll-margin-top: 80px; }
-  .num { font-variant-numeric: tabular-nums; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums; }
+  a { color: var(--lilac); text-decoration: none; }
+  a:hover { color: #D3C2FF; }
+  :focus-visible { outline: 2px solid var(--violet-2); outline-offset: 3px; border-radius: 4px; }
+  svg { display: block; }
+  .wrap { max-width: calc(var(--wrap) + 2 * var(--gutter)); margin: 0 auto; padding: 0 var(--gutter); }
+  section[id], header[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  .skip { position: absolute; left: 16px; top: -60px; z-index: 100; background: var(--ink); color: #fff; padding: 10px 14px; border-radius: 8px; }
+  .skip:focus { top: 12px; color: #fff; }
+  h1, h2, h3, p { margin: 0; }
 
-  /* Nav */
-  .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; padding: 22px 0; transition: background .3s ease, padding .3s ease; }
-  .nav.scrolled { background: rgba(0,0,0,0.88); backdrop-filter: blur(10px); border-bottom: 1px solid var(--hairline); padding: 14px 0; }
-  .nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1180px; margin: 0 auto; padding: 0 32px; }
-  .nav-logo { font-family: var(--font-serif); font-weight: 500; font-size: 19px; text-decoration: none; }
-  .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; margin: 0; padding: 0; }
-  .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 14px; }
-  .nav-links a:hover { color: var(--silver-bright); }
-  .nav-links .nav-cta { color: var(--silver-bright); border-bottom: 1px solid var(--violet-bright); padding-bottom: 2px; }
-  @media (max-width: 900px) { .nav-links li.opt { display: none; } }
-
-  /* Type */
-  h1, h2, h3 { font-weight: 400; margin: 0; }
-  h2 { font-family: var(--font-serif); font-size: clamp(30px, 3.6vw, 44px); letter-spacing: -0.015em; line-height: 1.15; }
-  h3 { font-size: 20px; font-weight: 600; line-height: 1.35; }
-  .lead { color: var(--text-muted); font-size: 19px; max-width: 60ch; margin: 18px 0 0; }
-  .eyebrow { font-size: 13px; color: var(--violet-bright); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 16px; }
-  .block { padding: 110px 0; border-top: 1px solid var(--hairline); }
-  .block-head { max-width: 760px; margin-bottom: 56px; }
+  /* Headline styles */
+  .display { font-family: var(--serif); font-weight: 300; letter-spacing: -0.02em; line-height: 1.06; }
+  .glow { color: #E6DEFF; }
+  .ink { color: var(--ink); }
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .glow { background: var(--glow-text); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .ink { background: var(--ink-text); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  }
+  .eyebrow { display: flex; align-items: center; gap: 14px; font-size: 12px; letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; }
+  .eyebrow .n { color: var(--violet-2); }
+  .eyebrow .bar { width: 28px; height: 1px; background: var(--hair-2); }
+  .h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(32px, 3.4vw, 44px); line-height: 1.14; letter-spacing: -0.02em; color: var(--text); }
+  .h2-big { font-size: clamp(40px, 5vw, 64px); }
+  .lead { font-size: clamp(17px, 1.4vw, 19px); line-height: 1.65; color: var(--soft); }
+  .small { font-size: 15px; line-height: 1.65; color: var(--muted); }
+  .caption { font-size: 12.5px; color: var(--muted); }
+  .section { padding: 120px 0; border-top: 1px solid var(--hair); }
+  .stack { display: flex; flex-direction: column; }
+  .split-head { display: grid; grid-template-columns: 7fr 5fr; gap: 64px; align-items: end; }
 
   /* Buttons */
-  .btn { display: inline-block; background: var(--violet); color: #FFFFFF; font-weight: 600; font-size: 16px; padding: 15px 30px; border-radius: 100px; text-decoration: none; transition: background .15s ease; }
-  .btn:hover { background: #6D28D9; }
-  .btn-ghost { display: inline-block; color: var(--text); font-size: 16px; padding: 14px 26px; border-radius: 100px; border: 1px solid var(--hairline-strong); text-decoration: none; }
-  .btn-ghost:hover { border-color: var(--silver); }
-  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; font-size: 15px; font-weight: 500; border-radius: 8px; padding: 12px 24px; transition: background .15s ease, border-color .15s ease; }
+  .btn-ink { background: var(--ink); color: #FFFFFF; }
+  .btn-ink:hover { background: #24203A; color: #FFFFFF; }
+  .btn-line-light { color: var(--ink); border: 1px solid rgba(11,11,18,0.25); }
+  .btn-line-light:hover { color: var(--ink); border-color: rgba(11,11,18,0.5); }
+  .btn-violet { background: var(--violet); color: #FFFFFF; }
+  .btn-violet:hover { background: #6D28D9; color: #FFFFFF; }
+  .btn-line { color: var(--text); border: 1px solid var(--hair-3); }
+  .btn-line:hover { color: var(--text); border-color: var(--muted); }
 
-  /* Screenshots */
-  .shot { margin: 0; }
-  .shot img { width: 100%; border-radius: 12px; border: 1px solid var(--hairline-strong); background: var(--bg-3); box-shadow: 0 30px 80px -30px rgba(124,58,237,0.35); }
-  .shot figcaption { font-size: 13px; color: var(--text-faint); margin-top: 12px; }
-  .shot figcaption b { color: var(--text-muted); font-weight: 600; }
+  /* Header */
+  .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(11,11,18,0.06); }
+  .header-row { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .logo { font-family: var(--serif); font-size: 22px; color: var(--ink); white-space: nowrap; }
+  .logo:hover { color: var(--ink); }
+  .nav { display: flex; gap: 30px; }
+  .nav a { font-size: 14px; color: var(--light-nav); }
+  .nav a:hover { color: var(--ink); }
+  .header-actions { display: flex; align-items: center; gap: 18px; }
+  .lang { font-size: 13px; color: var(--light-faint); white-space: nowrap; }
+  .lang a { color: var(--light-faint); text-decoration: underline; text-underline-offset: 3px; }
+  .lang [aria-current] { color: var(--ink); font-weight: 600; }
+  .header-cta { min-height: 40px; padding: 9px 16px; font-size: 14px; white-space: nowrap; }
+  .menu { display: none; position: relative; }
+  .menu summary { list-style: none; cursor: pointer; font-size: 14px; color: var(--ink); border: 1px solid rgba(11,11,18,0.2); border-radius: 8px; padding: 9px 14px; min-height: 40px; display: flex; align-items: center; }
+  .menu summary::-webkit-details-marker { display: none; }
+  .menu-panel { position: absolute; right: 0; top: calc(100% + 10px); width: min(300px, calc(100vw - 32px)); background: #FFFFFF; border: 1px solid rgba(11,11,18,0.1); border-radius: 12px; box-shadow: 0 20px 50px rgba(11,11,18,0.18); padding: 10px; display: flex; flex-direction: column; }
+  .menu-panel a { color: var(--ink); padding: 12px 12px; border-radius: 8px; font-size: 15px; }
+  .menu-panel a:hover { background: #F4F1FB; }
+  .menu-panel .btn { margin-top: 8px; color: #FFFFFF; }
+  .menu-panel .lang { padding: 12px; }
 
   /* Hero */
-  .hero { padding: 160px 0 100px; background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(124,58,237,0.22), transparent 70%), var(--bg); }
-  .hero .status { display: inline-flex; align-items: center; gap: 9px; font-size: 13.5px; color: var(--text-muted); border: 1px solid var(--hairline-strong); border-radius: 100px; padding: 6px 14px; margin-bottom: 28px; }
-  .hero .status i { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
-  .hero h1 { font-family: var(--font-serif); font-size: clamp(38px, 5.4vw, 68px); letter-spacing: -0.02em; line-height: 1.08; max-width: 18ch; }
-  .hero .shot { margin-top: 70px; }
+  .hero { background: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 55%, #F7F3FF 100%); color: var(--ink); }
+  .hero-text { padding: 84px 0 56px; display: flex; flex-direction: column; align-items: center; gap: 30px; text-align: center; }
+  .hero-kicker { font-size: 12px; letter-spacing: 0.18em; color: #5B21B6; }
+  .hero h1 { font-size: clamp(42px, 6.7vw, 96px); line-height: 1.04; letter-spacing: -0.025em; }
+  .hero-sub { max-width: 820px; font-size: clamp(18px, 1.5vw, 21px); line-height: 1.55; color: var(--light-text); }
+  .hero-sub strong { color: var(--ink); font-weight: 400; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .status-line { font-size: 13px; color: var(--light-muted); display: inline-flex; align-items: center; gap: 8px; }
+  .status-line i { width: 6px; height: 6px; border-radius: 50%; background: #1F9D61; flex-shrink: 0; }
+  .hero-stage { background: linear-gradient(180deg, #F7F3FF 0%, #EDE6FF 10%, #C2AEFF 24%, #8B63F0 36%, #4A1E9E 50%, #1A1030 66%, #08090C 82%); padding: 24px 0 120px; }
+  .preview { position: relative; margin: 0; }
+  .preview .halo { position: absolute; left: 8%; right: 8%; top: 30%; bottom: -60px; background: radial-gradient(ellipse at center, rgba(124,58,237,0.55), rgba(8,9,12,0) 70%); filter: blur(40px); pointer-events: none; }
+  .preview figcaption { position: relative; margin-top: 14px; font-size: 12.5px; color: var(--muted); }
+  .hero .preview figcaption { color: #B9B4CC; }
 
-  /* Steps */
-  .steps { display: grid; gap: 90px; }
-  .step { display: grid; grid-template-columns: 5fr 7fr; gap: 56px; align-items: center; }
-  .step .n { font-family: var(--font-serif); font-size: 15px; color: var(--violet-bright); margin-bottom: 12px; }
-  .step p { color: var(--text-muted); margin: 14px 0 0; }
-  .step blockquote { margin: 18px 0 0; padding: 14px 18px; border-left: 2px solid var(--violet-bright); background: var(--bg-2); border-radius: 0 8px 8px 0; color: var(--text); font-style: italic; }
-  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  /* App window (design preview) */
+  .app { position: relative; border: 1px solid var(--line-2); border-radius: 12px; background: var(--panel); overflow: hidden; box-shadow: 0 40px 90px rgba(0,0,0,0.6); text-align: left; color: var(--text); }
+  .app-bar { height: 30px; display: flex; align-items: center; gap: 6px; padding: 0 12px; background: #111318; border-bottom: 1px solid var(--line); }
+  .app-bar .d { width: 9px; height: 9px; border-radius: 50%; }
+  .app-bar .url { flex: 1; text-align: center; font-size: 10px; color: var(--muted); }
+  .app-top { height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 18px; border-bottom: 1px solid var(--line); }
+  .app-top .l { display: flex; align-items: center; gap: 28px; }
+  .app-top .brand { font-family: var(--serif); font-size: 15px; }
+  .app-tabs { display: flex; gap: 18px; font-size: 12px; color: var(--muted); }
+  .app-tabs .on { color: var(--text); box-shadow: inset 0 -1px 0 var(--text); padding: 4px 0; }
+  .app-top .r { display: flex; align-items: center; gap: 14px; font-size: 11px; color: var(--muted); }
+  .app-top .r b { color: var(--text); font-weight: 400; }
+  .dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--green); margin-right: 5px; vertical-align: middle; }
+  .pill { color: var(--text); background: rgba(228,231,237,0.06); border-radius: 999px; padding: 4px 9px; }
+  .app-body { display: grid; grid-template-columns: 176px minmax(0, 1fr) 210px; }
+  .app-side { border-right: 1px solid var(--line); padding: 14px 10px; display: flex; flex-direction: column; gap: 4px; }
+  .app-side .new { font-size: 11px; padding: 0 6px 10px; }
+  .app-side .lbl { font-size: 9px; letter-spacing: 0.1em; color: var(--muted); padding: 0 6px 4px; }
+  .conv { display: flex; flex-direction: column; gap: 2px; padding: 7px 8px; border-radius: 6px; font-size: 11px; color: var(--soft); }
+  .conv span { font-size: 9px; color: var(--muted); }
+  .conv.on { background: rgba(228,231,237,0.06); color: var(--text); }
+  .app-main { min-width: 0; padding: 18px 26px; display: flex; flex-direction: column; gap: 12px; }
+  .bubble { align-self: flex-end; background: rgba(228,231,237,0.06); font-size: 11px; padding: 8px 12px; border-radius: 12px; max-width: 90%; }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 10px; color: var(--muted); }
+  .meta b { color: var(--text); font-weight: 400; }
+  .ok { width: 11px; height: 11px; flex-shrink: 0; }
+  .summary { font-size: 11px; line-height: 1.6; color: var(--soft); }
+  .strat-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
+  .strat-name { font-family: var(--serif); font-size: 22px; font-weight: 300; letter-spacing: -0.015em; }
+  .approved { display: flex; align-items: center; gap: 5px; font-size: 10px; color: var(--green); }
+  .approved span { color: var(--muted); }
+  .actions { font-size: 10px; color: var(--muted); white-space: nowrap; }
+  .metrics { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); padding: 10px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .metric { display: flex; flex-direction: column; gap: 4px; padding: 0 12px; border-left: 1px solid var(--line); }
+  .metric:first-child { padding-left: 0; border-left: 0; }
+  .metric .k { font-size: 10px; color: var(--muted); }
+  .metric .v { font-family: var(--serif); font-size: 19px; font-weight: 300; }
+  .neg { color: var(--red) !important; }
+  .chart-row { display: flex; gap: 10px; }
+  .chart-row .plot { flex: 1; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .axis-x { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); }
+  .axis-y { display: flex; flex-direction: column; justify-content: space-between; font-size: 10px; color: var(--muted); text-align: right; }
+  .checks2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .check { display: flex; gap: 8px; align-items: center; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; font-size: 10px; color: var(--soft); }
+  .check .g { color: var(--green); }
+  .check .m { color: var(--muted); }
+  .ops-head { display: flex; justify-content: space-between; padding: 6px 0; font-size: 11px; }
+  .ops-head span { color: var(--muted); }
+  .op { display: grid; grid-template-columns: 90px 120px minmax(0, 1fr) 80px; gap: 10px; padding: 7px 0; border-top: 1px solid var(--line); font-size: 10px; color: var(--soft); }
+  .op .date { color: var(--muted); }
+  .op .amt { text-align: right; }
+  .app-vault { border-left: 1px solid var(--line); padding: 18px 16px; display: flex; flex-direction: column; gap: 12px; }
+  .app-vault .lbl { font-size: 9px; letter-spacing: 0.1em; color: var(--muted); }
+  .app-vault .big { font-family: var(--serif); font-size: 22px; font-weight: 300; letter-spacing: -0.015em; }
+  .app-vault .sub { font-size: 10px; color: var(--muted); }
+  .app-vault .sep { height: 1px; background: var(--line); margin: 4px 0; }
+  .alloc { display: flex; flex-direction: column; gap: 4px; }
+  .alloc .row { display: flex; justify-content: space-between; font-size: 10px; }
+  .alloc .row span:last-child { color: #9BA1AE; }
+  .track { height: 3px; background: rgba(228,231,237,0.06); border-radius: 2px; }
+  .track i { display: block; height: 3px; border-radius: 2px; }
+  .cost { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); }
+  .cost span:last-child { color: var(--soft); }
+  .sign { text-align: center; font-size: 11px; color: #FFFFFF; background: var(--violet); border-radius: 6px; padding: 9px; margin-top: 6px; }
+  .sign-note { font-size: 9px; line-height: 1.5; color: var(--muted); text-align: center; }
 
-  /* Lists */
-  .points { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; }
-  .points li { padding-left: 26px; position: relative; color: var(--text-muted); }
-  .points li::before { content: ""; position: absolute; left: 0; top: 11px; width: 10px; height: 2px; background: var(--violet-bright); }
-  .points b { color: var(--text); font-weight: 600; }
-  .split { display: grid; grid-template-columns: 5fr 7fr; gap: 56px; align-items: start; }
-  .two-shots { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; }
+  /* Principles */
+  .principles { padding: 140px 0; background: radial-gradient(ellipse 50% 60% at 15% 50%, rgba(124,58,237,0.14), rgba(8,9,12,0) 70%); }
+  .principles-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: center; }
+  .principles .lead { max-width: 460px; margin-top: 18px; }
+  .principles h2 { font-size: clamp(44px, 5.3vw, 76px); line-height: 1.05; letter-spacing: -0.025em; display: flex; flex-direction: column; gap: 6px; }
+  .principles h2 span { display: block; }
+
+  /* How it works */
+  .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; margin-top: 44px; }
+  .step { display: flex; flex-direction: column; gap: 18px; }
+  .step-visual { height: 150px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--panel-2); padding: 16px; display: flex; flex-direction: column; justify-content: center; gap: 10px; overflow: hidden; }
+  .step .num { font-family: var(--serif); font-size: 15px; color: var(--violet-2); }
+  .step h3 { font-size: 19px; font-weight: 500; margin-top: 10px; }
+  .step p { margin-top: 10px; }
+  .sv-input { border: 1px solid var(--hair-2); border-radius: 8px; padding: 11px 13px; font-size: 12px; line-height: 1.5; background: var(--panel); }
+  .sv-send { align-self: flex-end; font-size: 11px; color: #FFFFFF; background: var(--violet); border-radius: 6px; padding: 6px 12px; }
+  .sv-line { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--soft); }
+  .sv-kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .sv-kpis .k { font-size: 10px; color: var(--muted); }
+  .sv-kpis .v { font-family: var(--serif); font-size: 22px; font-weight: 300; }
+  .sv-wallet .k { font-size: 10px; color: var(--muted); }
+  .sv-wallet p { font-size: 12px; line-height: 1.5; color: var(--soft); margin: 4px 0 8px; }
+  .sv-btns { display: flex; gap: 8px; }
+  .sv-btns span { flex: 1; text-align: center; font-size: 12px; border-radius: 6px; padding: 7px; }
+  .sv-btns .s { color: #FFFFFF; background: var(--violet); }
+  .sv-btns .c { color: #9BA1AE; border: 1px solid var(--hair-3); }
+
+  /* Card */
+  .card { background: linear-gradient(180deg, var(--card-top) 0%, var(--card-bottom) 100%); border: 1px solid #23262F; border-radius: 16px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 30px 70px rgba(0,0,0,0.45); }
+
+  /* Analysis */
+  .analysis-band { background: var(--bg-2); border-top: 1px solid var(--hair); }
+  .analysis-band .section { border-top: 0; }
+  .analysis-intro { max-width: 900px; margin-top: 48px; display: flex; flex-direction: column; gap: 22px; }
+  .analysis-intro .lead { max-width: 780px; }
+  .analysis-card { margin-top: 48px; padding: 40px 44px 32px; display: flex; flex-direction: column; gap: 6px; }
+  .an-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-bottom: 26px; flex-wrap: wrap; }
+  .an-head .t { font-family: var(--serif); font-size: 26px; font-weight: 300; letter-spacing: -0.015em; }
+  .an-head .s { font-size: 13px; color: var(--muted); margin-top: 6px; }
+  .badge-ok { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--green); padding: 7px 12px; border: 1px solid rgba(52,194,123,0.35); border-radius: 999px; }
+  .big-chart { position: relative; height: 380px; }
+  .big-chart svg { width: 100%; height: 100%; overflow: visible; }
+  .mark { position: absolute; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; }
+  .mark b { position: absolute; left: 16px; top: -5px; font-size: 11px; font-weight: 600; color: var(--text); display: none; }
+  .call { position: absolute; display: flex; flex-direction: column; gap: 3px; padding: 10px 14px; background: rgba(11,12,17,0.92); border: 1px solid #3A3550; border-radius: 10px; box-shadow: 0 12px 30px rgba(0,0,0,0.5); }
+  .call .a { font-size: 13px; color: var(--text); }
+  .call .b { font-size: 12px; color: var(--muted); }
+  .calls { list-style: none; margin: 0; padding: 0; }
+  .big-axis { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); padding-top: 10px; }
+  .an-metrics { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 22px; padding: 28px 0; border-top: 1px solid var(--hair-2); border-bottom: 1px solid var(--hair-2); margin-top: 24px; }
+  .an-metrics div { display: flex; flex-direction: column; gap: 6px; }
+  .an-metrics div + div { border-left: 1px solid var(--hair); padding-left: 22px; }
+  .an-metrics .k { font-size: 12px; color: var(--muted); }
+  .an-metrics .v { font-family: var(--serif); font-size: 30px; font-weight: 300; letter-spacing: -0.015em; }
+  .an-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 24px; }
+  .an-panel { padding: 28px 30px; display: flex; flex-direction: column; gap: 14px; }
+  .an-panel h3 { font-size: 16px; font-weight: 400; }
+  .an-panel .d { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .an-panel svg { width: 100%; }
+  .share { display: flex; flex-direction: column; gap: 8px; }
+  .share .row { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--soft); flex-wrap: wrap; }
+  .share .row span:last-child { color: var(--muted); }
+  .share .bar { display: flex; height: 12px; border-radius: 6px; overflow: hidden; gap: 3px; }
+  .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding-top: 14px; border-top: 1px solid var(--hair); }
+  .pair .k { font-size: 12px; color: var(--muted); }
+  .pair .v { font-family: var(--serif); font-size: 28px; font-weight: 300; }
+  .chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+  .chip { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--soft); padding: 9px 14px; border: 1px solid var(--hair-2); border-radius: 999px; }
+  .chip.g { border-color: rgba(52,194,123,0.35); }
+  .chip.r { border-color: rgba(240,85,90,0.35); }
+  .chip .x { color: var(--red); }
+  .chip .m { color: var(--muted); }
+
+  /* Your money */
+  .purple-band { background: linear-gradient(180deg, #08090C 0%, #120C22 30%, #1B0F38 55%, #0D0A18 85%, #08090C 100%); border-top: 1px solid var(--hair); }
+  .purple-band .section { border-top: 0; }
+  .money-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; margin-top: 48px; }
+  .money-list { list-style: none; margin: 0; padding: 0; }
+  .money-list li { display: flex; gap: 16px; padding: 20px 0; border-top: 1px solid var(--hair); }
+  .money-list .n { font-family: var(--serif); font-size: 22px; color: var(--lilac); }
+  .money-list h3 { font-size: 17px; font-weight: 400; }
+  .money-list p { font-size: 14px; line-height: 1.55; color: var(--muted); margin-top: 6px; }
+  .vault-wrap { position: relative; margin: 0; }
+  .vault-wrap .halo { position: absolute; inset: -40px; background: radial-gradient(ellipse at center, rgba(124,58,237,0.35), rgba(8,9,12,0) 65%); filter: blur(30px); pointer-events: none; }
+  .vault { position: relative; background: linear-gradient(160deg, #1C1433 0%, #0F0D18 55%, #0B0C11 100%); border: 1px solid rgba(157,111,255,0.35); border-radius: 20px; padding: 36px; display: flex; flex-direction: column; gap: 22px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 40px 90px rgba(0,0,0,0.55); }
+  .vault-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .vault-top .t { display: flex; align-items: center; gap: 10px; font-size: 12px; letter-spacing: 0.14em; color: var(--lilac); }
+  .vault-top .s { font-size: 12px; color: var(--muted); }
+  .vault-amount { font-size: clamp(34px, 4vw, 48px); }
+  .vrow { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 0; border-top: 1px solid rgba(196,177,255,0.15); font-size: 15px; color: var(--soft); }
+  .vrow dd { font-size: 14px; color: var(--text); text-align: right; }
 
   /* Instruments */
-  .groups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .group { background: var(--bg-2); border: 1px solid var(--hairline); border-radius: 12px; padding: 24px; }
-  .group h3 { font-size: 15px; color: var(--violet-bright); margin-bottom: 14px; }
-  .group ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 15.5px; }
-  .group .tk { display: inline-block; min-width: 54px; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
-  .group li { color: var(--text-muted); }
-  .note { font-size: 15px; color: var(--text-muted); background: var(--bg-2); border: 1px solid var(--hairline); border-radius: 10px; padding: 16px 20px; margin-top: 24px; max-width: 80ch; }
+  .inst-band { background: var(--bg-3); border-top: 1px solid var(--hair); }
+  .inst-band .section { border-top: 0; }
+  .groups { display: flex; flex-direction: column; gap: 32px; margin-top: 44px; }
+  .group-name { display: flex; align-items: center; gap: 10px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; }
+  .group-name i { width: 8px; height: 8px; border-radius: 50%; }
+  .tiles { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+  .tile { padding: 16px; border-radius: 12px; display: flex; flex-direction: column; gap: 6px; }
+  .tile span:first-child { font-size: 15px; }
+  .tile span:last-child { font-size: 11px; letter-spacing: 0.06em; color: var(--muted); }
+  .g-idx { color: var(--lilac); } .g-idx i { background: var(--lilac); box-shadow: 0 0 12px var(--lilac); }
+  .g-co { color: var(--violet-2); } .g-co i { background: var(--violet-2); box-shadow: 0 0 12px var(--violet-2); }
+  .g-cm { color: var(--gold); } .g-cm i { background: var(--gold); box-shadow: 0 0 12px var(--gold); }
+  .t-idx { background: linear-gradient(180deg, #C4B1FF14, #0D0F14 80%); border: 1px solid #C4B1FF33; }
+  .t-co { background: linear-gradient(180deg, #9D6FFF14, #0D0F14 80%); border: 1px solid #9D6FFF33; }
+  .t-cm { background: linear-gradient(180deg, #D9B76A14, #0D0F14 80%); border: 1px solid #D9B76A33; }
 
   /* Examples */
-  .examples { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .example { background: var(--bg-2); border: 1px solid var(--hairline); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 14px; }
-  .example p { color: var(--text-muted); font-size: 15.5px; margin: 0; }
-  .example dl { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; margin: 0; font-size: 14.5px; }
-  .example dt { color: var(--text-muted); }
-  .example dd { margin: 0; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
-  .fine { font-size: 13.5px; color: var(--text-faint); margin-top: 22px; }
+  .examples { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 44px; }
+  .ex { padding: 28px; display: flex; flex-direction: column; gap: 18px; }
+  .ex.rej { border-color: rgba(240,85,90,0.35); }
+  .ex-top { display: flex; justify-content: space-between; align-items: center; }
+  .ex-top .k { font-size: 11px; letter-spacing: 0.14em; color: var(--muted); }
+  .ex-top .st { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--green); }
+  .ex.rej .ex-top .st { color: var(--red); }
+  .ex h3 { font-family: var(--serif); font-size: 26px; font-weight: 300; letter-spacing: -0.015em; }
+  .mix { display: flex; height: 6px; border-radius: 3px; overflow: hidden; gap: 2px; }
+  .mix-label { font-size: 13px; color: var(--muted); margin-top: 8px; }
+  .ex-kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; padding-top: 16px; border-top: 1px solid var(--hair); }
+  .ex-kpis div { display: flex; flex-direction: column; gap: 4px; }
+  .ex-kpis .k { font-size: 11px; color: var(--muted); }
+  .ex-kpis .v { font-family: var(--serif); font-size: 22px; font-weight: 300; }
+  .ex-note { font-size: 12.5px; color: var(--muted); }
 
-  /* Status */
-  .status-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  .status-col { background: var(--bg-2); border: 1px solid var(--hairline); border-radius: 12px; padding: 28px; }
-  .status-col h3 { font-size: 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
-  .status-col h3 i { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
-  .status-col.next h3 i { background: var(--silver); }
-  .status-col ul { margin: 0; padding-left: 18px; color: var(--text-muted); display: grid; gap: 8px; font-size: 15.5px; }
-  .status-col em { color: var(--text-faint); font-style: normal; }
-  .figures { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--hairline); }
-  .figures .v { font-family: var(--font-serif); font-size: 40px; line-height: 1; }
-  .figures .l { color: var(--text-muted); font-size: 14.5px; margin-top: 10px; }
-  .figures a { color: var(--violet-bright); font-size: 14px; }
-  .more { margin-top: 32px; }
-  .more a { color: var(--violet-bright); }
+  /* Plans */
+  .plans { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 44px; }
+  .plan { padding: 32px; display: flex; flex-direction: column; gap: 16px; }
+  .plan.max { background: linear-gradient(160deg, #1C1433 0%, #0F0D18 60%); border-color: rgba(157,111,255,0.35); }
+  .plan-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .plan h3 { font-family: var(--serif); font-size: 30px; font-weight: 300; }
+  .plan .tag { font-size: 11px; letter-spacing: 0.14em; color: var(--lilac); text-transform: uppercase; }
+  .price { display: flex; align-items: baseline; gap: 8px; }
+  .price .v { font-family: var(--serif); font-size: 56px; font-weight: 300; letter-spacing: -0.02em; line-height: 1; }
+  .price .u { font-size: 15px; color: var(--muted); }
+  .plan .for { color: var(--soft); font-size: 15px; }
+  .same { margin-top: 24px; padding: 32px 36px; display: grid; grid-template-columns: 4fr 8fr; gap: 40px; }
+  .same h3 { font-size: 18px; font-weight: 500; }
+  .feat { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 28px; }
+  .feat li { display: flex; gap: 10px; font-size: 15px; color: var(--soft); line-height: 1.5; }
+  .feat li svg { margin-top: 5px; }
+  .tokens { margin-top: 24px; display: grid; grid-template-columns: 7fr 5fr; gap: 56px; align-items: center; padding: 40px 44px; }
+  .tokens h3 { font-family: var(--serif); font-size: clamp(26px, 2.6vw, 34px); font-weight: 300; letter-spacing: -0.015em; }
+  .tokens .lead { margin-top: 16px; font-size: 17px; }
+  .tok-points { list-style: none; margin: 22px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+  .tok-points li { display: flex; gap: 10px; font-size: 15px; color: var(--soft); }
+  .tok-points li::before { content: ""; flex-shrink: 0; width: 6px; height: 6px; margin-top: 9px; border-radius: 50%; background: var(--lilac); }
+  .wallet { background: var(--panel); border: 1px solid var(--line-2); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px; }
+  .wallet .lbl { font-size: 10px; letter-spacing: 0.12em; color: var(--muted); }
+  .wallet .big { font-family: var(--serif); font-size: 36px; font-weight: 300; }
+  .wallet .big small { font-family: var(--sans); font-size: 13px; color: var(--muted); margin-left: 6px; }
+  .wrow { display: flex; justify-content: space-between; gap: 12px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 13px; color: var(--soft); }
+  .wrow span:last-child { color: var(--muted); text-align: right; }
+  .plans-note { margin-top: 20px; }
+
+  /* Statement */
+  .statement { padding: 150px 0; border-top: 1px solid var(--hair); background: radial-gradient(ellipse 70% 80% at 50% 50%, rgba(124,58,237,0.22), rgba(8,9,12,0) 70%); text-align: center; }
+  .statement .k { font-size: 12px; letter-spacing: 0.18em; color: var(--lilac); }
+  .statement h2 { font-size: clamp(34px, 4.1vw, 58px); margin-top: 24px; }
+
+  /* Today */
+  .today-title { font-size: clamp(38px, 4.2vw, 60px); margin-top: 52px; }
+  .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; padding: 36px 40px; border-radius: 18px; border: 1px solid rgba(157,111,255,0.25); background: linear-gradient(120deg, rgba(124,58,237,0.14), rgba(13,15,20,0.6)); margin-top: 52px; }
+  .stats > div { display: flex; flex-direction: column; gap: 8px; }
+  .stats > div + div { border-left: 1px solid rgba(196,177,255,0.15); padding-left: 28px; }
+  .stats .v { font-size: clamp(44px, 4vw, 56px); }
+  .stats .k { font-size: 14px; color: var(--muted); }
+  .stats .tx { display: flex; gap: 10px; font-size: 13px; }
+  .journey { list-style: none; margin: 52px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .journey li { display: flex; flex-direction: column; gap: 12px; }
+  .journey .line { display: flex; align-items: center; }
+  .journey .pt { width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; background: var(--bg-3); border: 2px solid rgba(196,177,255,0.45); }
+  .journey .ln { flex: 1; height: 2px; background: rgba(196,177,255,0.2); }
+  .journey .here .pt { background: var(--violet-2); border: 0; box-shadow: 0 0 0 6px rgba(157,111,255,0.2), 0 0 24px var(--violet-2); }
+  .journey .here .ln { background: linear-gradient(90deg, var(--violet-2), rgba(196,177,255,0.3)); }
+  .journey .you { font-size: 11px; letter-spacing: 0.12em; color: var(--violet-2); min-height: 16px; }
+  .journey h3 { font-family: var(--serif); font-size: 22px; font-weight: 300; color: var(--soft); }
+  .journey .here h3 { color: var(--text); }
+  .journey p { font-size: 13px; line-height: 1.5; color: var(--muted); padding-right: 16px; }
+  .roadmap { margin-top: 72px; padding-top: 52px; border-top: 1px solid var(--hair); }
+  .roadmap .head { display: grid; grid-template-columns: 7fr 5fr; gap: 64px; align-items: end; }
+  .roadmap h3.title { font-family: var(--serif); font-size: clamp(30px, 3vw, 40px); font-weight: 300; letter-spacing: -0.02em; }
+  .phases { list-style: none; margin: 36px 0 0; padding: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 12px; }
+  .phase { padding: 20px 16px; border-radius: 12px; border: 1px solid var(--hair-2); background: rgba(13,15,20,0.55); display: flex; flex-direction: column; gap: 8px; }
+  .phase .p { font-family: var(--serif); font-size: 15px; color: var(--violet-2); }
+  .phase h4 { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.35; color: var(--text); }
+  .phase p { font-size: 12.5px; line-height: 1.5; color: var(--muted); }
+  .phase.launch { border-color: rgba(157,111,255,0.45); background: linear-gradient(180deg, rgba(124,58,237,0.16), rgba(13,15,20,0.6)); }
 
   /* Investors */
-  .inv { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
-  .inv table { width: 100%; border-collapse: collapse; font-size: 15.5px; margin-top: 18px; }
-  .inv td { padding: 10px 0; border-bottom: 1px solid var(--hairline); color: var(--text-muted); }
-  .inv td.num { text-align: right; color: var(--text); }
-  .person { padding: 18px 0; border-bottom: 1px solid var(--hairline); }
-  .person .role { color: var(--text-muted); font-size: 15px; }
+  .inv-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: start; margin-top: 44px; }
+  .inv-left { display: flex; flex-direction: column; gap: 22px; }
+  .inv-left h2 { font-size: clamp(40px, 4.2vw, 60px); }
+  .inv-left .btns { display: flex; flex-wrap: wrap; gap: 12px; padding-top: 8px; }
+  .founder { padding-top: 24px; border-top: 1px solid var(--hair); }
+  .founder .n { font-family: var(--serif); font-size: 22px; }
+  .founder .r { font-size: 14px; color: var(--muted); margin-top: 6px; }
+  .funds { background: linear-gradient(160deg, #1C1433 0%, #0F0D18 60%); border: 1px solid rgba(157,111,255,0.3); border-radius: 18px; padding: 32px 36px; display: flex; flex-direction: column; gap: 22px; }
+  .funds .t { font-size: 12px; letter-spacing: 0.14em; color: var(--lilac); }
+  .funds .bar { display: flex; height: 16px; border-radius: 8px; overflow: hidden; gap: 3px; }
+  .funds ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 36px; }
+  .funds li { display: flex; flex-direction: column; gap: 6px; padding: 18px 0; border-top: 1px solid var(--hair); }
+  .funds li .a { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 30px; font-weight: 300; }
+  .funds li .a i { width: 10px; height: 10px; border-radius: 3px; }
+  .funds li .l { font-size: 14px; color: var(--muted); }
 
   /* Closing */
-  .closing { text-align: center; }
-  .closing .lead { margin-left: auto; margin-right: auto; }
-  .closing .cta-row { justify-content: center; }
-  .disclaimer { font-size: 12.5px; color: var(--text-faint); line-height: 1.8; margin: 80px auto 0; padding-top: 28px; border-top: 1px solid var(--hairline); max-width: 90ch; text-align: left; }
-  footer { padding: 36px 0; border-top: 1px solid var(--hairline); }
-  .footer-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-size: 13px; color: var(--text-faint); }
-  .footer-row a { color: var(--text-muted); text-decoration: none; margin-left: 18px; }
+  .closing-stage { height: 440px; background: linear-gradient(180deg, #08090C 0%, #1A1030 22%, #4A1E9E 42%, #8B63F0 58%, #C2AEFF 74%, #EDE6FF 88%, #FFFFFF 100%); border-top: 1px solid var(--hair); }
+  .closing { background: #FFFFFF; color: var(--ink); padding: 0 0 100px; text-align: center; }
+  .closing .inner { display: flex; flex-direction: column; align-items: center; gap: 28px; }
+  .closing h2 { font-size: clamp(40px, 5vw, 72px); line-height: 1.04; letter-spacing: -0.025em; }
+  .closing p { max-width: 640px; font-size: clamp(17px, 1.4vw, 19px); line-height: 1.55; color: var(--light-text); }
+  .disclaimer { margin-top: 64px; max-width: 90ch; font-size: 12.5px; line-height: 1.7; color: var(--light-faint); text-align: left; }
+  .site-footer { background: #FFFFFF; }
+  .footer-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; padding: 32px 0 48px; font-size: 13px; color: var(--light-faint); border-top: 1px solid rgba(11,11,18,0.1); }
+  .footer-row nav { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; }
+  .footer-row a { color: var(--light-faint); }
+  .footer-row a:hover { color: var(--ink); }
 
-  @media (max-width: 900px) {
-    .wrap, .nav-inner { padding: 0 16px; }
-    .block { padding: 80px 0; }
-    .step, .split, .inv, .status-cols { grid-template-columns: 1fr; gap: 32px; }
-    .groups, .examples { grid-template-columns: 1fr; }
-    .two-shots, .pair { grid-template-columns: 1fr; }
-    .figures { grid-template-columns: 1fr 1fr; }
+  /* ---------- Tablet ---------- */
+  @media (max-width: 1199px) {
+    .nav { gap: 20px; }
+    .app-body { grid-template-columns: minmax(0, 1fr) 200px; }
+    .app-side { display: none; }
+    .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 48px; }
+    .an-metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 28px; }
+    .an-metrics div:nth-child(4) { border-left: 0; padding-left: 0; }
+    .phases { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .tokens { grid-template-columns: 1fr; gap: 32px; }
   }
+  @media (max-width: 1023px) {
+    .nav, .header-actions .lang { display: none; }
+    .menu { display: block; }
+    .principles-grid, .money-grid, .inv-grid, .split-head, .roadmap .head { grid-template-columns: 1fr; gap: 32px; }
+    .same { grid-template-columns: 1fr; gap: 20px; }
+    .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .journey { grid-template-columns: 1fr; gap: 0; }
+    .journey li { display: grid; grid-template-columns: 18px 1fr; column-gap: 20px; padding-bottom: 28px; position: relative; }
+    .journey li .line { grid-row: 1 / span 3; flex-direction: column; height: 100%; }
+    .journey li .ln { width: 2px; height: auto; flex: 1; }
+    .journey .here .ln { background: linear-gradient(180deg, var(--violet-2), rgba(196,177,255,0.3)); }
+    .journey .you:empty { display: none; }
+    .journey p { padding-right: 0; }
+    .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; }
+    .stats > div:nth-child(3) { border-left: 0; padding-left: 0; }
+  }
+  /* ---------- Mobile ---------- */
+  @media (max-width: 760px) {
+    :root { --gutter: 16px; --header-h: 64px; }
+    .header-cta { display: none; }
+    .section { padding: 80px 0; }
+    .principles, .statement { padding: 96px 0; }
+    .hero-text { padding: 56px 0 40px; gap: 24px; }
+    .hero-stage { padding-bottom: 80px; }
+    .app-body { grid-template-columns: 1fr; }
+    .app-vault, .app-tabs, .app-top .r .pill { display: none; }
+    .app-main { padding: 16px; }
+    .metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 10px; }
+    .metric:nth-child(4) { padding-left: 0; border-left: 0; }
+    .op { grid-template-columns: 80px minmax(0, 1fr); }
+    .op .kind, .op .amt { display: none; }
+    .strat-head { flex-direction: column; align-items: flex-start; }
+    .steps { grid-template-columns: 1fr; }
+    .analysis-card { padding: 24px 18px 20px; }
+    .big-chart { height: 240px; }
+    .call { display: none; }
+    .mark b { display: block; }
+    .calls { display: grid; gap: 10px; margin-top: 18px; }
+    .calls li { display: grid; grid-template-columns: 22px 1fr; gap: 8px; font-size: 13px; color: var(--soft); }
+    .calls li b { color: var(--lilac); }
+    .calls li span { color: var(--muted); }
+    .an-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .an-metrics div:nth-child(odd) { border-left: 0; padding-left: 0; }
+    .an-metrics div:nth-child(4) { border-left: 1px solid var(--hair); padding-left: 20px; }
+    .an-metrics .v { font-size: 26px; }
+    .an-grid, .examples, .plans { grid-template-columns: 1fr; }
+    .an-panel, .ex, .plan { padding: 22px; }
+    .vault { padding: 24px; }
+    .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .feat { grid-template-columns: 1fr; }
+    .same, .tokens { padding: 24px 22px; }
+    .phases { grid-template-columns: 1fr; }
+    .stats { padding: 24px; gap: 20px; }
+    .stats > div + div { padding-left: 20px; }
+    .funds { padding: 24px; }
+    .funds ul { grid-template-columns: 1fr; }
+    .closing-stage { height: 280px; }
+  }
+  @media (min-width: 761px) { .calls { display: contents; } .calls li { display: contents; } .calls li > b, .calls li > span:not(.call) { display: none; } }
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-<nav class="nav" id="nav">
-  <div class="nav-inner">
-    <a href="#top" class="nav-logo">IQ Finance</a>
-    <ul class="nav-links">
-      <li class="opt"><a href="#how">How it works</a></li>
-      <li class="opt"><a href="#instruments">Instruments</a></li>
-      <li class="opt"><a href="#status">Where we are</a></li>
-      <li class="opt"><a href="technology/">Technology</a></li>
-      <li class="opt"><a href="#investors">Investors</a></li>
-      <li><a href="it/" hreflang="it" lang="it">IT</a></li>
-      <li><a href="#early-access" class="nav-cta">Early access</a></li>
-    </ul>
-  </div>
-</nav>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <path id="curve" d="M0.0 150.1 L16.2 137.6 L32.4 139.4 L48.6 142.9 L64.8 158.5 L81.0 160.0 L97.2 135.9 L113.4 125.0 L129.6 102.1 L145.8 94.5 L162.0 84.0 L178.2 77.6 L194.4 108.3 L210.6 88.8 L226.8 76.0 L243.1 63.3 L259.3 94.8 L275.5 126.8 L291.7 141.7 L307.9 148.2 L324.1 139.7 L340.3 138.0 L356.5 125.2 L372.7 135.2 L388.9 126.6 L405.1 116.2 L421.3 126.6 L437.5 90.3 L453.7 76.5 L469.9 49.8 L486.1 59.7 L502.3 72.0 L518.5 76.2 L534.7 75.7 L550.9 60.3 L567.1 52.6 L583.3 59.0 L599.5 75.6 L615.7 83.4 L631.9 56.3 L648.1 70.0 L664.3 62.4 L680.5 51.1 L696.7 78.6 L712.9 74.9 L729.2 46.0 L745.4 84.3 L761.6 88.1 L777.8 87.5 L794.0 101.2 L810.2 88.7 L826.4 87.2 L842.6 113.8 L858.8 94.9 L875.0 78.9 L891.2 57.2 L907.4 25.4 L923.6 15.2 L939.8 10.0 L956.0 34.1"/>
+    <path id="curve-area" d="M0.0 150.1 L16.2 137.6 L32.4 139.4 L48.6 142.9 L64.8 158.5 L81.0 160.0 L97.2 135.9 L113.4 125.0 L129.6 102.1 L145.8 94.5 L162.0 84.0 L178.2 77.6 L194.4 108.3 L210.6 88.8 L226.8 76.0 L243.1 63.3 L259.3 94.8 L275.5 126.8 L291.7 141.7 L307.9 148.2 L324.1 139.7 L340.3 138.0 L356.5 125.2 L372.7 135.2 L388.9 126.6 L405.1 116.2 L421.3 126.6 L437.5 90.3 L453.7 76.5 L469.9 49.8 L486.1 59.7 L502.3 72.0 L518.5 76.2 L534.7 75.7 L550.9 60.3 L567.1 52.6 L583.3 59.0 L599.5 75.6 L615.7 83.4 L631.9 56.3 L648.1 70.0 L664.3 62.4 L680.5 51.1 L696.7 78.6 L712.9 74.9 L729.2 46.0 L745.4 84.3 L761.6 88.1 L777.8 87.5 L794.0 101.2 L810.2 88.7 L826.4 87.2 L842.6 113.8 L858.8 94.9 L875.0 78.9 L891.2 57.2 L907.4 25.4 L923.6 15.2 L939.8 10.0 L956.0 34.1 L956 180 L0 180 Z"/>
+    <symbol id="tick" viewBox="0 0 12 12"><path d="M2.5 6.5l2.3 2.3 4.7-5.3" fill="none" stroke="#34C27B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <filter id="glw" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+  </defs>
+</svg>
 
-<!-- 1. What it is -->
-<header class="hero" id="top">
-  <div class="wrap">
-    <div class="status"><i></i>Working prototype on a test network · no real money involved</div>
-    <h1>Describe how you want to invest. See how it would have gone. Then decide.</h1>
-    <p class="lead">IQ Finance turns a goal written in plain words into an investment strategy, tests it on years of past market data, and shows you the results before anything happens. Nothing starts without your approval.</p>
-    <div class="cta-row">
-      <a class="btn" href="#early-access">Request early access</a>
-      <a class="btn-ghost" href="#how">How it works ↓</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="#top">IQ Finance</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#how">How it works</a>
+      <a href="#analysis">Analysis</a>
+      <a href="#your-money">Your money</a>
+      <a href="#plans">Plans</a>
+      <a href="#today">Today</a>
+      <a href="#investors">Investors</a>
+      <a href="technology/">Technology</a>
+    </nav>
+    <div class="header-actions">
+      <span class="lang"><span aria-current="page" lang="en">EN</span> · <a href="it/" hreflang="it" lang="it">IT</a></span>
+      <a class="btn btn-violet header-cta" href="mailto:marco.laporta06@gmail.com?subject=Early%20access%20request%20%E2%80%94%20IQ%20Finance&amp;body=Hi%2C%20I%20would%20like%20early%20access%20to%20IQ%20Finance%20when%20it%20becomes%20available.">Request early access</a>
+      <details class="menu">
+        <summary>Menu</summary>
+        <div class="menu-panel">
+          <a href="#how">How it works</a>
+          <a href="#analysis">Analysis</a>
+          <a href="#your-money">Your money</a>
+          <a href="#plans">Plans</a>
+          <a href="#today">Today</a>
+          <a href="#investors">Investors</a>
+          <a href="technology/">Technology</a>
+          <span class="lang"><span aria-current="page" lang="en">EN</span> · <a href="it/" hreflang="it" lang="it">Italiano</a></span>
+          <a class="btn btn-violet" href="mailto:marco.laporta06@gmail.com?subject=Early%20access%20request%20%E2%80%94%20IQ%20Finance&amp;body=Hi%2C%20I%20would%20like%20early%20access%20to%20IQ%20Finance%20when%20it%20becomes%20available.">Request early access</a>
+        </div>
+      </details>
     </div>
-    <figure class="shot">
-      <img src="screenshots/01-hero-chat-strategy.png" width="1440" height="900" alt="The IQ Finance prototype: a goal written in the chat and the strategy the platform built from it, ready for approval.">
-      <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
-    </figure>
   </div>
 </header>
 
-<!-- 2. How it works -->
-<section class="block" id="how">
-  <div class="wrap">
-    <div class="block-head">
-      <div class="eyebrow">How it works</div>
-      <h2>Four steps, and the last one is always yours.</h2>
-    </div>
-    <div class="steps">
-      <div class="step">
-        <div>
-          <div class="n">01</div>
-          <h3>Describe your goal</h3>
-          <p>Write it the way you'd say it. No forms, no jargon.</p>
-          <blockquote>“Half in big US tech, half in gold, rebalanced every three months.”</blockquote>
-        </div>
-        <figure class="shot">
-          <img src="screenshots/02-step1-describe.png" width="1440" height="900" loading="lazy" alt="The chat box with the goal written in plain words, before sending it.">
-          <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
-        </figure>
-      </div>
-      <div class="step">
-        <div>
-          <div class="n">02</div>
-          <h3>The platform builds and tests the strategy</h3>
-          <p>An AI model turns your words into a precise plan: which instruments, how much in each, when to rebalance. Then a separate engine, built on fixed mathematical rules, tests it on the past five years of market data.</p>
-          <p><b>The AI suggests. The rules decide.</b></p>
-        </div>
-        <figure class="shot">
-          <img src="screenshots/03-step2-built.png" width="1440" height="900" loading="lazy" alt="The strategy built from the goal: instruments, weights and rebalancing schedule.">
-          <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
-        </figure>
-      </div>
-      <div class="step">
-        <div>
-          <div class="n">03</div>
-          <h3>See what would have happened</h3>
-          <p>You see how the strategy would have performed: what it would have gained or lost, its worst drop, and whether it passes our safety checks.</p>
-          <p>These are simulated results on past data, not a promise about the future. Rebalancing is applied inside the simulation; automatic rebalancing and watching a strategy after it goes live are coming later.</p>
-        </div>
-        <figure class="shot">
-          <img src="screenshots/04-step3-analysis.png" width="1440" height="900" loading="lazy" alt="The analysis of the strategy over the past five years: growth curve, result, worst drop and the outcome of the safety checks.">
-          <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
-        </figure>
-      </div>
-      <div class="step">
-        <div>
-          <div class="n">04</div>
-          <h3>You decide. Your money stays yours.</h3>
-          <p>If you like it, approve it with your signature. If you don't, nothing happens. Funds sit in a personal account that belongs only to you, never in an account we manage.</p>
-        </div>
-        <div class="pair">
-          <figure class="shot">
-            <img src="screenshots/05-step4-signature.png" width="1440" height="900" loading="lazy" alt="The signature request in the wallet, on top of the proposed operation.">
-            <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
-          </figure>
-          <figure class="shot">
-            <img src="screenshots/06-step4-confirmed.png" width="1440" height="900" loading="lazy" alt="The operation confirmed, with a link to its public record.">
-            <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
-          </figure>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<main id="main">
 
-<!-- 3. What you see before deciding -->
-<section class="block" id="before">
-  <div class="wrap">
-    <div class="split">
-      <div>
-        <div class="eyebrow">Before you decide</div>
-        <h2>The full picture, in plain numbers.</h2>
-        <p class="lead">Before you approve anything, you see exactly how the strategy would have behaved.</p>
-      </div>
-      <ul class="points">
-        <li><b>Growth over time.</b> How €100 would have changed over the last five years.</li>
-        <li><b>The worst drop.</b> The biggest fall from a high point along the way.</li>
-        <li><b>How steady the ride was.</b> Whether gains came smoothly or in big swings.</li>
-        <li><b>Luck or skill?</b> A statistical test checks whether the results hold up or could be chance. It needs at least three years of data.</li>
-        <li><b>Safety checks: pass or fail.</b> If the strategy would ever have fallen more than 35% from its peak, it is blocked. If any check fails, it cannot run.</li>
-      </ul>
+<!-- HERO -->
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="wrap hero-text">
+    <span class="hero-kicker">IQ FINANCE</span>
+    <h1 id="hero-title" class="display ink">Institutional quant investing.<br>Built for everyone.</h1>
+    <p class="hero-sub">Tell us your goal in one sentence. We'll show you how it would have survived the last five years of markets — <strong>every rally, every crash</strong> — before you risk a single cent.</p>
+    <div class="cta-row">
+      <a class="btn btn-ink" href="mailto:marco.laporta06@gmail.com?subject=Early%20access%20request%20%E2%80%94%20IQ%20Finance&amp;body=Hi%2C%20I%20would%20like%20early%20access%20to%20IQ%20Finance%20when%20it%20becomes%20available.">Request early access</a>
+      <a class="btn btn-line-light" href="#how">See how it works</a>
     </div>
-    <div class="two-shots">
-      <figure class="shot">
-        <img src="screenshots/07-analysis-passed.png" width="1440" height="900" loading="lazy" alt="A strategy that passes every safety check.">
-        <figcaption><b>A strategy that passes.</b> Screenshot of the MVP on a test network · simulated results</figcaption>
-      </figure>
-      <figure class="shot">
-        <img src="screenshots/08-analysis-blocked.png" width="1440" height="900" loading="lazy" alt="A strategy the engine blocks because it would have fallen more than 35% from its peak.">
-        <figcaption><b>A strategy the engine blocks.</b> Screenshot of the MVP on a test network · simulated results</figcaption>
-      </figure>
-    </div>
+    <span class="status-line"><i></i>Working prototype on a test network · no real money involved</span>
   </div>
-</section>
-
-<!-- 4. Your money stays yours -->
-<section class="block" id="yours">
-  <div class="wrap">
-    <div class="split">
-      <div>
-        <div class="eyebrow">Your money stays yours</div>
-        <h2>We never hold your money.</h2>
-      </div>
-      <ul class="points">
-        <li><b>A personal account only you own.</b> Each user gets their own digital vault on the blockchain, not a shared account controlled by us.</li>
-        <li><b>Nothing starts without your signature.</b></li>
-        <li><b>Every operation leaves a public record</b> anyone can check. <a href="https://sepolia.arbiscan.io/tx/0x12e3d3833344535f590ee4ccbcbbd21758591d471f78d2ca8fb6af23638e3939" target="_blank" rel="noreferrer" style="color:var(--violet-bright);">See an example ↗</a></li>
-        <li><b>Where we are, honestly.</b> Today we run on a test network with test funds. Your signature is checked by our servers; checking it directly inside your vault comes later. An independent security review of the code is planned before any real money is involved.</li>
-      </ul>
-    </div>
-    <div class="two-shots">
-      <figure class="shot">
-        <img src="screenshots/09-portfolio.png" width="1440" height="900" loading="lazy" alt="The personal portfolio: value, allocation and the note about test tokens.">
-        <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
-      </figure>
-      <figure class="shot">
-        <img src="screenshots/11-public-record.png" width="1440" height="900" loading="lazy" alt="The public record of an operation on the test network.">
-        <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
+  <div class="hero-stage">
+    <div class="wrap">
+      <figure class="preview">
+        <div class="halo"></div>
+        <p class="sr-only">Illustration of the IQ Finance app. A user writes: “Half in big US tech (Nasdaq-100), half in gold, rebalanced every three months.” The app replies that over five years the strategy would have grown 10,000 USDC to about 17,140 USDC, with a worst fall of 21.8% in 2022, recovered in 14 months, and that it was approved by the risk engine. A side panel shows the personal vault and a “Review and sign” button. All figures are illustrative.</p>
+        <div class="app" aria-hidden="true">
+          <div class="app-bar"><span class="d" style="background:#FF5F57"></span><span class="d" style="background:#FEBC2E"></span><span class="d" style="background:#28C840"></span><span class="url">app.iqfinance.me</span></div>
+          <div class="app-top">
+            <div class="l"><span class="brand">IQ Finance</span><div class="app-tabs"><span class="on">Assistant</span><span>Strategies</span><span>Portfolio</span><span>Markets</span></div></div>
+            <div class="r"><span>Vault <b>10,000.00 USDC</b></span><span><i class="dot"></i>Test network</span><span class="pill">0x8f3…a21c</span></div>
+          </div>
+          <div class="app-body">
+            <div class="app-side">
+              <span class="new">+ New conversation</span>
+              <span class="lbl">RECENT</span>
+              <div class="conv on">50/50 tech and gold<span>Today</span></div>
+              <div class="conv">Broad market with gold<span>Yesterday</span></div>
+              <div class="conv">Three-way hold<span>Oct 2</span></div>
+              <div class="conv">All in Tesla<span>Oct 2</span></div>
+            </div>
+            <div class="app-main">
+              <div class="bubble">Half in big US tech (Nasdaq-100), half in gold, rebalanced every three months.</div>
+              <div class="meta"><b>IQ Finance</b><span>·</span><svg class="ok"><use href="#tick"/></svg><span>5 years of market data</span><svg class="ok"><use href="#tick"/></svg><span>Checks complete</span></div>
+              <p class="summary">Over five years this strategy would have grown 10,000 USDC to about 17,140 USDC. Its worst moment was 2022, a 21.8% fall recovered in 14 months.</p>
+              <div class="strat-head">
+                <div class="stack" style="gap:4px"><span class="strat-name">50/50 tech and gold</span><span class="approved"><svg class="ok"><use href="#tick"/></svg>Approved by the risk engine <span>· fixed allocation · quarterly</span></span></div>
+                <span class="actions">☆ Save strategy &nbsp; Save analysis &nbsp; Edit</span>
+              </div>
+              <div class="metrics">
+                <div class="metric"><span class="k">Total return</span><span class="v">+71.4%</span></div>
+                <div class="metric"><span class="k">Per year</span><span class="v">11.4%</span></div>
+                <div class="metric"><span class="k">Worst drop</span><span class="v neg">−21.8%</span></div>
+                <div class="metric"><span class="k">Time to recover</span><span class="v">14 months</span></div>
+                <div class="metric"><span class="k">Ups and downs</span><span class="v">14.2%</span></div>
+                <div class="metric"><span class="k">Return per unit of risk</span><span class="v">0.82</span></div>
+              </div>
+              <div class="chart-row">
+                <div class="plot">
+                  <svg width="100%" height="120" viewBox="0 0 956 180" preserveAspectRatio="none">
+                    <g stroke="#1C1F27"><line x1="0" y1="10" x2="956" y2="10" vector-effect="non-scaling-stroke"/><line x1="0" y1="50" x2="956" y2="50" vector-effect="non-scaling-stroke"/><line x1="0" y1="90" x2="956" y2="90" vector-effect="non-scaling-stroke"/><line x1="0" y1="130" x2="956" y2="130" vector-effect="non-scaling-stroke"/><line x1="0" y1="170" x2="956" y2="170" vector-effect="non-scaling-stroke"/></g>
+                    <use href="#curve-area" fill="rgba(157,111,255,0.08)"/>
+                    <use href="#curve" fill="none" stroke="#9D6FFF" stroke-width="1.6" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="axis-x"><span>2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span><span>2026</span></div>
+                </div>
+                <div class="axis-y" style="height:120px"><span>18,000</span><span>16,000</span><span>14,000</span><span>12,000</span><span>10,000</span></div>
+              </div>
+              <div class="checks2">
+                <div class="check"><svg class="ok"><use href="#tick"/></svg>Maximum-loss check <span class="g">passed</span></div>
+                <div class="check"><span class="m">–</span>Luck-or-skill check <span class="m">not needed</span></div>
+              </div>
+              <div>
+                <div class="ops-head">Every operation<span>42 operations · total cost 0.21%</span></div>
+                <div class="op"><span class="date">Sep 30, 2021</span><span class="kind">Opening</span><span>Buy Nasdaq-100 and gold</span><span class="amt">10,000.00</span></div>
+                <div class="op"><span class="date">Jan 3, 2022</span><span class="kind">Rebalance</span><span>Sell gold → buy Nasdaq-100</span><span class="amt">412.30</span></div>
+                <div class="op"><span class="date">Apr 1, 2022</span><span class="kind">Rebalance</span><span>Sell gold → buy Nasdaq-100</span><span class="amt">598.10</span></div>
+              </div>
+            </div>
+            <div class="app-vault">
+              <span class="lbl">YOUR VAULT</span>
+              <span class="big">10,000.00</span>
+              <span class="sub">USDC · only you can withdraw</span>
+              <div class="sep"></div>
+              <span class="lbl">IF YOU RUN THIS STRATEGY</span>
+              <div class="alloc"><div class="row"><span>Nasdaq-100</span><span>5,000.00</span></div><div class="track"><i style="width:50%;background:#9D6FFF"></i></div></div>
+              <div class="alloc"><div class="row"><span>Gold</span><span>5,000.00</span></div><div class="track"><i style="width:50%;background:#C9CCD4"></i></div></div>
+              <div class="cost"><span>Estimated cost</span><span>5.00 USDC</span></div>
+              <span class="sign">Review and sign</span>
+              <span class="sign-note">Nothing starts without your signature.</span>
+            </div>
+          </div>
+        </div>
+        <figcaption>Product design preview · illustrative figures</figcaption>
       </figure>
     </div>
   </div>
 </section>
 
-<!-- 5. What you can build strategies with -->
-<section class="block" id="instruments">
+<!-- PRINCIPLES -->
+<section class="principles" aria-labelledby="principles-title">
+  <div class="wrap principles-grid">
+    <div>
+      <div class="eyebrow"><span class="n">—</span><span class="bar"></span><span>Why IQ Finance</span></div>
+      <p class="lead">Most people either hand their money to someone they can't see into, or gamble on their own. We built a third way: the discipline of a quant fund, with every decision in your hands.</p>
+    </div>
+    <h2 id="principles-title" class="display">
+      <span>The AI suggests.</span>
+      <span class="glow">The rules decide.</span>
+      <span>You stay in control.</span>
+    </h2>
+  </div>
+</section>
+
+<!-- 01 HOW IT WORKS -->
+<section class="section" id="how" aria-labelledby="how-title">
   <div class="wrap">
-    <div class="block-head">
-      <div class="eyebrow">Instruments</div>
-      <h2>What you can build strategies with</h2>
-      <p class="lead">17 instruments, in plain words.</p>
+    <div class="eyebrow"><span class="n">01</span><span class="bar"></span><span>How it works</span></div>
+    <h2 id="how-title" class="h2" style="margin-top:44px">Say what you want.<br>See what it would have done.</h2>
+    <ol class="steps" style="list-style:none;padding:0">
+      <li class="step">
+        <div class="step-visual" aria-hidden="true">
+          <div class="sv-input">Half in big US tech, half in gold, rebalanced every three months.</div>
+          <div class="sv-send">Send</div>
+        </div>
+        <div><span class="num">01</span><h3>Describe your goal</h3><p class="small">Write it the way you would say it. No forms, no jargon.</p></div>
+      </li>
+      <li class="step">
+        <div class="step-visual" aria-hidden="true">
+          <div class="sv-line"><svg width="13" height="13"><use href="#tick"/></svg>Request understood</div>
+          <div class="sv-line"><svg width="13" height="13"><use href="#tick"/></svg>5 years of market data</div>
+          <div class="sv-line"><svg width="13" height="13"><use href="#tick"/></svg>Simulation run</div>
+          <div class="sv-line"><svg width="13" height="13"><use href="#tick"/></svg>Risk checks applied</div>
+        </div>
+        <div><span class="num">02</span><h3>The platform builds and tests it</h3><p class="small">An AI model turns your words into a precise plan. A separate engine with fixed mathematical rules tests it on five years of real market data. The AI suggests. The rules decide.</p></div>
+      </li>
+      <li class="step">
+        <div class="step-visual" aria-hidden="true">
+          <div class="sv-kpis"><span class="k">Total return</span><span class="k">Worst drop</span><span class="v">+71.4%</span><span class="v neg">−21.8%</span></div>
+          <svg width="100%" height="46" viewBox="0 0 956 180" preserveAspectRatio="none"><use href="#curve" fill="none" stroke="#9D6FFF" stroke-width="1.6" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg>
+        </div>
+        <div><span class="num">03</span><h3>Read the full analysis</h3><p class="small">Returns, risk and every operation the strategy would have made — simulated on past data, not a promise.</p></div>
+      </li>
+      <li class="step">
+        <div class="step-visual sv-wallet" aria-hidden="true">
+          <span class="k">Wallet · signature request</span>
+          <p>Approve: buy Nasdaq-100 and gold for 10,000 USDC</p>
+          <div class="sv-btns"><span class="s">Sign</span><span class="c">Cancel</span></div>
+        </div>
+        <div><span class="num">04</span><h3>You decide</h3><p class="small">Approve with your signature, or do nothing. Your money stays in an account only you control.</p></div>
+      </li>
+    </ol>
+    <p class="caption" style="margin-top:28px">Product design preview · illustrative figures</p>
+  </div>
+</section>
+
+<!-- 02 ANALYSIS -->
+<div class="analysis-band">
+<section class="section" id="analysis" aria-labelledby="analysis-title">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">02</span><span class="bar"></span><span>The analysis</span></div>
+    <div class="analysis-intro">
+      <h2 id="analysis-title" class="display h2-big glow">See the worst moment<br>before it happens.</h2>
+      <p class="lead">Every strategy is replayed on five years of real markets — through the 2022 crash and the recovery that followed. You see when it would have hurt, how much, and how long it took to come back. Before you invest anything.</p>
+    </div>
+
+    <figure class="card analysis-card" style="margin-left:0;margin-right:0">
+      <div class="an-head">
+        <div><div class="t">50/50 tech and gold</div><div class="s">50% Nasdaq-100 · 50% gold · rebalanced quarterly · value of 10,000 USDC</div></div>
+        <span class="badge-ok"><svg width="13" height="13" aria-hidden="true"><use href="#tick"/></svg>Approved by the risk engine</span>
+      </div>
+      <div class="big-chart">
+        <svg viewBox="0 0 956 180" preserveAspectRatio="none" role="img" aria-labelledby="bc-title">
+          <title id="bc-title">Value of the strategy from September 2021 to September 2026: a fall through 2022, a recovery in 2023 and growth to about 17,140 USDC. Illustrative.</title>
+          <g stroke="#191C24"><line x1="0" y1="20" x2="956" y2="20" vector-effect="non-scaling-stroke"/><line x1="0" y1="60" x2="956" y2="60" vector-effect="non-scaling-stroke"/><line x1="0" y1="100" x2="956" y2="100" vector-effect="non-scaling-stroke"/><line x1="0" y1="140" x2="956" y2="140" vector-effect="non-scaling-stroke"/></g>
+          <rect x="178" y="0" width="292" height="180" fill="rgba(240,85,90,0.07)"/>
+          <use href="#curve-area" fill="rgba(157,111,255,0.10)"/>
+          <use href="#curve" fill="none" stroke="#9D6FFF" stroke-width="6" stroke-opacity="0.35" filter="url(#glw)" vector-effect="non-scaling-stroke"/>
+          <use href="#curve" fill="none" stroke="#C4B1FF" stroke-width="2.2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+        </svg>
+        <span class="mark" style="left:18.6%;top:43.2%;background:#C4B1FF;box-shadow:0 0 0 5px #C4B1FF33,0 0 22px #C4B1FF" aria-hidden="true"><b>1</b></span>
+        <span class="mark" style="left:32.2%;top:82.4%;background:#F0555A;box-shadow:0 0 0 5px #F0555A33,0 0 22px #F0555A" aria-hidden="true"><b>2</b></span>
+        <span class="mark" style="left:49.2%;top:27.6%;background:#34C27B;box-shadow:0 0 0 5px #34C27B33,0 0 22px #34C27B" aria-hidden="true"><b>3</b></span>
+        <span class="mark" style="left:100%;top:18.9%;background:#C4B1FF;box-shadow:0 0 0 5px #C4B1FF33,0 0 22px #C4B1FF" aria-hidden="true"><b style="left:-22px">4</b></span>
+        <ol class="calls">
+          <li><b>1</b><span class="call" style="left:4%;top:68px;"><span class="a">Jan 2022 · markets turn</span><span class="b">Tech stocks start a long fall</span></span><span>Jan 2022 · markets turn: tech stocks start a long fall</span></li>
+          <li><b>2</b><span class="call" style="left:21%;top:335px;border-color:rgba(240,85,90,0.6)"><span class="a">Jun 2022 · the worst moment</span><span class="b">−21.8% from the high · 10,000 → 7,820 USDC</span></span><span>Jun 2022 · the worst moment: −21.8% from the high, 10,000 → 7,820 USDC</span></li>
+          <li><b>3</b><span class="call" style="left:50.5%;top:135px;border-color:rgba(52,194,123,0.5)"><span class="a">Aug 2023 · fully recovered</span><span class="b">14 months after the worst moment</span></span><span>Aug 2023 · fully recovered, 14 months after the worst moment</span></li>
+          <li><b>4</b><span class="call" style="left:78%;top:-6px;"><span class="a">Today · 17,140 USDC</span><span class="b">+71.4% over five years</span></span><span>Today · 17,140 USDC, +71.4% over five years</span></li>
+        </ol>
+      </div>
+      <div class="big-axis" aria-hidden="true"><span>Sep 2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span><span>Sep 2026</span></div>
+      <div class="an-metrics">
+        <div><span class="k">Total, 5 years</span><span class="v">+71.4%</span></div>
+        <div><span class="k">Per year</span><span class="v">11.4%</span></div>
+        <div><span class="k">Worst drop</span><span class="v neg">−21.8%</span></div>
+        <div><span class="k">Time to recover</span><span class="v">14 months</span></div>
+        <div><span class="k">Ups and downs</span><span class="v">14.2%</span></div>
+        <div><span class="k">Return per unit of risk</span><span class="v">0.82</span></div>
+      </div>
+    </figure>
+
+    <div class="an-grid">
+      <div class="card an-panel">
+        <div><h3>Distance from the highest point</h3><p class="d">How far below its best value the strategy was, day by day.</p></div>
+        <svg role="img" aria-label="Distance from the highest point over five years; the deepest point is −21.8% in June 2022. Illustrative." width="100%" height="150" viewBox="0 0 956 140" preserveAspectRatio="none" style="display: block"><line x1="0" y1="8" x2="956" y2="8" stroke="#2A2D36" vector-effect="non-scaling-stroke"></line><line x1="0" y1="129.5" x2="956" y2="129.5" stroke="rgba(240,85,90,0.5)" stroke-dasharray="4 5" vector-effect="non-scaling-stroke"></line><path d="M0.0 8.0 L16.2 8.0 L32.4 10.7 L48.6 15.9 L64.8 38.9 L81.0 41.2 L97.2 8.0 L113.4 8.0 L129.6 8.0 L145.8 8.0 L162.0 8.0 L178.2 8.0 L194.4 52.3 L210.6 24.1 L226.8 8.0 L243.1 8.0 L259.3 53.0 L275.5 98.9 L291.7 120.2 L307.9 129.5 L324.1 117.3 L340.3 114.9 L356.5 96.6 L372.7 110.9 L388.9 98.5 L405.1 83.7 L421.3 98.6 L437.5 46.6 L453.7 26.9 L469.9 8.0 L486.1 22.1 L502.3 39.5 L518.5 45.6 L534.7 44.8 L550.9 22.9 L567.1 11.9 L583.3 21.0 L599.5 44.7 L615.7 55.8 L631.9 17.2 L648.1 36.7 L664.3 25.8 L680.5 9.7 L696.7 48.9 L712.9 43.7 L729.2 8.0 L745.4 62.4 L761.6 67.7 L777.8 67.0 L794.0 86.4 L810.2 68.6 L826.4 66.6 L842.6 104.3 L858.8 77.4 L875.0 54.7 L891.2 23.9 L907.4 8.0 L923.6 8.0 L939.8 8.0 L956.0 41.7 L956 8 L0 8 Z" fill="rgba(240,85,90,0.18)"></path><path d="M0.0 8.0 L16.2 8.0 L32.4 10.7 L48.6 15.9 L64.8 38.9 L81.0 41.2 L97.2 8.0 L113.4 8.0 L129.6 8.0 L145.8 8.0 L162.0 8.0 L178.2 8.0 L194.4 52.3 L210.6 24.1 L226.8 8.0 L243.1 8.0 L259.3 53.0 L275.5 98.9 L291.7 120.2 L307.9 129.5 L324.1 117.3 L340.3 114.9 L356.5 96.6 L372.7 110.9 L388.9 98.5 L405.1 83.7 L421.3 98.6 L437.5 46.6 L453.7 26.9 L469.9 8.0 L486.1 22.1 L502.3 39.5 L518.5 45.6 L534.7 44.8 L550.9 22.9 L567.1 11.9 L583.3 21.0 L599.5 44.7 L615.7 55.8 L631.9 17.2 L648.1 36.7 L664.3 25.8 L680.5 9.7 L696.7 48.9 L712.9 43.7 L729.2 8.0 L745.4 62.4 L761.6 67.7 L777.8 67.0 L794.0 86.4 L810.2 68.6 L826.4 66.6 L842.6 104.3 L858.8 77.4 L875.0 54.7 L891.2 23.9 L907.4 8.0 L923.6 8.0 L939.8 8.0 L956.0 41.7" fill="none" stroke="#F0555A" stroke-width="1.4" vector-effect="non-scaling-stroke"></path></svg>
+        <span class="caption">Deepest point −21.8% (Jun 2022) · dashed line</span>
+      </div>
+      <div class="card an-panel">
+        <div><h3>Return over any 12 months</h3><p class="d">What you would have earned if you had invested on any day and held one year.</p></div>
+        <svg role="img" aria-label="Return over every 12-month period: negative through 2022, positive from 2023; positive in 81% of periods. Illustrative." width="100%" height="170" viewBox="0 0 956 200" preserveAspectRatio="none" style="display: block"><line x1="0" y1="110" x2="956" y2="110" stroke="#3A3D47" vector-effect="non-scaling-stroke"></line><rect x="1.0" y="110" width="17.5" height="41.0" fill="#F0555A" fill-opacity="0.85"></rect><rect x="20.5" y="110" width="17.5" height="39.8" fill="#F0555A" fill-opacity="0.85"></rect><rect x="40.0" y="110" width="17.5" height="44.2" fill="#F0555A" fill-opacity="0.85"></rect><rect x="59.5" y="110" width="17.5" height="31.2" fill="#F0555A" fill-opacity="0.85"></rect><rect x="79.0" y="110" width="17.5" height="29.0" fill="#F0555A" fill-opacity="0.85"></rect><rect x="98.6" y="110" width="17.5" height="18.7" fill="#F0555A" fill-opacity="0.85"></rect><rect x="118.1" y="110" width="17.5" height="5.0" fill="#F0555A" fill-opacity="0.85"></rect><rect x="137.6" y="110" width="17.5" height="3.4" fill="#F0555A" fill-opacity="0.85"></rect><rect x="157.1" y="110" width="17.5" height="0.2" fill="#F0555A" fill-opacity="0.85"></rect><rect x="176.6" y="110" width="17.5" height="6.7" fill="#F0555A" fill-opacity="0.85"></rect><rect x="196.1" y="106.88" width="17.5" height="3.1" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="215.6" y="108.08" width="17.5" height="1.9" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="235.1" y="106.16" width="17.5" height="3.8" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="254.6" y="103.76" width="17.5" height="6.2" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="274.1" y="69.44" width="17.5" height="40.6" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="293.7" y="60.08" width="17.5" height="49.9" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="313.2" y="65.36" width="17.5" height="44.6" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="332.7" y="68.47999999999999" width="17.5" height="41.5" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="352.2" y="70.16" width="17.5" height="39.8" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="371.7" y="82.16" width="17.5" height="27.8" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="391.2" y="79.28" width="17.5" height="30.7" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="410.7" y="71.36" width="17.5" height="38.6" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="430.2" y="66.32" width="17.5" height="43.7" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="449.7" y="60.08" width="17.5" height="49.9" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="469.2" y="55.28" width="17.5" height="54.7" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="488.8" y="65.84" width="17.5" height="44.2" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="508.3" y="50.96" width="17.5" height="59.0" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="527.8" y="45.2" width="17.5" height="64.8" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="547.3" y="44.480000000000004" width="17.5" height="65.5" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="566.8" y="47.6" width="17.5" height="62.4" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="586.3" y="39.68000000000001" width="17.5" height="70.3" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="605.8" y="45.92" width="17.5" height="64.1" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="625.3" y="29.840000000000003" width="17.5" height="80.2" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="644.8" y="32.480000000000004" width="17.5" height="77.5" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="664.3" y="40.879999999999995" width="17.5" height="69.1" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="683.9" y="49.040000000000006" width="17.5" height="61.0" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="703.4" y="41.36" width="17.5" height="68.6" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="722.9" y="52.400000000000006" width="17.5" height="57.6" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="742.4" y="51.2" width="17.5" height="58.8" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="761.9" y="56.720000000000006" width="17.5" height="53.3" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="781.4" y="67.52000000000001" width="17.5" height="42.5" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="800.9" y="73.03999999999999" width="17.5" height="37.0" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="820.4" y="72.08" width="17.5" height="37.9" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="839.9" y="77.12" width="17.5" height="32.9" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="859.4" y="82.88" width="17.5" height="27.1" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="879.0" y="79.52000000000001" width="17.5" height="30.5" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="898.5" y="68.0" width="17.5" height="42.0" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="918.0" y="80.0" width="17.5" height="30.0" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="937.5" y="76.16" width="17.5" height="33.8" fill="#9D6FFF" fill-opacity="0.85"></rect></svg>
+        <div class="axis-x" aria-hidden="true" style="font-size:11px"><span>Sep 2022</span><span>2023</span><span>2024</span><span>2025</span><span>Sep 2026</span></div>
+        <span class="caption">Positive in 81% of all 12-month periods</span>
+      </div>
+      <div class="card an-panel">
+        <div><h3>How 12-month results were spread</h3><p class="d">Every possible one-year outcome, from worst to best.</p></div>
+        <svg role="img" aria-label="Spread of all one-year outcomes from −20% to +40%; 5% below −9.6% and 5% above +33.0%. Illustrative." width="100%" height="160" viewBox="0 0 956 170" preserveAspectRatio="none" style="display: block"><rect x="3.0" y="141.3" width="62.3" height="8.7" rx="2" fill="#F0555A" fill-opacity="0.85"></rect><rect x="71.3" y="132.7" width="62.3" height="17.3" rx="2" fill="#F0555A" fill-opacity="0.85"></rect><rect x="139.6" y="119.7" width="62.3" height="30.3" rx="2" fill="#F0555A" fill-opacity="0.85"></rect><rect x="207.9" y="102.3" width="62.3" height="47.7" rx="2" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="276.1" y="80.7" width="62.3" height="69.3" rx="2" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="344.4" y="54.7" width="62.3" height="95.3" rx="2" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="412.7" y="33.0" width="62.3" height="117.0" rx="2" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="481.0" y="20.0" width="62.3" height="130.0" rx="2" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="549.3" y="28.7" width="62.3" height="121.3" rx="2" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="617.6" y="50.3" width="62.3" height="99.7" rx="2" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="685.9" y="76.3" width="62.3" height="73.7" rx="2" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="754.1" y="102.3" width="62.3" height="47.7" rx="2" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="822.4" y="124.0" width="62.3" height="26.0" rx="2" fill="#9D6FFF" fill-opacity="0.85"></rect><rect x="890.7" y="137.0" width="62.3" height="13.0" rx="2" fill="#9D6FFF" fill-opacity="0.85"></rect><line x1="204.9" y1="0" x2="204.9" y2="150" stroke="#EBEDF1" stroke-dasharray="3 4" vector-effect="non-scaling-stroke"></line><line x1="0" y1="150" x2="956" y2="150" stroke="#3A3D47" vector-effect="non-scaling-stroke"></line></svg>
+        <div class="axis-x" aria-hidden="true" style="font-size:11px"><span>−20%</span><span>0%</span><span>+20%</span><span>+40%</span></div>
+        <span class="caption">5% of outcomes below −9.6% · 5% above +33.0%</span>
+      </div>
+      <div class="card an-panel">
+        <div><h3>Where the return came from</h3><p class="d">Each part's share of the gains and of the risk.</p></div>
+        <div class="share" style="padding-top:6px">
+          <div class="row"><span>Share of the return</span><span>Nasdaq-100 63% · Gold 37%</span></div>
+          <div class="bar" aria-hidden="true"><span style="width:63%;background:#9D6FFF"></span><span style="width:37%;background:#C9CCD4"></span></div>
+        </div>
+        <div class="share" style="margin-top:8px">
+          <div class="row"><span>Share of the risk</span><span>Nasdaq-100 71% · Gold 29%</span></div>
+          <div class="bar" aria-hidden="true"><span style="width:71%;background:#9D6FFF"></span><span style="width:29%;background:#C9CCD4"></span></div>
+        </div>
+        <div class="pair" style="margin-top:8px">
+          <div class="stack" style="gap:4px"><span class="k">How much they move together</span><span class="v">0.18</span><span class="caption">low · good for diversification</span></div>
+          <div class="stack" style="gap:4px"><span class="k">Largest drift before rebalancing</span><span class="v">6.2%</span><span class="caption">from the 50/50 target</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chips">
+      <span class="chip g"><svg width="13" height="13" aria-hidden="true"><use href="#tick"/></svg>Maximum-loss check passed</span>
+      <span class="chip"><span class="m" aria-hidden="true">–</span>Luck-or-skill check not needed for fixed allocations</span>
+      <span class="chip r"><span class="x" aria-hidden="true">✕</span>“All in Tesla” rejected: fell 73.6%, limit 35%</span>
+    </div>
+    <p class="caption" style="margin-top:20px">Illustrative figures · simulated on real past market data, costs included · computed by a deterministic engine, never written by the AI · not a forecast.</p>
+    <p class="caption" style="margin-top:6px">Product design preview · illustrative figures</p>
+  </div>
+</section>
+</div>
+
+<!-- 03 YOUR MONEY -->
+<div class="purple-band">
+<section class="section" id="your-money" aria-labelledby="money-title">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">03</span><span class="bar"></span><span>Your money stays yours</span></div>
+    <div class="money-grid">
+      <div class="stack" style="gap:24px">
+        <h2 id="money-title" class="display h2-big glow">Your money never<br>leaves your hands.</h2>
+        <p class="lead" style="max-width:520px">We never hold your funds. You keep them in a vault only you can withdraw from, and nothing starts without your signature.</p>
+        <ol class="money-list">
+          <li><span class="n" aria-hidden="true">01</span><div><h3>An account only you own</h3><p>A personal digital vault, not a shared account controlled by us.</p></div></li>
+          <li><span class="n" aria-hidden="true">02</span><div><h3>Nothing starts without your signature</h3><p>Every operation needs your approval in your own wallet.</p></div></li>
+          <li><span class="n" aria-hidden="true">03</span><div><h3>A public record anyone can check</h3><p>Every operation leaves a trace you can verify yourself.</p></div></li>
+        </ol>
+        <p class="caption" style="font-size:13px;line-height:1.6">Today on a test network with test funds. Your signature is checked by our servers; checking it inside your vault comes later. An independent security audit comes before any real money.</p>
+      </div>
+      <figure class="vault-wrap">
+        <div class="halo"></div>
+        <div class="vault">
+          <div class="vault-top">
+            <span class="t"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C4B1FF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>YOUR VAULT</span>
+            <span class="s">Personal · on a public ledger</span>
+          </div>
+          <span class="display glow vault-amount">10,000.00 USDC</span>
+          <dl style="margin:0">
+            <div class="vrow"><dt>Owner</dt><dd style="margin:0">You</dd></div>
+            <div class="vrow"><dt>Who can withdraw</dt><dd style="margin:0;color:var(--green)">Only you</dd></div>
+            <div class="vrow"><dt>Can IQ Finance withdraw?</dt><dd style="margin:0;color:var(--red)">No</dd></div>
+            <div class="vrow"><dt>Who approves each operation</dt><dd style="margin:0">You, with your signature</dd></div>
+          </dl>
+        </div>
+        <figcaption class="caption" style="position:relative;margin-top:14px">Product design preview · illustrative figures</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- 04 INSTRUMENTS -->
+<div class="inst-band">
+<section class="section" id="instruments" aria-labelledby="inst-title">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">04</span><span class="bar"></span><span>Instruments</span></div>
+    <div class="split-head" style="margin-top:44px">
+      <h2 id="inst-title" class="h2">17 instruments.<br>Markets everyone recognizes.</h2>
+      <p class="small">Strategy tests use real historical market data, adjusted for dividends and splits. On the test network, instruments are test versions issued one-for-one with a digital dollar and don't yet follow the real price.</p>
     </div>
     <div class="groups">
-      <div class="group">
-        <h3>US market indexes</h3>
-        <ul>
-          <li><span class="tk">QQQ</span>Nasdaq-100</li>
-          <li><span class="tk">SPY</span>S&amp;P 500</li>
-          <li><span class="tk">DIA</span>Dow Jones</li>
-          <li><span class="tk">IWM</span>Russell 2000, smaller companies</li>
+      <div>
+        <h3 class="group-name g-idx"><i aria-hidden="true"></i>US market indexes</h3>
+        <ul class="tiles">
+          <li class="tile t-idx"><span>Nasdaq-100</span><span>QQQ</span></li>
+          <li class="tile t-idx"><span>S&amp;P 500</span><span>SPY</span></li>
+          <li class="tile t-idx"><span>Dow Jones</span><span>DIA</span></li>
+          <li class="tile t-idx"><span>Russell 2000</span><span>IWM</span></li>
         </ul>
       </div>
-      <div class="group">
-        <h3>Large companies</h3>
-        <ul>
-          <li><span class="tk">AAPL</span>Apple</li>
-          <li><span class="tk">MSFT</span>Microsoft</li>
-          <li><span class="tk">NVDA</span>Nvidia</li>
-          <li><span class="tk">GOOGL</span>Alphabet (Google)</li>
-          <li><span class="tk">AMZN</span>Amazon</li>
-          <li><span class="tk">META</span>Meta</li>
-          <li><span class="tk">TSLA</span>Tesla</li>
-          <li><span class="tk">JPM</span>JPMorgan Chase</li>
-          <li><span class="tk">BRK-B</span>Berkshire Hathaway</li>
+      <div>
+        <h3 class="group-name g-co"><i aria-hidden="true"></i>Large companies</h3>
+        <ul class="tiles">
+          <li class="tile t-co"><span>Apple</span><span>AAPL</span></li>
+          <li class="tile t-co"><span>Microsoft</span><span>MSFT</span></li>
+          <li class="tile t-co"><span>Nvidia</span><span>NVDA</span></li>
+          <li class="tile t-co"><span>Alphabet</span><span>GOOGL</span></li>
+          <li class="tile t-co"><span>Amazon</span><span>AMZN</span></li>
+          <li class="tile t-co"><span>Meta</span><span>META</span></li>
+          <li class="tile t-co"><span>Tesla</span><span>TSLA</span></li>
+          <li class="tile t-co"><span>JPMorgan Chase</span><span>JPM</span></li>
+          <li class="tile t-co"><span>Berkshire Hathaway</span><span>BRK-B</span></li>
         </ul>
       </div>
-      <div class="group">
-        <h3>Gold, oil, dollar, volatility</h3>
-        <ul>
-          <li><span class="tk">GLD</span>Gold</li>
-          <li><span class="tk">USO</span>Oil</li>
-          <li><span class="tk">UUP</span>US dollar</li>
-          <li><span class="tk">VXX</span>Market volatility</li>
+      <div>
+        <h3 class="group-name g-cm"><i aria-hidden="true"></i>Gold, oil, dollar, volatility</h3>
+        <ul class="tiles">
+          <li class="tile t-cm"><span>Gold</span><span>GLD</span></li>
+          <li class="tile t-cm"><span>Oil</span><span>USO</span></li>
+          <li class="tile t-cm"><span>US dollar</span><span>UUP</span></li>
+          <li class="tile t-cm"><span>Market volatility</span><span>VXX</span></li>
         </ul>
       </div>
     </div>
-    <p class="note">Strategy tests use real historical market data, adjusted for dividends and splits. Today, on the test network, the instruments are test versions: they're issued and redeemed one-for-one with a digital dollar (USDC) and don't yet follow the real price.</p>
-    <figure class="shot" style="margin-top:56px;">
-      <img src="screenshots/10-markets-catalog.png" width="1440" height="900" loading="lazy" alt="The catalog of the 17 instruments in the prototype.">
-      <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
-    </figure>
   </div>
 </section>
+</div>
 
-<!-- 6. Example strategies -->
-<section class="block" id="examples">
+<!-- 05 EXAMPLES -->
+<section class="section" id="examples" aria-labelledby="ex-title">
   <div class="wrap">
-    <div class="block-head">
-      <div class="eyebrow">Examples</div>
-      <h2>Example strategies</h2>
-      <p class="lead">Three goals, written in plain words, tested by the prototype on the past five years.</p>
+    <div class="eyebrow"><span class="n">05</span><span class="bar"></span><span>Example strategies</span></div>
+    <div class="split-head" style="margin-top:44px">
+      <h2 id="ex-title" class="h2">Same goal, same rules,<br>for every strategy.</h2>
+      <p class="small">Three strategies the engine approved and one it refused. Each is tested the same way before you see it.</p>
     </div>
     <div class="examples">
-      <article class="example">
-        <h3>Balanced: half tech, half gold</h3>
-        <p>50% Nasdaq-100, 50% gold, rebalanced every three months.</p>
-        <dl>
-          <dt>Period</dt><dd>5 years</dd>
-          <dt>Result</dt><dd>[[EX1_RESULT]]</dd>
-          <dt>Worst drop</dt><dd>[[EX1_WORST_DROP]]</dd>
-          <dt>Safety checks</dt><dd>[[EX1_CHECKS]]</dd>
-        </dl>
-        <figure class="shot">
-          <img src="screenshots/12-example-1.png" width="1440" height="900" loading="lazy" alt="Analysis of the balanced strategy: half Nasdaq-100, half gold.">
-          <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
-        </figure>
+      <article class="card ex">
+        <div class="ex-top"><span class="k">EXAMPLE 01</span><span class="st"><svg width="12" height="12" aria-hidden="true"><use href="#tick"/></svg>Approved</span></div>
+        <h3>50/50 tech and gold</h3>
+        <div><div class="mix" aria-hidden="true"><span style="width:50%;background:#9D6FFF"></span><span style="width:50%;background:#C9CCD4"></span></div><p class="mix-label">Nasdaq-100 50% · Gold 50% · quarterly</p></div>
+        <svg width="100%" height="70" viewBox="0 0 956 180" preserveAspectRatio="none" aria-hidden="true"><use href="#curve" fill="none" stroke="#9D6FFF" stroke-width="1.8" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg>
+        <div class="ex-kpis"><div><span class="k">5-year total</span><span class="v">+71.4%</span></div><div><span class="k">Per year</span><span class="v">11.4%</span></div><div><span class="k">Worst drop</span><span class="v neg">−21.8%</span></div></div>
       </article>
-      <article class="example">
-        <h3>Broad market, rebalanced</h3>
-        <p>60% S&amp;P 500, 20% smaller US companies, 20% gold, rebalanced every three months.</p>
-        <dl>
-          <dt>Period</dt><dd>5 years</dd>
-          <dt>Result</dt><dd>[[EX2_RESULT]]</dd>
-          <dt>Worst drop</dt><dd>[[EX2_WORST_DROP]]</dd>
-          <dt>Safety checks</dt><dd>[[EX2_CHECKS]]</dd>
-        </dl>
-        <figure class="shot">
-          <img src="screenshots/13-example-2.png" width="1440" height="900" loading="lazy" alt="Analysis of the broad-market strategy.">
-          <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
-        </figure>
+      <article class="card ex">
+        <div class="ex-top"><span class="k">EXAMPLE 02</span><span class="st"><svg width="12" height="12" aria-hidden="true"><use href="#tick"/></svg>Approved</span></div>
+        <h3>Broad market with gold</h3>
+        <div><div class="mix" aria-hidden="true"><span style="width:60%;background:#9D6FFF"></span><span style="width:20%;background:#6E5BB8"></span><span style="width:20%;background:#C9CCD4"></span></div><p class="mix-label">S&amp;P 500 60% · Smaller US companies 20% · Gold 20%</p></div>
+        <svg width="100%" height="70" viewBox="0 0 956 180" preserveAspectRatio="none" aria-hidden="true"><use href="#curve" fill="none" stroke="#9D6FFF" stroke-width="1.8" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg>
+        <div class="ex-kpis"><div><span class="k">5-year total</span><span class="v">+58.9%</span></div><div><span class="k">Per year</span><span class="v">9.7%</span></div><div><span class="k">Worst drop</span><span class="v neg">−20.4%</span></div></div>
       </article>
-      <article class="example">
-        <!-- [[EX3_CHOICE]]: if the engine blocks this basket, use the approved alternative:
-             "Equal parts S&P 500, Dow Jones and gold, held without changes." -->
-        <h3>Big-tech basket, held</h3>
-        <p>Equal parts Apple, Microsoft, Nvidia, Alphabet and Amazon, held without changes.</p>
-        <dl>
-          <dt>Period</dt><dd>5 years</dd>
-          <dt>Result</dt><dd>[[EX3_RESULT]]</dd>
-          <dt>Worst drop</dt><dd>[[EX3_WORST_DROP]]</dd>
-          <dt>Safety checks</dt><dd>[[EX3_CHECKS]]</dd>
-        </dl>
-        <figure class="shot">
-          <img src="screenshots/14-example-3.png" width="1440" height="900" loading="lazy" alt="Analysis of the third example strategy.">
-          <figcaption>Screenshot of the MVP on a test network · simulated results</figcaption>
-        </figure>
+      <article class="card ex">
+        <div class="ex-top"><span class="k">EXAMPLE 03</span><span class="st"><svg width="12" height="12" aria-hidden="true"><use href="#tick"/></svg>Approved</span></div>
+        <h3>Three-way hold</h3>
+        <div><div class="mix" aria-hidden="true"><span style="width:34%;background:#9D6FFF"></span><span style="width:33%;background:#6E5BB8"></span><span style="width:33%;background:#C9CCD4"></span></div><p class="mix-label">S&amp;P 500 · Dow Jones · Gold, equal parts</p></div>
+        <svg width="100%" height="70" viewBox="0 0 956 180" preserveAspectRatio="none" aria-hidden="true"><use href="#curve" fill="none" stroke="#9D6FFF" stroke-width="1.8" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg>
+        <div class="ex-kpis"><div><span class="k">5-year total</span><span class="v">+54.2%</span></div><div><span class="k">Per year</span><span class="v">9.0%</span></div><div><span class="k">Worst drop</span><span class="v neg">−15.1%</span></div></div>
+      </article>
+      <article class="card ex rej">
+        <div class="ex-top"><span class="k">EXAMPLE 04</span><span class="st"><span aria-hidden="true">✕</span>&nbsp;Rejected</span></div>
+        <h3>All in Tesla</h3>
+        <div><div class="mix" aria-hidden="true"><span style="width:100%;background:#F0555A"></span></div><p class="mix-label">Tesla 100% · held</p></div>
+        <svg width="100%" height="70" viewBox="0 0 956 180" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40 L80 30 L160 20 L240 60 L320 120 L400 150 L480 130 L560 160 L640 140 L720 150 L800 145 L880 155 L956 150" fill="none" stroke="#F0555A" stroke-width="1.8" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg>
+        <div class="ex-kpis"><div><span class="k">5-year total</span><span class="v">—</span></div><div><span class="k">Per year</span><span class="v">—</span></div><div><span class="k">Worst drop</span><span class="v neg">−73.6%</span></div></div>
+        <p class="ex-note">Over the 35% loss limit. Rejected strategies never run.</p>
       </article>
     </div>
-    <p class="fine">Simulated on past market data over five years · not a forecast · past results do not predict future results.</p>
+    <p class="caption" style="margin-top:28px">Illustrative figures · simulated on real past market data · not a forecast.</p>
   </div>
 </section>
 
-<!-- 7. Where we are today -->
-<section class="block" id="status">
+<!-- 06 PLANS -->
+<section class="section" id="plans" aria-labelledby="plans-title">
   <div class="wrap">
-    <div class="block-head">
-      <div class="eyebrow">Where we are today</div>
-      <h2>What works now, and what comes next.</h2>
+    <div class="eyebrow"><span class="n">06</span><span class="bar"></span><span>Plans at launch</span></div>
+    <div class="split-head" style="margin-top:44px">
+      <h2 id="plans-title" class="h2">Two plans.<br>One difference.</h2>
+      <p class="small">When IQ Finance launches with real money, there will be two monthly plans. They include exactly the same features; the only difference is how much AI and analysis you can use each month.</p>
     </div>
-    <div class="status-cols">
-      <div class="status-col">
-        <h3><i></i>Working today, on a test network (no real money)</h3>
-        <ul>
-          <li>Describing a goal and getting a strategy</li>
-          <li>Full test on past market data</li>
-          <li>Saving strategies and analyses</li>
-          <li>Conversation history</li>
-          <li>Safety checks before anything runs</li>
-          <li>Approval with your signature</li>
-          <li>Execution on the blockchain</li>
-          <li>Buying and selling instruments yourself</li>
+    <div class="plans">
+      <article class="card plan">
+        <div class="plan-top"><h3>Pro</h3><span class="tag">For regular use</span></div>
+        <p class="price"><span class="v">€20</span><span class="u">per month, VAT included</span></p>
+        <p class="for">Everything IQ Finance does, with a monthly amount of AI and analysis for building and checking your strategies.</p>
+      </article>
+      <article class="card plan max">
+        <div class="plan-top"><h3>Pro Max</h3><span class="tag">For heavy use</span></div>
+        <p class="price"><span class="v">€85</span><span class="u">per month, VAT included</span></p>
+        <p class="for">The same features, with much more AI and analysis included each month, at a lower cost per use.</p>
+      </article>
+    </div>
+    <div class="card same">
+      <h3>Included in both plans</h3>
+      <ul class="feat">
+        <li><svg width="13" height="13" aria-hidden="true"><use href="#tick"/></svg>Describe a goal and get a strategy</li>
+        <li><svg width="13" height="13" aria-hidden="true"><use href="#tick"/></svg>Full analysis on five years of real market data</li>
+        <li><svg width="13" height="13" aria-hidden="true"><use href="#tick"/></svg>Scenario explorer: “what happens to my portfolio if…”</li>
+        <li><svg width="13" height="13" aria-hidden="true"><use href="#tick"/></svg>Automatic management within the limits you approve</li>
+        <li><svg width="13" height="13" aria-hidden="true"><use href="#tick"/></svg>Your strategies and analyses saved</li>
+        <li><svg width="13" height="13" aria-hidden="true"><use href="#tick"/></svg>Buy and sell yourself in Markets — always, even when your monthly use runs out</li>
+      </ul>
+    </div>
+    <div class="card tokens">
+      <div>
+        <h3>Need more? Extra usage tokens, kept in your own wallet.</h3>
+        <p class="lead">If you use up your plan's monthly amount, you'll be able to buy extra usage tokens. They are an IQ Finance utility token: a digital voucher that lives in your own wallet and pays only for the AI and analysis on IQ Finance. Each time the AI works for you, your balance goes down.</p>
+        <ul class="tok-points">
+          <li>Your plan's monthly amount is always used first.</li>
+          <li>They stay in your wallet, and you can send them to another wallet.</li>
+          <li>For using the service, not for investing: no promised value, no refunds, no exchange listing.</li>
+          <li>Markets stay open for your own buy and sell orders even with no tokens left.</li>
         </ul>
       </div>
-      <div class="status-col next">
-        <h3><i></i>Coming next</h3>
+      <figure style="margin:0">
+        <div class="wallet" aria-hidden="true">
+          <span class="lbl">YOUR WALLET · USAGE TOKENS</span>
+          <span class="big">12.00<small>usage tokens</small></span>
+          <div class="wrow"><span>Plan amount this month</span><span>Used up</span></div>
+          <div class="wrow"><span>Next use</span><span>Paid from your tokens</span></div>
+          <div class="wrow"><span>Last use</span><span>Strategy analysis</span></div>
+        </div>
+        <p class="sr-only">Illustration of a wallet holding 12 extra usage tokens, used after the plan's monthly amount runs out. Illustrative.</p>
+        <figcaption class="caption" style="margin-top:12px">Product design preview · illustrative figures</figcaption>
+      </figure>
+    </div>
+    <p class="caption plans-note">Plans and usage tokens start with the launch with real money. Today the prototype runs on a test network and nothing is for sale.</p>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<section class="statement" aria-labelledby="promise-title">
+  <div class="wrap">
+    <span class="k">OUR PROMISE</span>
+    <h2 id="promise-title" class="display glow">We would rather show you a rejected strategy<br>than lose your money.</h2>
+  </div>
+</section>
+
+<!-- 07 TODAY -->
+<div class="purple-band">
+<section class="section" id="today" aria-labelledby="today-title">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">07</span><span class="bar"></span><span>Where we are today</span></div>
+    <h2 id="today-title" class="display glow today-title">Built in the open.<br>Honest about what comes next.</h2>
+    <div class="stats">
+      <div><span class="display glow v">911</span><span class="k">automated tests passing · Oct 6, 2026</span></div>
+      <div><span class="display glow v">17</span><span class="k">instruments</span></div>
+      <div><span class="display glow v">0</span><span class="k">real funds involved</span></div>
+      <div><span class="display glow v">4</span><span class="k">public example transactions</span>
+        <span class="tx"><a href="https://sepolia.arbiscan.io/tx/0x12e3d3833344535f590ee4ccbcbbd21758591d471f78d2ca8fb6af23638e3939" target="_blank" rel="noreferrer" aria-label="Example transaction 1 on Arbiscan (opens in a new tab)">1 ↗</a> <a href="https://sepolia.arbiscan.io/tx/0xce87e2015eba94db71b52ccdd520aa548d7414d248e82c0f2971eaa63604b563" target="_blank" rel="noreferrer" aria-label="Example transaction 2 on Arbiscan (opens in a new tab)">2 ↗</a> <a href="https://sepolia.arbiscan.io/tx/0x4d6455fd2acdf2fff3e7fa276e2c578f4a9f8b4a17d96813c2f2f4abe3986de7" target="_blank" rel="noreferrer" aria-label="Example transaction 3 on Arbiscan (opens in a new tab)">3 ↗</a> <a href="https://sepolia.arbiscan.io/tx/0xc04a77844d7bfc58361229fdeb19aaff4723a21e4b48c0e0749cde2767b22032" target="_blank" rel="noreferrer" aria-label="Example transaction 4 on Arbiscan (opens in a new tab)">4 ↗</a></span></div>
+    </div>
+    <ol class="journey" aria-label="Before real money">
+      <li class="here"><div class="line"><span class="pt"></span><span class="ln"></span></div><span class="you">YOU ARE HERE</span><h3>Prototype</h3><p>Strategies, analysis, signature and on-chain execution on a test network</p></li>
+      <li><div class="line"><span class="pt"></span><span class="ln"></span></div><span class="you"></span><h3>Security</h3><p>Independent audit · signature checked inside the vault</p></li>
+      <li><div class="line"><span class="pt"></span><span class="ln"></span></div><span class="you"></span><h3>Mandate</h3><p>Approve once, run within your limits · watching after launch</p></li>
+      <li><div class="line"><span class="pt"></span><span class="ln"></span></div><span class="you"></span><h3>Real prices</h3><p>Instruments that follow the real market price</p></li>
+      <li><div class="line"><span class="pt"></span><span class="ln" style="background:transparent"></span></div><span class="you"></span><h3>Launch</h3><p>Real money, regulated partners</p></li>
+    </ol>
+
+    <div class="roadmap">
+      <div class="head">
+        <h3 class="title">The road ahead, in seven phases.</h3>
+        <p class="small">From today's prototype to a product for funds and banks. Each phase is a step we can verify, not a promise.</p>
+      </div>
+      <ol class="phases">
+        <li class="phase"><span class="p">00</span><h4>Foundations and compliance</h4><p>Legal opinion, review of the usage token, independent security audit, incorporation.</p></li>
+        <li class="phase"><span class="p">01</span><h4>Our own AI</h4><p>An open model specialised in finance, with a larger one as backup, retrained on real usage.</p></li>
+        <li class="phase launch"><span class="p">02</span><h4>Launch with real money</h4><p>The main network, the Pro and Pro Max plans, usage tokens and the scenario explorer.</p></li>
+        <li class="phase"><span class="p">03</span><h4>Scaling</h4><p>Simpler sign-up, new markets, an international company structure.</p></li>
+        <li class="phase"><span class="p">04</span><h4>Direct tokenization</h4><p>Issuing tokenized versions of real assets ourselves.</p></li>
+        <li class="phase"><span class="p">05</span><h4>Our own blockchain and exchange</h4><p>Bringing transactions and core technology in-house. Long term, not funded by this round.</p></li>
+        <li class="phase"><span class="p">06</span><h4>Funds and banks</h4><p>The same engine for institutions. The last phase.</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- 08 INVESTORS -->
+<div class="inst-band">
+<section class="section" id="investors" aria-labelledby="inv-title">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">08</span><span class="bar"></span><span>For investors</span></div>
+    <div class="inv-grid">
+      <div class="inv-left">
+        <h2 id="inv-title" class="display glow">We are raising<br>€500,000 Pre-Seed.</h2>
+        <p class="lead" style="font-size:17px">SAFE, released in two tranches against verifiable milestones: from a working prototype to a security-audited product ready for real money.</p>
+        <div class="btns">
+          <a class="btn btn-violet" href="mailto:marco.laporta06@gmail.com?subject=Deck%20request%20%E2%80%94%20IQ%20Finance">Request the deck</a>
+          <a class="btn btn-line" href="technology/">Technology</a>
+        </div>
+        <div class="founder"><div class="n">Marco La Porta</div><div class="r">Founder, CEO &amp; CTO · with external advisory on finance and regulation</div></div>
+      </div>
+      <div class="funds">
+        <span class="t">USE OF FUNDS · €500,000</span>
+        <div class="bar" aria-hidden="true"><span style="width:9%;background:#E6DEFF"></span><span style="width:7%;background:#C4B1FF"></span><span style="width:22%;background:#9D6FFF"></span><span style="width:12%;background:#7C5BD6"></span><span style="width:40%;background:#5B3BB5"></span><span style="width:10%;background:#3A2A6B"></span></div>
         <ul>
-          <li>Approving once and letting a strategy run within limits you set <em>(in design)</em></li>
-          <li>Watching strategies after they go live</li>
-          <li>Automatic rebalancing</li>
-          <li>Test instruments that follow the real price</li>
-          <li>Signature checked inside your vault</li>
-          <li>Independent security review of the code</li>
-          <li>Launch with real money</li>
+          <li><span class="a"><i style="background:#E6DEFF" aria-hidden="true"></i>€45k</span><span class="l">Legal &amp; compliance</span></li>
+          <li><span class="a"><i style="background:#C4B1FF" aria-hidden="true"></i>€35k</span><span class="l">Independent security audit</span></li>
+          <li><span class="a"><i style="background:#9D6FFF" aria-hidden="true"></i>€110k</span><span class="l">Founders &amp; development</span></li>
+          <li><span class="a"><i style="background:#7C5BD6" aria-hidden="true"></i>€60k</span><span class="l">Infrastructure, marketing &amp; administration</span></li>
+          <li><span class="a"><i style="background:#5B3BB5" aria-hidden="true"></i>€200k</span><span class="l">Reaching the first subscribers, through partners</span></li>
+          <li><span class="a"><i style="background:#3A2A6B" aria-hidden="true"></i>€50k</span><span class="l">Reserve</span></li>
         </ul>
       </div>
     </div>
-    <div class="figures">
-      <div><div class="v num">911</div><div class="l">automated tests passed (October 6, 2026)</div></div>
-      <div><div class="v num">17</div><div class="l">instruments</div></div>
-      <div><div class="v num">0</div><div class="l">real funds moved</div></div>
-      <div><div class="v num">3</div><div class="l">public example transactions:
-        <a href="https://sepolia.arbiscan.io/tx/0x12e3d3833344535f590ee4ccbcbbd21758591d471f78d2ca8fb6af23638e3939" target="_blank" rel="noreferrer">1 ↗</a>
-        <a href="https://sepolia.arbiscan.io/tx/0xce87e2015eba94db71b52ccdd520aa548d7414d248e82c0f2971eaa63604b563" target="_blank" rel="noreferrer">2 ↗</a>
-        <a href="https://sepolia.arbiscan.io/tx/0x4d6455fd2acdf2fff3e7fa276e2c578f4a9f8b4a17d96813c2f2f4abe3986de7" target="_blank" rel="noreferrer">3 ↗</a></div></div>
-    </div>
-    <p class="more"><a href="technology/">How it is built, stated limits and roadmap → Technology</a></p>
   </div>
 </section>
+</div>
 
-<!-- 8. For investors -->
-<section class="block" id="investors">
-  <div class="wrap">
-    <div class="block-head">
-      <div class="eyebrow">For investors</div>
-      <h2>We're raising a €250,000 Pre-Seed round.</h2>
-      <p class="lead">A SAFE, released in verifiable milestones, for 18 months of runway.</p>
-    </div>
-    <div class="inv">
-      <div>
-        <h3>Use of funds</h3>
-        <table>
-          <tr><td>Legal &amp; compliance</td><td class="num">€45k</td></tr>
-          <tr><td>Independent security review</td><td class="num">€35k</td></tr>
-          <tr><td>Founders &amp; development</td><td class="num">€110k</td></tr>
-          <tr><td>Infrastructure, marketing &amp; reserve</td><td class="num">€60k</td></tr>
-        </table>
-        <div class="cta-row">
-          <a class="btn" href="mailto:marco.laporta06@gmail.com?subject=Deck%20request%20%E2%80%94%20IQ%20Finance">Request the deck</a>
-        </div>
-      </div>
-      <div>
-        <h3>Team</h3>
-        <div class="person">
-          <div><b>Marco La Porta</b></div>
-          <div class="role">Founder, CEO &amp; CTO</div>
-        </div>
-        <div class="person">
-          <div><b>External advisory</b></div>
-          <div class="role">Finance and regulation</div>
-        </div>
-        <p style="color:var(--text-muted); font-size:15.5px; margin-top:22px;">Contact: <a href="mailto:marco.laporta06@gmail.com" style="color:var(--violet-bright);">marco.laporta06@gmail.com</a></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Early access -->
-<section class="block closing" id="early-access">
+<!-- CLOSING -->
+<div class="closing-stage" aria-hidden="true"></div>
+<section class="closing" id="early-access" aria-labelledby="close-title">
   <span id="waitlist"></span>
-  <div class="wrap">
-    <h2>Be among the first to try it.</h2>
-    <p class="lead">Write to us and we'll let you know when real access becomes available. No spam, no financial solicitation.</p>
-    <div class="cta-row">
-      <a class="btn" href="mailto:marco.laporta06@gmail.com?subject=Early%20access%20request%20%E2%80%94%20IQ%20Finance&amp;body=Hi%2C%20I%27d%20like%20early%20access%20to%20IQ%20Finance%20when%20it%20becomes%20available.">Request early access →</a>
-    </div>
-    <p class="fine">No real funds can be moved today: we're on a test network.</p>
-    <div class="disclaimer">This document and website are for purely informational and strategic purposes. They do not constitute a solicitation of public savings, a public offering of financial products, or investment advice. The product currently operates exclusively on a test network (Arbitrum Sepolia): no real funds are involved or can be moved.</div>
+  <div class="wrap inner">
+    <h2 id="close-title" class="display ink">Institutional quant investing.<br>Built for everyone.</h2>
+    <p>See the worst before you invest. Decide with the full picture. Keep your money in your hands.</p>
+    <a class="btn btn-ink" href="mailto:marco.laporta06@gmail.com?subject=Early%20access%20request%20%E2%80%94%20IQ%20Finance&amp;body=Hi%2C%20I%20would%20like%20early%20access%20to%20IQ%20Finance%20when%20it%20becomes%20available.">Request early access</a>
+    <p class="disclaimer">This document and website are for purely informational and strategic purposes. They do not constitute a solicitation of public savings, a public offering of financial products, or investment advice. The product currently operates exclusively on a test network (Arbitrum Sepolia): no real funds are involved or can be moved. Plans, prices and usage tokens described here are planned for the launch and do not exist today.</p>
   </div>
 </section>
+</main>
 
-<footer>
+<footer class="site-footer">
   <div class="wrap footer-row">
-    <div>© 2026 IQ Finance</div>
-    <div><a href="technology/">Technology</a><a href="it/" hreflang="it" lang="it">Italiano</a></div>
+    <span>© 2026 IQ Finance</span>
+    <nav aria-label="Footer">
+      <a href="technology/">Technology</a>
+      <a href="mailto:marco.laporta06@gmail.com">marco.laporta06@gmail.com</a>
+      <span class="lang"><span aria-current="page" lang="en">EN</span> · <a href="it/" hreflang="it" lang="it">IT</a></span>
+    </nav>
   </div>
 </footer>
-
 <script>
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 40);
-  }, { passive: true });
+  // Close the mobile menu after choosing a section.
+  document.querySelectorAll('.menu-panel a').forEach(function (a) {
+    a.addEventListener('click', function () { a.closest('details').removeAttribute('open'); });
+  });
 </script>
 </body>
 </html>
