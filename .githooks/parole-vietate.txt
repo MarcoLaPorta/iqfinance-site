@@ -16,11 +16,12 @@ MEV
 non-custodial
 non custodial
 noncustodial
+DEX
+ERC-20
 
-# Niente prezzi o fee sul sito
+# Prezzi: ammessi solo i due piani (CLAUDE.md, regola 5). Niente fee, margini o listino token.
 fee
 fees
-€/mese
-€/month
-per month
-al mese
+commissione
+commissioni
+high-water mark

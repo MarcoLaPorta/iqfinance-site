@@ -25,10 +25,16 @@ Sito statico pubblicato con GitHub Pages: **ciò che arriva su `main` va online.
    `in_sviluppo` non si descrive al presente: mandato firmato una volta, monitoraggio del rischio
    dopo l'esecuzione, ribilanciamento automatico, token che seguono il prezzo del sottostante
    (oggi i token testnet sono emessi e riscattati alla pari con USDC).
-5. **Niente prezzi o fee sul sito.**
-6. **Immagini.** Screenshot reali dell'MVP su testnet, con didascalia
-   "Screenshot dell'MVP su rete di test · risultati simulati".
-   Mockup ammessi solo se etichettati come illustrativi.
+5. **Prezzi.** Si pubblicano solo i due piani, al futuro ("at launch"), IVA inclusa:
+   Pro € 20 al mese e Pro Max € 85 al mese (da `facts.yaml`), senza il numero di token inclusi.
+   I token di utilizzo extra si descrivono come utility token nel wallet dell'utente (stato:
+   futuro), senza prezzo. Niente performance fee, margini sugli ordini, listino in token o
+   prezzo dei token extra.
+6. **Immagini.** Le immagini del prodotto sono disegnate in HTML/CSS sul design v2
+   (`design-reference/`), con didascalia "Product design preview · illustrative figures".
+   I numeri delle strategie sono illustrativi ("Illustrative figures") e vanno sostituiti con i
+   backtest reali prima del push. Screenshot reali dell'MVP: didascalia
+   "Screenshot of the MVP on a test network · simulated results".
 7. **Riepilogo finale** di ogni lavoro con tutti i commit (hash e contenuto).
 
 ## Controllo prima del push
