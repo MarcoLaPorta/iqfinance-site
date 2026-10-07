@@ -72,12 +72,6 @@
   .state.dev { color: var(--gold); border: 1px solid rgba(217,183,106,0.45); }
   .state.fut { color: var(--muted); border: 1px solid var(--hair-3); }
   .state.test { color: var(--green); border: 1px solid rgba(52,194,123,0.45); }
-  .phase-list { list-style: none; margin: 48px 0 0; padding: 0; display: flex; flex-direction: column; }
-  .phase-list li { display: grid; grid-template-columns: 90px 1fr; gap: 32px; padding: 28px 0; border-top: 1px solid var(--hair); }
-  .phase-list .p { font-family: var(--serif); font-size: 34px; font-weight: 300; color: var(--violet-2); line-height: 1; }
-  .phase-list h3 { font-size: 19px; font-weight: 500; }
-  .phase-list p { margin-top: 8px; font-size: 15.5px; color: var(--soft); line-height: 1.6; max-width: 80ch; }
-  .phase-list .why { margin-top: 12px; font-size: 14.5px; color: var(--muted); }
   .status-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 48px; margin-top: 48px; align-items: start; }
   .tests .v { font-size: clamp(64px, 8vw, 104px); line-height: 1; }
   .tests .v small { font-size: 0.4em; color: var(--muted); -webkit-text-fill-color: var(--muted); }
@@ -105,8 +99,7 @@
     .tech-stage { height: 140px; }
     .flow { grid-template-columns: 1fr; }
     .pillar { padding: 24px 22px; }
-    .phase-list li { grid-template-columns: 1fr; gap: 10px; }
-    .ledger ol { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .ledger ol { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
 </style>
 </head>
