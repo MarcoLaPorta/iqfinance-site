@@ -623,7 +623,7 @@
       <h3>L'IA interpreta. Il codice decide.</h3>
       <p>Un modello linguistico come Claude interpreta oggi il linguaggio naturale con una flessibilità che nessun modulo decisionale rigido della finanza tradizionale ha mai avuto: capisce sfumature, gestisce ambiguità, chiede chiarimenti se serve. È un salto reale, non marketing — chiunque abbia provato a programmare un sistema a regole "se-allora" per interpretare intenti umani sa quanto sia fragile rispetto a questo.</p>
       <p>Ma la stessa flessibilità che rende un'IA utile a interpretare è anche ciò che la rende pericolosa da lasciar decidere da sola: un modello probabilistico può allucinare, fraintendere una frase ambigua, comportarsi in modo imprevisto proprio nei momenti di mercato più volatili. Per questo nel nostro sistema l'IA ha un solo compito, netto: tradurre l'intento in una struttura dati verificabile. Non decide mai se eseguire.</p>
-      <p><b>Il prossimo passo, dichiarato apertamente.</b> Con dati proprietari di parsing finanziario raccolti in produzione, valuteremo il fine-tuning di modelli linguistici open-source (famiglia Qwen, DeepSeek o comparabili) — per ridurre il costo marginale per utente e affinare l'aderenza al dominio. Il fine-tuning cambierebbe lo stile del modello, mai il suo ruolo: resterebbe comunque sottoposto, senza eccezioni, alla validazione del motore deterministico.</p>
+      <p><b>Il prossimo passo, dichiarato apertamente.</b> Prima del lancio sulla rete principale, questo livello passa da un modello di terzi a modelli open source scelti, configurati e specializzati da IQ Finance (in sviluppo): un modello piccolo specializzato sul dominio finanziario svolge il lavoro, con un modello più grande come riserva per le richieste che il piccolo non gestisce bene, riaddestrato periodicamente con i dati reali di utilizzo. Un modello diverso cambia lo stile, mai il ruolo: resta sottoposto, senza eccezioni, alla validazione del motore deterministico.</p>
     </div>
   </div>
 </section>
@@ -810,8 +810,8 @@
         <h3>Traduce l'intento, non decide l'esecuzione</h3>
         <p>L'interfaccia conversazionale è costruita su Vercel AI SDK con Claude come modello di interpretazione. Il suo unico compito è tradurre l'intento espresso in linguaggio naturale in una struttura dati JSON rigorosa — asset target, pesi percentuali, soglie di stop-loss, frequenza di esecuzione. Non è mai il modello a decidere se un'operazione può procedere.</p>
         <p>Questa distinzione non è cosmetica: nel codice, il tool che sottomette esecuzioni on-chain è tecnicamente accessibile al modello, ma resta strutturalmente impotente finché una riga del database non è già passata allo stato <code>AWAITING_MANAGER_SIGNATURE</code> — uno stato raggiungibile solo dopo una firma crittografica reale dell'utente, verificata off-chain contro il wallet registrato.</p>
-        <p><b>La potenza dell'IA, oggi e domani.</b> Un modello linguistico generico come Claude è già in grado di interpretare intenti finanziari espressi in modo naturale e ambiguo — un salto reale rispetto ai moduli decisionali rigidi (i vecchi alberi "se-allora") che la finanza tradizionale usa da decenni. Ma la roadmap non si ferma qui: una volta raccolti dati proprietari di parsing finanziario in produzione, prevediamo di valutare il fine-tuning di modelli linguistici open-source (famiglia Qwen, DeepSeek o comparabili) su infrastruttura dedicata — per ridurre il costo marginale per utente e affinare l'aderenza al dominio specifico (terminologia finanziaria, formati di rischio). Il fine-tuning cambierebbe lo stile del modello, mai il suo ruolo: resterebbe comunque sottoposto, senza eccezioni, alla validazione del Livello 2.</p>
-        <div class="dd-tags"><span>Vercel AI SDK</span><span>Claude</span><span>Parsing → JSON</span><span>Fine-tuning proprietario — roadmap</span></div>
+        <p><b>La potenza dell'IA, oggi e domani.</b> Un modello linguistico generico come Claude è già in grado di interpretare intenti finanziari espressi in modo naturale e ambiguo — un salto reale rispetto ai moduli decisionali rigidi (i vecchi alberi "se-allora") che la finanza tradizionale usa da decenni. Prima del lancio sulla rete principale, il Livello 1 passa all'IA proprietaria (in sviluppo): modelli open source scelti, configurati e specializzati da IQ Finance. Un modello piccolo specializzato sul dominio finanziario svolge il lavoro, con un modello grande come riserva, tramite un instradatore, per le richieste che il piccolo non gestisce bene. Al lancio i modelli sono ospitati da un fornitore e pagati a consumo; server GPU dedicati in affitto subentrano quando i volumi li rendono più convenienti, e tengono anche i dati delle conversazioni su infrastruttura controllata da IQ Finance. Il modello piccolo viene riaddestrato periodicamente con i dati reali di utilizzo. Un modello diverso cambia lo stile, mai il ruolo: resta sottoposto, senza eccezioni, alla validazione del Livello 2.</p>
+        <div class="dd-tags"><span>Vercel AI SDK</span><span>Claude — oggi, su testnet</span><span>Parsing → JSON</span><span>Modelli open source proprietari — in sviluppo</span></div>
       </div>
     </div>
 
@@ -863,32 +863,32 @@
     </div>
     <div class="roadmap-list">
       <div class="roadmap-row">
-        <div class="rn">00<span class="active-tag">● in corso</span></div>
-        <div><h3>Fondamenta e Compliance</h3><p>Legal opinion, audit di sicurezza degli smart contract, costituzione della società.</p></div>
+        <div class="rn">00</div>
+        <div><h3>Fondamenta e compliance</h3><p>Legal opinion, qualificazione del token di utilizzo, audit esterno dei contratti, costituzione della società.</p></div>
       </div>
       <div class="roadmap-row">
         <div class="rn">01</div>
-        <div><h3>IA proprietaria</h3><p>Decisa dopo il round, sulla base di dati reali di utilizzo.</p></div>
+        <div><h3>IA proprietaria</h3><p>Modello piccolo verticale e modello grande con instradamento, a consumo e poi su server dedicati; riaddestramento sul dominio finanziario con i dati reali di utilizzo.</p></div>
       </div>
       <div class="roadmap-row">
         <div class="rn">02</div>
-        <div><h3>Mainnet Launch e Traction</h3><p>Passaggio da testnet a rete Arbitrum principale, primi utenti reali, costruzione del primo track record verificabile.</p></div>
+        <div><h3>Mainnet</h3><p>Lancio sulla rete principale con i piani a token (Pro e Pro Max), il token di utilizzo e il modulo di esplorazione scenari: i primi utenti reali e il primo track record verificabile.</p></div>
       </div>
       <div class="roadmap-row">
         <div class="rn">03</div>
-        <div><h3>Scaling e Holding Globale</h3><p>Licenze regolamentari UE, hub regolatori in giurisdizioni chiave, trasformazione societaria per sostenere la crescita.</p></div>
+        <div><h3>Scaling e holding globale</h3><p>Onboarding semplificato, nuovi mercati, struttura societaria internazionale.</p></div>
       </div>
       <div class="roadmap-row">
         <div class="rn">04</div>
-        <div><h3>B2B — motore per fondi e banche</h3><p>Lo stesso motore di rischio, pensato per i risparmiatori, reso disponibile come infrastruttura a hedge fund e banche con esposizioni digitali.</p></div>
+        <div><h3>Tokenizzazione diretta</h3><p>Emissione diretta di asset reali tokenizzati: estensione dell'infrastruttura di mint/redeem già costruita, diventare noi stessi il canale di tokenizzazione per emittenti terzi, una volta consolidati la base utenti e il track record delle fasi precedenti.</p></div>
       </div>
       <div class="roadmap-row">
         <div class="rn">05</div>
-        <div><h3>Tokenizzazione Diretta di Titoli</h3><p>Estensione dell'infrastruttura di mint/redeem già costruita: diventare noi stessi il canale di tokenizzazione per emittenti terzi, una volta consolidata la base utenti e il track record delle fasi precedenti.</p></div>
+        <div><h3>Blockchain proprietaria e DEX nativo</h3><p>Una blockchain propria e un DEX nativo per internalizzare le transazioni e le tecnologie alla base del prodotto. Fase di lungo periodo, successiva alla tokenizzazione diretta, non finanziata da questo round.</p></div>
       </div>
       <div class="roadmap-row">
         <div class="rn">06</div>
-        <div><h3>DEX Nativo e Ecosistema</h3><p>Liquidity pool proprietarie e un network di esecuzione che riduce la dipendenza da protocolli di terze parti.</p></div>
+        <div><h3>B2B — fondi e banche</h3><p>Lo stesso motore di rischio, pensato per i risparmiatori, reso disponibile come infrastruttura a hedge fund e banche con esposizioni digitali. Ultima fase.</p></div>
       </div>
     </div>
     <div class="callout">
