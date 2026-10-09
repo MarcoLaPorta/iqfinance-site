@@ -29,9 +29,10 @@
     tabs.forEach(function (t, i) {
       t.addEventListener('click', function () { select(t); });
       t.addEventListener('keydown', function (e) {
-        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        var next = e.key === 'ArrowRight' || e.key === 'ArrowDown', prev = e.key === 'ArrowLeft' || e.key === 'ArrowUp';
+        if (next || prev) {
           e.preventDefault();
-          select(tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length], true);
+          select(tabs[(i + (next ? 1 : tabs.length - 1)) % tabs.length], true);
         }
       });
     });

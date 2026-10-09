@@ -139,6 +139,14 @@ section[id] { scroll-margin-top: calc(var(--header-h) + var(--subnav-h) + 16px);
 .m-who { font-size: 12.5px; font-weight: 600; color: var(--lilac); }
 .m-bot p { font-size: 15px; line-height: 1.6; color: var(--text-2); }
 .m-bot p b { color: var(--text); font-weight: 600; }
+.m-plan { border: 1px solid #2E3039; border-radius: 14px; padding: 14px; background: var(--ui); display: flex; flex-direction: column; gap: 10px; }
+.m-plan-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.m-plan-top b { font-family: var(--serif); font-weight: 500; font-size: 18px; letter-spacing: -0.02em; color: var(--text); }
+.m-plan-top span { font-size: 12.5px; color: var(--green); }
+.m-alloc { display: flex; height: 8px; border-radius: 4px; overflow: hidden; gap: 2px; }
+.m-alloc i { display: block; height: 8px; }
+.m-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12.5px; color: var(--text-3); }
+.m-legend i { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; vertical-align: 0; }
 .m-checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 13.5px; color: var(--text-2); }
 .m-checks li::before { content: "✓  "; color: var(--green); }
 .m-actions { display: flex; gap: 8px; margin-top: 6px; }
@@ -425,8 +433,6 @@ html.js:not(.no-motion) .draw.in { clip-path: inset(0 0 0 0); }
   .metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 24px; }
 }
 @media (max-width: 1023px) {
-  .nav, .header-actions .lang { display: none; }
-  .menu { display: block; }
   .t-body { grid-template-columns: 1fr; }
   .t-chat { border-right: 0; border-bottom: 1px solid var(--ui-line); }
   .proof ul { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 44px; }
@@ -448,7 +454,8 @@ html.js:not(.no-motion) .draw.in { clip-path: inset(0 0 0 0); }
 @media (max-width: 720px) {
   :root { --gutter: 16px; --header-h: 56px; }
   body { font-size: 16px; }
-  .header-cta { display: none; }
+  .header-cta, .nav, .header-actions .lang { display: none; }
+  .menu { display: block; }
   .hero-text { padding-top: 72px; padding-bottom: 48px; gap: 24px; }
   .hero-stage { padding-bottom: 100px; }
   .t-top .t-tabs, .t-right .vault-chip { display: none; }

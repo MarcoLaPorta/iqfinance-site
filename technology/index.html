@@ -31,6 +31,44 @@
   .tech-hero p a { color: #5B21B6; text-decoration: underline; text-underline-offset: 3px; }
   .tech-hero .toc { display: none; }
   .tech-stage { height: 260px; background: linear-gradient(180deg, #FFFFFF 0%, #F6F2FF 10%, #E4D8FF 22%, #C1A8FC 34%, #8966E6 48%, #5535B8 62%, #2B1876 76%, #0D0630 90%, #000000 100%); }
+  /* Opening figure */
+  .tech-stage { height: auto; padding: 8px 0 140px; background: linear-gradient(180deg, #FFFFFF 0%, #F6F2FF 10%, #E4D8FF 22%, #C1A8FC 34%, #8966E6 48%, #5535B8 62%, #2B1876 76%, #0D0630 90%, #000000 100%); }
+  .arch-map { display: grid; grid-template-columns: repeat(9, auto); grid-template-columns: 1fr 28px 1fr 28px 1fr 28px 1fr 28px 1fr; align-items: stretch; background: var(--ui); border: 1px solid #2A2C35; border-radius: 22px; padding: 28px; box-shadow: 0 50px 120px rgba(20,8,60,0.55); color: var(--text); text-align: left; }
+  .node { display: flex; flex-direction: column; gap: 8px; padding: 18px; border: 1px solid var(--ui-line); border-radius: 16px; background: #0B0C10; }
+  .node.hl-node { border-color: rgba(157,111,255,0.6); box-shadow: 0 0 0 1px rgba(157,111,255,0.2) inset, 0 20px 60px rgba(124,58,237,0.25); }
+  .nk { font-size: 11.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lilac); }
+  .node b { font-family: var(--serif); font-weight: 500; font-size: 21px; letter-spacing: -0.02em; line-height: 1.1; }
+  .nd { font-size: 13px; line-height: 1.5; color: var(--text-2); }
+  .chip-in { margin-top: auto; font-size: 12.5px; line-height: 1.45; color: #FFFFFF; background: var(--violet); border-radius: 12px 12px 12px 4px; padding: 8px 10px; }
+  .pills, .gates { margin-top: auto; display: flex; flex-direction: column; gap: 6px; }
+  .pills i, .gates i { font-style: normal; font-size: 12px; color: var(--text); border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; align-self: flex-start; }
+  .pills i.dev { color: var(--gold); border-color: rgba(217,183,106,0.5); }
+  .pills i.test { color: var(--green); border-color: rgba(34,195,142,0.45); }
+  .gates i::before { content: "✓ "; color: var(--green); }
+  .sig { margin-top: auto; align-self: flex-start; font-size: 13px; font-weight: 500; color: #FFFFFF; background: var(--violet); border-radius: 999px; padding: 7px 16px; }
+  .arrow { position: relative; align-self: center; height: 2px; background: linear-gradient(90deg, rgba(157,111,255,0.2), rgba(157,111,255,0.9)); }
+  .arrow::after { content: ""; position: absolute; right: -1px; top: -4px; border-left: 7px solid rgba(157,111,255,0.9); border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
+  /* The four checks as a connected row */
+  .flow.flow-row { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; counter-reset: none; }
+  .flow-row .card { position: relative; padding: 28px; }
+  .flow-row .card:not(:last-child)::after { content: ""; position: absolute; right: -33px; top: 50px; width: 34px; height: 2px; background: rgba(157,111,255,0.7); }
+  .flow-row h3 { font-size: 22px; }
+  .flow-row .top { flex-direction: column; gap: 6px; }
+  /* Architecture: vertical titles + one panel */
+  .arch { display: grid; grid-template-columns: 4fr 8fr; gap: 40px; margin-top: 64px; align-items: start; }
+  .arch-tabs { display: flex; flex-direction: column; position: sticky; top: calc(var(--header-h) + var(--subnav-h) + 32px); }
+  .arch-tabs button { cursor: pointer; text-align: left; background: none; border: 0; border-left: 2px solid var(--line-soft); padding: 14px 0 14px 22px; display: flex; flex-direction: column; gap: 2px; }
+  .arch-tabs .tk { font-family: var(--serif); font-weight: 500; font-size: clamp(22px, 2.2vw, 30px); letter-spacing: -0.02em; line-height: 1.1; color: #5D5F6B; transition: color .2s ease; }
+  .arch-tabs .ts { font-size: 13.5px; color: #5D5F6B; }
+  .arch-tabs button:hover .tk { color: #B9BAC4; }
+  .arch-tabs button[aria-selected="true"] { border-left: 2px solid; border-image: var(--grad) 1; }
+  .arch-tabs button[aria-selected="true"] .tk { color: #FFFFFF; }
+  .arch-tabs button[aria-selected="true"] .ts { color: var(--text-2); }
+  .arch-box { border: 1px solid var(--line); border-radius: 28px; padding: 44px; min-height: 520px; }
+  html.js .dd-panel[hidden] { display: none; }
+  html:not(.js) .dd-panel + .dd-panel { margin-top: 44px; padding-top: 40px; border-top: 1px solid var(--line-soft); }
+  .dd-kicker { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lilac); margin-bottom: 14px; }
+  .dd-panel h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(26px, 2.6vw, 34px); letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 18px; }
   /* Product */
   .two-col { display: grid; grid-template-columns: 7fr 5fr; gap: 24px; align-items: stretch; margin-top: 64px; }
   .two-col > .prose { border: 1px solid var(--line); border-radius: 28px; padding: 44px; }
@@ -115,12 +153,23 @@
   .closing .disclaimer::before { content: "Important information"; display: block; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
   @media (max-width: 1023px) {
     .two-col, .pillars, .status-grid { grid-template-columns: 1fr; }
-    .three, .flow { grid-template-columns: 1fr; }
+    .three, .flow, .flow.flow-row { grid-template-columns: 1fr; }
+    .flow-row .card:not(:last-child)::after { display: none; }
+    .arch { grid-template-columns: 1fr; gap: 24px; }
+    .arch-tabs { position: static; flex-direction: row; overflow-x: auto; scrollbar-width: none; border-bottom: 1px solid var(--line-soft); }
+    .arch-tabs button { border-left: 0; border-bottom: 2px solid transparent; padding: 0 22px 14px 0; flex-shrink: 0; }
+    .arch-tabs button[aria-selected="true"] { border-left: 0; border-bottom: 2px solid; }
+    .arch-tabs .ts { display: none; }
+    .arch-map { grid-template-columns: 1fr; gap: 0; }
+    .arrow { width: 2px; height: 22px; justify-self: center; background: linear-gradient(180deg, rgba(157,111,255,0.2), rgba(157,111,255,0.9)); }
+    .arrow::after { right: -4px; top: auto; bottom: -1px; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 7px solid rgba(157,111,255,0.9); border-bottom: 0; }
     .dd-block { grid-template-columns: 1fr; gap: 14px; }
   }
   @media (max-width: 720px) {
     .tech-hero .inner { padding-top: 72px; padding-bottom: 40px; }
-    .tech-stage { height: 160px; }
+    .tech-stage { padding-bottom: 90px; }
+    .arch-map { padding: 16px; }
+    .arch-box { padding: 26px 22px; min-height: 0; }
     .card, .pillar, .two-col > .prose, .dd-block, .tests, .status-grid > div:last-child { padding: 26px 22px; border-radius: 22px; }
     #roadmap .phase-list { padding: 8px 22px; border-radius: 22px; }
     .ledger ol { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -137,13 +186,9 @@
   <div class="wrap header-row">
     <a class="logo" href="../">IQ Finance</a>
     <nav class="nav" aria-label="Main">
-      <a href="../#how">How it works</a>
-      <a href="../#analysis">Analysis</a>
-      <a href="../#your-money">Your money</a>
-      <a href="../#plans">Plans</a>
-      <a href="../#today">Today</a>
-      <a href="../#investors">Investors</a>
+      <a href="../">Product</a>
       <a href="./" aria-current="page">Technology</a>
+      <a href="../#investors">Investors</a>
     </nav>
     <div class="header-actions">
       <span class="lang"><span aria-current="page" lang="en">EN</span> · <a href="../it/" hreflang="it" lang="it">IT</a></span>
@@ -151,14 +196,10 @@
       <details class="menu">
         <summary>Menu</summary>
         <div class="menu-panel">
-          <a href="../">Home</a>
-          <a href="#product">The product</a>
-          <a href="#pillars">AI and blockchain</a>
-          <a href="#checks">The three checks</a>
-          <a href="#architecture">Architecture</a>
-          <a href="#roadmap">Roadmap</a>
-          <a href="#status">Project status</a>
-          <span class="lang"><span aria-current="page" lang="en">EN</span> · <a href="../it/" hreflang="it" lang="it">Italiano</a></span>
+          <a href="../">Product</a>
+          <a href="./" aria-current="page">Technology</a>
+          <a href="../#investors">Investors</a>
+          <span class="lang"><span aria-current="page" lang="en">English</span> · <a href="../it/" hreflang="it" lang="it">Italiano</a></span>
           <a class="btn btn-violet" href="mailto:marco.laporta06@gmail.com?subject=Early%20access%20request%20%E2%80%94%20IQ%20Finance&amp;body=Hi%2C%20I%20would%20like%20early%20access%20to%20IQ%20Finance%20when%20it%20becomes%20available.">Request early access</a>
         </div>
       </details>
@@ -184,7 +225,50 @@
     </nav>
   </div>
 </section>
-<div class="tech-stage" aria-hidden="true"></div>
+<div class="tech-stage">
+  <div class="wrap">
+    <figure>
+      <p class="sr-only">Diagram of the architecture: your request in natural language goes to Level 1, the interface that turns it into a data structure; Level 2, the deterministic risk engine, applies three gates and can block the proposal; only after your signature does Level 3, your personal Smart Vault on Arbitrum, execute the operation through a whitelisted router, on a test network today.</p>
+      <div class="arch-map" aria-hidden="true">
+        <div class="node">
+          <span class="nk">Input</span>
+          <b>Your request</b>
+          <span class="nd">One sentence in natural language</span>
+          <span class="chip-in">“I have 10,000 USDC. Put half in big US tech and half in gold…”</span>
+        </div>
+        <span class="arrow"></span>
+        <div class="node">
+          <span class="nk">Level 1</span>
+          <b>Interface &amp; parsing</b>
+          <span class="nd">The AI interprets and returns a JSON plan. It never decides.</span>
+          <span class="pills"><i>Claude · today</i><i class="dev">Proprietary AI · in development</i></span>
+        </div>
+        <span class="arrow"></span>
+        <div class="node hl-node">
+          <span class="nk">Level 2</span>
+          <b>Risk engine</b>
+          <span class="nd">Three gates in sequence, all fail-closed.</span>
+          <span class="gates"><i>Sharpe &amp; drawdown</i><i>Backstop 35%</i><i>DSR ≥ 0.99</i></span>
+        </div>
+        <span class="arrow"></span>
+        <div class="node">
+          <span class="nk">Approval</span>
+          <b>Your signature</b>
+          <span class="nd">Nothing starts without it. Verified by the backend today.</span>
+          <span class="sig">Sign</span>
+        </div>
+        <span class="arrow"></span>
+        <div class="node">
+          <span class="nk">Level 3</span>
+          <b>Smart Vault</b>
+          <span class="nd">One contract per user. Only the owner withdraws.</span>
+          <span class="pills"><i>Router whitelist</i><i>Per-trade cap</i><i class="test">Arbitrum Sepolia</i></span>
+        </div>
+      </div>
+      <figcaption class="figcap">How a request becomes an operation · simplified diagram</figcaption>
+    </figure>
+  </div>
+</div>
 <div class="scope">
 <nav class="subnav" aria-label="On this page">
   <ul>
@@ -292,12 +376,12 @@
       <h2 id="checks-title" class="h2">Between what you ask and what happens, three checks — never one fewer.</h2>
       <p class="small">Every single proposal goes through the same sequence, without exceptions.</p>
     </div>
-    <ol class="flow" style="list-style:none;padding:0">
+    <ol class="flow flow-row" style="list-style:none;padding:0">
       <li class="card">
         <div class="top"><span class="n">01</span><span class="k">CONVERSATIONAL INTERFACE</span></div>
         <h3>You say what you want, in one sentence</h3>
         <p>A language model (Claude, via Vercel AI SDK) interprets the intent and translates it into a precise data structure — but decides nothing about what to do with your capital.</p>
-        <div class="mini" aria-hidden="true"><span class="lbl">CHAT</span><span class="who">YOU</span><div class="msg">Half in big US tech, half in gold, rebalanced every three months.</div></div>
+        <div class="mini" aria-hidden="true"><span class="lbl">CHAT</span><span class="who">YOU</span><div class="msg">I have 10,000 USDC. Put half in big US tech and half in gold, rebalance every three months, and show me how bad it would have got in a crash.</div></div>
       </li>
       <li class="card">
         <div class="top"><span class="n">02</span><span class="k">TURNING IT INTO A PROPOSAL</span></div>
@@ -334,10 +418,20 @@
     <div class="eyebrow"><span class="n">V</span><span class="bar"></span><span class="ch">Technical deep dive</span></div>
     <h2 id="arch-title" class="display h2-big glow" style="margin-top:44px">How it is built, in detail</h2>
     <p class="lead" style="margin-top:18px;max-width:820px;text-align:center">What follows is not simplified marketing material: it is the real description of the architecture, with the same technical names, the same numerical thresholds and the same limits we would use in due diligence. If a fintech startup deserves trust, it must hold up at this level of detail too.</p>
-    <div class="dd">
-      <div class="dd-block rv">
-        <div class="dd-label">Level 1<span>Interface &amp; parsing</span></div>
-        <div>
+    <div class="arch">
+      <div class="arch-tabs" role="tablist" aria-orientation="vertical" aria-label="Parts of the architecture">
+        <button role="tab" id="dt1" aria-controls="dp1" aria-selected="true"><span class="tk">Level 1</span><span class="ts">Interface &amp; parsing</span></button>
+        <button role="tab" id="dt2" aria-controls="dp2" aria-selected="false" tabindex="-1"><span class="tk">Level 2</span><span class="ts">Risk engine</span></button>
+        <button role="tab" id="dt3" aria-controls="dp3" aria-selected="false" tabindex="-1"><span class="tk">Level 3</span><span class="ts">On-chain Smart Vault</span></button>
+        <button role="tab" id="dt4" aria-controls="dp4" aria-selected="false" tabindex="-1"><span class="tk">Real assets</span><span class="ts">Mint &amp; redeem</span></button>
+        <button role="tab" id="dt5" aria-controls="dp5" aria-selected="false" tabindex="-1"><span class="tk">Usage token</span><span class="ts">Extra usage, in the wallet</span></button>
+        <button role="tab" id="dt6" aria-controls="dp6" aria-selected="false" tabindex="-1"><span class="tk">Scenario explorer</span><span class="ts">Planned for launch</span></button>
+        <button role="tab" id="dt7" aria-controls="dp7" aria-selected="false" tabindex="-1"><span class="tk">Honesty</span><span class="ts">Stated limits</span></button>
+      </div>
+      <div class="arch-box">
+        <div class="dd-panel" role="tabpanel" id="dp1" aria-labelledby="dt1">
+          <span class="dd-kicker">Level 1 · Interface &amp; parsing</span>
+
           <h3>Translates intent, does not decide execution</h3>
           <div class="prose">
             <p>The conversational interface is built on Vercel AI SDK with Claude as the interpretation model. Its sole task is to translate intent expressed in natural language into a rigorous JSON data structure — target assets, percentage weights, stop-loss thresholds, execution frequency. It is never the model that decides whether an operation can proceed.</p>
@@ -346,10 +440,9 @@
           </div>
           <ul class="tags"><li>Vercel AI SDK</li><li>Claude — today, on testnet</li><li>Parsing → JSON</li><li>Proprietary open-source models — in development</li></ul>
         </div>
-      </div>
-      <div class="dd-block rv">
-        <div class="dd-label">Level 2<span>Risk engine</span></div>
-        <div>
+        <div class="dd-panel" role="tabpanel" id="dp2" aria-labelledby="dt2">
+          <span class="dd-kicker">Level 2 · Risk engine</span>
+
           <h3>Three independent gates, all fail-closed</h3>
           <div class="prose">
             <p>Every proposal goes through three checks in sequence, each capable on its own of blocking execution. Gate 1 verifies direct risk thresholds: it rejects if the historical Sharpe ratio falls below -0.5 or if maximum drawdown exceeds the configured threshold (default 35%). Gate 2 is an absolute backstop, independent of any exemption applied elsewhere: if the backtest ever touched a permanent liquidation marker, the proposal is rejected regardless of everything else. Gate 3 recomputes the Deflated Sharpe Ratio server-side (Bailey/López de Prado formula) from raw data — never trusting a value the model might copy from a previous answer — with an acceptance threshold of 0.99 and a minimum of 750 bars of history (about 3 years).</p>
@@ -357,10 +450,9 @@
           </div>
           <ul class="tags"><li>DSR ≥ 0.99</li><li>Drawdown ≤ 35%</li><li>CPCV</li><li>Monte Carlo 10k</li><li>¼-Kelly</li></ul>
         </div>
-      </div>
-      <div class="dd-block rv">
-        <div class="dd-label">Level 3<span>On-chain Smart Vault</span></div>
-        <div>
+        <div class="dd-panel" role="tabpanel" id="dp3" aria-labelledby="dt3">
+          <span class="dd-kicker">Level 3 · On-chain Smart Vault</span>
+
           <h3>One contract per user, one role that updates everywhere</h3>
           <div class="prose">
             <p>Each user receives their own Smart Vault, deployed as a minimal clone (EIP-1167 pattern) of a single verified implementation — cheap to create, impossible to alter individually after deployment. Two distinct roles govern the contract: the owner (the user) is the only one who can deposit, withdraw and define the router whitelist; the manager is resolved dynamically by reading the current address from the Factory on every call — a single manager-rotation transaction applies instantly to all existing vaults, with no need to re-initialize them.</p>
@@ -368,20 +460,18 @@
           </div>
           <ul class="tags"><li>EIP-1167 clone</li><li>RBAC owner/manager</li><li>Router whitelist</li><li>Per-trade cap</li></ul>
         </div>
-      </div>
-      <div class="dd-block rv">
-        <div class="dd-label">Real assets<span>Mint &amp; redeem</span></div>
-        <div>
+        <div class="dd-panel" role="tabpanel" id="dp4" aria-labelledby="dt4">
+          <span class="dd-kicker">Real assets · Mint &amp; redeem</span>
+
           <h3>Tokenized securities, transparent mint and redeem on-chain</h3>
           <div class="prose">
             <p>RWA assets are minted and redeemed 1:1 against a stablecoin through a dedicated primary-market contract, with an explicit checks-effects-interactions pattern (the token is burned before the counterpart transfer, to prevent reentrancy attacks on the reserve). The current catalog counts 17 RWA tokens, all verifiable on-chain, deployed on a test network. Today, on the test network, tokens are issued and redeemed at par with USDC and do not yet track the price of the underlying asset: price tracking and custody of the real underlying with a regulated partner are requirements before any launch with real capital.</p>
           </div>
           <ul class="tags"><li>Mint/redeem 1:1</li><li>Checks-effects-interactions</li><li>17 RWA</li></ul>
         </div>
-      </div>
-      <div class="dd-block rv">
-        <div class="dd-label">Usage token<span>Extra usage, in the wallet</span></div>
-        <div>
+        <div class="dd-panel" role="tabpanel" id="dp5" aria-labelledby="dt5">
+          <span class="dd-kicker">Usage token · Extra usage, in the wallet</span>
+
           <h3>A utility token for extra usage <span class="state fut">future</span></h3>
           <div class="prose">
             <p>Use of the AI and of computation is measured in usage tokens. The amount included in a plan renews every month and is an internal credit: it is not a crypto-asset and cannot be transferred. When it runs out, the user will be able to buy extra usage tokens: a utility token issued by IQ Finance, which only gives access to IQ Finance's own service.</p>
@@ -390,20 +480,18 @@
           </div>
           <ul class="tags"><li>ERC-20 on Arbitrum</li><li>Burn on use · EIP-2612</li><li>No peg · no reserve · no redemption</li><li>No listing · no internal market</li></ul>
         </div>
-      </div>
-      <div class="dd-block rv">
-        <div class="dd-label">Scenario explorer<span>Planned for launch</span></div>
-        <div>
+        <div class="dd-panel" role="tabpanel" id="dp6" aria-labelledby="dt6">
+          <span class="dd-kicker">Scenario explorer · Planned for launch</span>
+
           <h3>“What happens to my allocation if…” <span class="state dev">in development</span></h3>
           <div class="prose">
             <p>A module that helps reason before deciding: questions in natural language, historical scenarios replayed on real market episodes in the catalog's data (crashes, rate rises, strong-dollar phases) with drawdown, recovery time and each asset's contribution, hypothetical shocks to the factors the catalog is exposed to (US equities, technology, gold, oil, dollar, volatility), and comparisons between allocations under the same scenario.</p>
             <p>It is kept separate from execution by design: it reads market data only and has no access to any execution tool; its output can become a proposal only by going back through the normal flow — backtest, risk engine, signature; every result is labelled as exploratory AI analysis, not a forecast and not a trading signal; historical scenarios are computed by the quantitative engine, and the AI explains the numbers, it does not produce them.</p>
           </div>
         </div>
-      </div>
-      <div class="dd-block rv">
-        <div class="dd-label">Honesty<span>Stated limits</span></div>
-        <div>
+        <div class="dd-panel" role="tabpanel" id="dp7" aria-labelledby="dt7">
+          <span class="dd-kicker">Honesty · Stated limits</span>
+
           <h3>What isn't true yet, said before you ask</h3>
           <div class="prose">
             <p>The system currently operates exclusively on Arbitrum Sepolia, a test network: no real funds have ever been moved. The contract code is not yet publicly verified on a block explorer, and has not received a security audit from an independent third party — both steps explicitly planned before any launch with real capital, not details postponed by chance. Today your signature is verified by our backend; verification directly in the contract, including the minimum price you approved, is planned for a later phase. We consider transparency about these limits as much a part of the product as the code itself.</p>
