@@ -10,28 +10,34 @@
     a.addEventListener('click', function () { a.closest('details').removeAttribute('open'); });
   });
 
-  // Example strategies: pill selector (ARIA tabs, arrow keys supported).
-  var tabs = Array.prototype.slice.call(document.querySelectorAll('.ex-tabs [role="tab"]'));
-  function select(tab, focus) {
-    tabs.forEach(function (t) {
-      var on = t === tab;
-      t.setAttribute('aria-selected', on ? 'true' : 'false');
-      t.tabIndex = on ? 0 : -1;
-      var p = document.getElementById(t.getAttribute('aria-controls'));
-      if (p) { p.hidden = !on; if (on) { var d = p.querySelector('.draw'); if (d) { d.classList.remove('in'); void d.getBoundingClientRect(); d.classList.add('in'); } } }
+  // Selectors (example strategies, analyses): ARIA tabs with arrow keys, one per tablist.
+  document.querySelectorAll('[role="tablist"]').forEach(function (list) {
+    var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+    function select(tab, focus) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        var p = document.getElementById(t.getAttribute('aria-controls'));
+        if (!p) return;
+        p.hidden = !on;
+        if (on) { p.querySelectorAll('.draw').forEach(function (d) { d.classList.remove('in'); void d.getBoundingClientRect(); d.classList.add('in'); }); }
+      });
+      if (focus) tab.focus();
+      if (list.scrollWidth > list.clientWidth) list.scrollTo({ left: tab.offsetLeft - 16, behavior: 'smooth' });
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { select(t); });
+      t.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+          e.preventDefault();
+          select(tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length], true);
+        }
+      });
     });
-    if (focus) tab.focus();
-  }
-  tabs.forEach(function (t, i) {
-    t.addEventListener('click', function () { select(t); });
-    t.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-        e.preventDefault();
-        select(tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length], true);
-      }
-    });
+    var first = tabs.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0] || tabs[0];
+    if (first) select(first);
   });
-  if (tabs.length) select(tabs[0]);
 
   // Sub-navigation: highlight the section in view.
   var links = Array.prototype.slice.call(document.querySelectorAll('.subnav a'));
