@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero B — We said no</title>
+<!-- DESIGN REFERENCE, NOT PRODUCTION CODE. Hero variant B: the rejected strategy is the protagonist.
+     The point of view no exchange can have: the safest trade is the one we don't let you make.
+     Figures are illustrative. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --black: #000; --ivory: #EFE8DA; --ivory-2: #CFC8BA; --muted: #8E8A84; --red: #E5484D; --red-soft: rgba(229,72,77,0.14); --green: #46C483; --line: rgba(239,232,218,0.12); --violet: #7C3AED;
+    --serif: 'Instrument Serif', Georgia, serif; --mono: 'IBM Plex Mono', ui-monospace, monospace; --sans: 'Inter', system-ui, sans-serif; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--black); color: var(--ivory); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1104px; margin: 0 auto; padding: 0 32px; }
+  header { border-bottom: 1px solid var(--line); }
+  .hrow { height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .logo { display: inline-flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 21px; }
+  .mono { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); display: inline-flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 13px; }
+  nav { display: flex; gap: 28px; font-size: 13px; color: var(--muted); }
+  .hcta { font-size: 13px; color: #fff; background: var(--violet); border-radius: 6px; padding: 8px 14px; }
+  .hero { padding: 88px 0 96px; }
+  .grid { display: grid; grid-template-columns: 5fr 6fr; gap: 56px; align-items: center; }
+  .kicker { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.24em; color: var(--muted); }
+  h1 { margin: 22px 0 0; font-family: var(--serif); font-weight: 400; font-size: clamp(56px, 7vw, 104px); line-height: 0.95; letter-spacing: -0.015em; }
+  h1 em { font-style: italic; color: var(--red); }
+  .sub { margin: 26px 0 0; font-size: 19px; line-height: 1.6; color: var(--ivory-2); max-width: 520px; }
+  .sub b { color: var(--ivory); font-weight: 500; }
+  .ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 34px; }
+  .btn { font-size: 15px; padding: 14px 22px; border-radius: 8px; }
+  .btn.solid { background: var(--ivory); color: #000; }
+  .btn.line { border: 1px solid var(--line); }
+  .status { margin-top: 26px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: var(--muted); }
+  .status i { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--green); margin-right: 8px; vertical-align: middle; }
+  .board { position: relative; border: 1px solid var(--line); border-radius: 16px; background: linear-gradient(180deg, #0B0B0C, #050505); padding: 28px 28px 22px; box-shadow: 0 40px 100px rgba(0,0,0,0.7); }
+  .bhead { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+  .bhead .t { font-family: var(--serif); font-size: 30px; }
+  .bhead .s { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: var(--muted); }
+  .plot { position: relative; height: 300px; margin-top: 18px; }
+  .plot svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .limit-label { position: absolute; right: 0; font-family: var(--mono); font-size: 11px; color: var(--ivory-2); background: #000; padding: 2px 6px; border: 1px dashed rgba(239,232,218,0.4); }
+  .deep-label { position: absolute; font-family: var(--mono); font-size: 12px; color: var(--red); }
+  .stamp { position: absolute; right: 28px; top: 92px; transform: rotate(-9deg); border: 2px solid var(--red); color: var(--red); font-family: var(--mono); font-weight: 500; font-size: 22px; letter-spacing: 0.24em; padding: 10px 16px 8px; border-radius: 4px; box-shadow: inset 0 0 0 4px #000, inset 0 0 0 5px rgba(229,72,77,0.6); background: rgba(0,0,0,0.6); }
+  .stamp small { display: block; font-size: 9.5px; letter-spacing: 0.16em; margin-top: 4px; color: #F09A9D; }
+  .axis { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10.5px; color: var(--muted); margin-top: 8px; }
+  .verdict { margin-top: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .vbox { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .vbox.no { border-color: rgba(229,72,77,0.45); background: var(--red-soft); }
+  .vbox.yes { border-color: rgba(70,196,131,0.4); }
+  .vbox .k { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; color: var(--muted); }
+  .vbox .v { margin-top: 6px; font-size: 15px; }
+  .vbox.no .v b { color: var(--red); font-weight: 500; }
+  .vbox.yes .v b { color: var(--green); font-weight: 500; }
+  .caption { margin-top: 14px; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  .strip { margin-top: 88px; padding-top: 28px; border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .strip .n { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; color: var(--muted); }
+  .strip p { margin: 10px 0 0; font-family: var(--serif); font-size: 26px; line-height: 1.2; }
+  @keyframes drop { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+  .fall { stroke-dasharray: 1; animation: drop 2.6s cubic-bezier(.45,.05,.2,1) .3s both; }
+  .stamp { animation: slam .35s cubic-bezier(.2,1.6,.4,1) 2.9s both; }
+  @keyframes slam { from { opacity: 0; transform: rotate(-9deg) scale(1.6); } to { opacity: 1; transform: rotate(-9deg) scale(1); } }
+  @media (prefers-reduced-motion: reduce) { .fall, .stamp { animation: none; } }
+  @media (max-width: 900px) { nav { display: none; } .grid, .strip { grid-template-columns: 1fr; } .wrap { padding: 0 16px; } .stamp { top: 70px; right: 16px; font-size: 16px; } }
+</style>
+</head>
+<body>
+<header><div class="wrap hrow">
+  <a class="logo" href="#"><span class="mono" aria-hidden="true">IQ</span>IQ Finance</a>
+  <nav aria-label="Main"><a href="#">How it works</a><a href="#">Analysis</a><a href="#">Your money</a><a href="#">Plans</a><a href="#">Today</a><a href="#">Investors</a><a href="#">Technology</a></nav>
+  <a class="hcta" href="#">Request early access</a>
+</div></header>
+<main>
+<section class="hero" aria-labelledby="t">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <span class="kicker">INSTITUTIONAL QUANT INVESTING · BUILT FOR EVERYONE</span>
+        <h1 id="t">We said no<br>to <em>−73.6%.</em></h1>
+        <p class="sub">Ask to put everything in Tesla. Before anything runs, the strategy is replayed on five years of real markets: it would have fallen <b>73.6%</b>. The limit is <b>35%</b>. So it never runs.</p>
+        <p class="sub" style="margin-top:14px">Tell us your goal in one sentence. You see the worst moment before it happens — and the rules decide, not a guess.</p>
+        <div class="ctas"><a class="btn solid" href="#">Request early access</a><a class="btn line" href="#">See how it works</a></div>
+        <div class="status"><i></i>WORKING PROTOTYPE ON A TEST NETWORK · NO REAL MONEY INVOLVED</div>
+      </div>
+      <figure style="margin:0">
+        <div class="board">
+          <div class="bhead"><span class="t">All in Tesla</span><span class="s">TESLA 100% · HELD · SEP 2021 – SEP 2026</span></div>
+          <div class="plot">
+            <svg viewBox="0 0 600 300" preserveAspectRatio="none" role="img" aria-label="Tesla held alone would have fallen 73.6% from its high in 2022, far below the 35% loss limit. Illustrative.">
+              <rect x="0" y="105" width="600" height="195" fill="rgba(229,72,77,0.06)"/>
+              <line x1="0" y1="105" x2="600" y2="105" stroke="rgba(239,232,218,0.55)" stroke-dasharray="5 6" vector-effect="non-scaling-stroke"/>
+              <line x1="0" y1="20" x2="600" y2="20" stroke="rgba(239,232,218,0.12)" vector-effect="non-scaling-stroke"/>
+              <path class="fall" pathLength="1" d="M0 70 L25 52 L50 30 L70 20 L95 34 L120 60 L140 88 L160 118 L185 150 L205 176 L225 205 L250 232 L270 262 L285 276 L300 258 L320 238 L345 212 L365 228 L385 195 L410 214 L430 186 L455 204 L480 168 L505 190 L530 172 L555 196 L580 178 L600 188" fill="none" stroke="#E5484D" stroke-width="2.2" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+              <circle cx="285" cy="276" r="5" fill="#E5484D"/>
+            </svg>
+            <span class="limit-label" style="top:calc(35% - 12px)">YOUR LIMIT · −35%</span>
+            <span class="deep-label" style="left:calc(47.5% + 12px);top:calc(92% - 8px)">−73.6% from the high</span>
+            <div class="stamp" aria-hidden="true">REJECTED<small>OVER THE 35% LOSS LIMIT</small></div>
+          </div>
+          <div class="axis" aria-hidden="true"><span>SEP 2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span><span>SEP 2026</span></div>
+          <div class="verdict">
+            <div class="vbox no"><div class="k">ALL IN TESLA</div><div class="v"><b>Rejected</b> · worst drop −73.6%</div></div>
+            <div class="vbox yes"><div class="k">50/50 TECH AND GOLD</div><div class="v"><b>Approved</b> · worst drop −21.8%</div></div>
+          </div>
+        </div>
+        <figcaption class="caption">Fig. 1 — Product design preview · illustrative figures</figcaption>
+      </figure>
+    </div>
+    <div class="strip">
+      <div><span class="n">I · THE AI SUGGESTS</span><p>It turns your words into a precise plan.</p></div>
+      <div><span class="n">II · THE RULES DECIDE</span><p>Fixed limits, tested on real markets.</p></div>
+      <div><span class="n">III · YOU SIGN</span><p>Nothing starts without your signature.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+</body>
+</html>
