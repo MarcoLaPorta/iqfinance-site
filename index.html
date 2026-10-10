@@ -14,7 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/home.css">
 </head>
-<body>
+<body class="v5">
 <a class="skip" href="#main">Skip to content</a>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -70,12 +70,12 @@
 <!-- Opening -->
 <section class="hero" id="top" aria-labelledby="hero-title">
   <div class="wrap hero-text">
-    <a class="news" href="#today"><b>STATUS</b><i aria-hidden="true"></i>Working prototype on a test network · no real money involved <span aria-hidden="true">›</span></a>
-    <h1 id="hero-title" class="big h-xl">Institutional quant investing. <span class="hl">Built for everyone.</span></h1>
+    <h1 id="hero-title" class="brand-xl">IQ Finance</h1>
+    <p class="tagline">Institutional quant investing. <span class="hl">Built for everyone.</span></p>
     <p class="hero-sub">Tell us your goal in one sentence. We'll show you how it would have survived the last five years of markets, every rally and every crash, before you risk a single cent.</p>
     <div class="hero-ctas">
       <a class="btn btn-ink" href="mailto:marco.laporta06@gmail.com?subject=Early%20access%20request%20%E2%80%94%20IQ%20Finance&amp;body=Hi%2C%20I%20would%20like%20early%20access%20to%20IQ%20Finance%20when%20it%20becomes%20available.">Request early access</a>
-      <a class="btn btn-line-light" href="#how">See how it works</a>
+      <a class="btn btn-line-light" href="#what">Read how it works</a>
     </div>
   </div>
   <div class="hero-stage">
@@ -155,92 +155,93 @@
 <section class="proof" aria-label="Where the prototype stands">
   <div class="wrap">
     <ul>
-      <li><svg style="color:#C4B1FF" aria-hidden="true"><use href="#i-test"/></svg><span class="v" data-count="911">911</span><span class="k">automated tests passing, Oct 6, 2026</span></li>
-      <li><svg style="color:#C4B1FF" aria-hidden="true"><use href="#i-clock"/></svg><span class="v">5 years</span><span class="k">of real market data behind every test</span></li>
-      <li><svg style="color:#C4B1FF" aria-hidden="true"><use href="#i-grid"/></svg><span class="v" data-count="17">17</span><span class="k">instruments on the test network</span></li>
-      <li><svg style="color:#C4B1FF" aria-hidden="true"><use href="#i-link"/></svg><span class="v" data-count="4">4</span><span class="k">public example transactions</span><span class="tx"><a href="https://sepolia.arbiscan.io/tx/0x12e3d3833344535f590ee4ccbcbbd21758591d471f78d2ca8fb6af23638e3939" target="_blank" rel="noreferrer" aria-label="Example transaction 1 on Arbiscan (opens in a new tab)">1 ↗</a> <a href="https://sepolia.arbiscan.io/tx/0xce87e2015eba94db71b52ccdd520aa548d7414d248e82c0f2971eaa63604b563" target="_blank" rel="noreferrer" aria-label="Example transaction 2 on Arbiscan (opens in a new tab)">2 ↗</a> <a href="https://sepolia.arbiscan.io/tx/0x4d6455fd2acdf2fff3e7fa276e2c578f4a9f8b4a17d96813c2f2f4abe3986de7" target="_blank" rel="noreferrer" aria-label="Example transaction 3 on Arbiscan (opens in a new tab)">3 ↗</a> <a href="https://sepolia.arbiscan.io/tx/0xc04a77844d7bfc58361229fdeb19aaff4723a21e4b48c0e0749cde2767b22032" target="_blank" rel="noreferrer" aria-label="Example transaction 4 on Arbiscan (opens in a new tab)">4 ↗</a></span></li>
+      <li><span class="v" data-count="911">911</span><span class="k">automated tests passing, Oct 6, 2026</span></li>
+      <li><span class="v">5 years</span><span class="k">of real market data behind every test</span></li>
+      <li><span class="v" data-count="17">17</span><span class="k">instruments on the test network</span></li>
+      <li><span class="v" data-count="4">4</span><span class="k">public example transactions</span><span class="tx"><a href="https://sepolia.arbiscan.io/tx/0x12e3d3833344535f590ee4ccbcbbd21758591d471f78d2ca8fb6af23638e3939" target="_blank" rel="noreferrer" aria-label="Example transaction 1 on Arbiscan (opens in a new tab)">1 ↗</a> <a href="https://sepolia.arbiscan.io/tx/0xce87e2015eba94db71b52ccdd520aa548d7414d248e82c0f2971eaa63604b563" target="_blank" rel="noreferrer" aria-label="Example transaction 2 on Arbiscan (opens in a new tab)">2 ↗</a> <a href="https://sepolia.arbiscan.io/tx/0x4d6455fd2acdf2fff3e7fa276e2c578f4a9f8b4a17d96813c2f2f4abe3986de7" target="_blank" rel="noreferrer" aria-label="Example transaction 3 on Arbiscan (opens in a new tab)">3 ↗</a> <a href="https://sepolia.arbiscan.io/tx/0xc04a77844d7bfc58361229fdeb19aaff4723a21e4b48c0e0749cde2767b22032" target="_blank" rel="noreferrer" aria-label="Example transaction 4 on Arbiscan (opens in a new tab)">4 ↗</a></span></li>
     </ul>
   </div>
 </section>
 
-<!-- What it is -->
-<section class="section about" id="what" aria-labelledby="what-title">
-  <div class="wrap">
-    <div class="about-grid">
-      <div class="about-head">
-        <span class="kicker">What IQ Finance is</span>
-        <h2 id="what-title" class="big h-md">An investment assistant that shows you <span class="hl">the risks first.</span></h2>
-      </div>
-      <div class="about-body">
-        <p>IQ Finance lets you describe in your own words how you want to invest: how much to put in large technology companies, how much in gold, how often to rebalance. An AI turns that request into a precise strategy, with exact weights and rules.</p>
-        <p>Before anything happens, the strategy is replayed on the last five years of real market data. You see how it would have behaved in good years and bad ones: how much it would have earned, how far it would have fallen at its worst, and how long it took to recover.</p>
-        <p>A separate engine with fixed rules then checks the result. If the strategy would ever have lost more than 35% from its peak, it is blocked and never runs. If it passes, the decision is yours: you approve it with your own signature, or you simply do nothing.</p>
-        <p>Your money stays in a personal vault that only you can withdraw from. IQ Finance never holds your funds.</p>
-        <p class="about-note">Today IQ Finance is a working prototype on a test network: everything described here works with test funds, and no real money is involved yet.</p>
-      </div>
+<!-- 1. What it is -->
+<section class="chapter" id="what" aria-labelledby="what-title">
+  <div class="wrap ch-grid">
+    <div class="ch-head">
+      <span class="ch-n">01</span>
+      <h2 id="what-title" class="ch-title">An investment assistant that shows you <span class="hl">the risks first.</span></h2>
     </div>
-    <ul class="compare">
-      <li><span class="ck">Compared with a broker</span><p>Your money is never in our hands. It stays in a vault in your name.</p></li>
-      <li><span class="ck">Compared with a robo-advisor</span><p>The rules are stated openly, the strategy is the one you asked for, and you see every result before deciding.</p></li>
-      <li><span class="ck">Compared with investing on your own</span><p>Every strategy is tested on real market data and checked against fixed limits before it can run.</p></li>
-    </ul>
+    <div class="ch-body">
+      <p class="first">IQ Finance lets you describe in your own words how you want to invest: how much to put in large technology companies, how much in gold, how often to rebalance. An AI turns that request into a precise strategy, with exact weights and rules.</p>
+      <p>Before anything happens, the strategy is replayed on the last five years of real market data. You see how it would have behaved in good years and bad ones: how much it would have earned, how far it would have fallen at its worst, and how long it took to recover.</p>
+      <p>A separate engine with fixed rules then checks the result. If the strategy would ever have lost more than 35% from its peak, it is blocked and never runs. If it passes, the decision is yours: you approve it with your own signature, or you simply do nothing.</p>
+      <p>Your money stays in a personal vault that only you can withdraw from. IQ Finance never holds your funds.</p>
+      <dl class="versus">
+        <div><dt>Unlike a broker,</dt><dd>your money is never in our hands. It stays in a vault in your name.</dd></div>
+        <div><dt>Unlike a robo-advisor,</dt><dd>the rules are stated openly, the strategy is the one you asked for, and you see every result before deciding.</dd></div>
+        <div><dt>Unlike investing on your own,</dt><dd>every strategy is tested on real market data and checked against fixed limits before it can run.</dd></div>
+      </dl>
+      <p class="aside">Today IQ Finance is a working prototype on a test network: everything described here works with test funds, and no real money is involved yet.</p>
+    </div>
   </div>
 </section>
 
-<!-- Principles -->
-<section class="statement" aria-labelledby="principles-title">
+<!-- Statement -->
+<section class="quote" aria-labelledby="principles-title">
   <div class="wrap">
-    <span class="k">Why IQ Finance</span>
-    <h2 id="principles-title" class="big h-lg" style="margin:22px auto 0;max-width:16ch">The AI suggests. <span class="hl">The rules decide.</span> You stay in control.</h2>
-    <p class="lead" style="margin:28px auto 0;max-width:640px">Most people either hand their money to someone they can't see into, or gamble on their own. We built a third way: the discipline of a quant fund, with every decision in your hands.</p>
+    <h2 id="principles-title" class="quote-text">The AI suggests. <span class="hl">The rules decide.</span> You stay in control.</h2>
   </div>
 </section>
 
-<!-- How it works -->
-<section class="section" id="how" aria-labelledby="how-title">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2 id="how-title" class="big h-lg">Say what you want. <span class="hl">See what it would have done.</span></h2>
-      <p class="lead">Four steps, and the last one is always yours.</p>
+<!-- 2. How it works -->
+<section class="chapter" id="how" aria-labelledby="how-title">
+  <div class="wrap ch-grid">
+    <div class="ch-head">
+      <span class="ch-n">02</span>
+      <h2 id="how-title" class="ch-title">Say what you want. <span class="hl">See what it would have done.</span></h2>
     </div>
-    <ol class="features">
-      <li class="feature rv">
-        <svg class="ico" style="color:#FFFFFF" aria-hidden="true"><use href="#i-chat"/></svg>
-        <h3>Describe your goal</h3>
-        <p>Write it the way you would say it to a person: how much you want to invest, in what, and how often to rebalance. No forms to fill in and no financial jargon to learn.</p>
-        <div class="chip-ui" aria-hidden="true">I have 10,000 USDC. Put half in big US tech and half in gold, rebalance every three months, and show me how bad it would have got in a crash.<span class="send">Send</span></div>
-      </li>
-      <li class="feature rv">
-        <svg class="ico" style="color:#FFFFFF" aria-hidden="true"><use href="#i-engine"/></svg>
-        <h3>The platform builds and tests it</h3>
-        <p>An AI model turns your words into a precise plan: which instruments, how much in each, when to rebalance. A separate engine with fixed rules then replays that plan on five years of real market data. The AI suggests; it never decides.</p>
-        <div class="chip-ui" aria-hidden="true"><div class="row"><span>Request understood</span><span>✓</span></div><div class="row"><span>5 years of market data</span><span>✓</span></div><div class="row"><span>Simulation run</span><span>✓</span></div><div class="row"><span>Risk checks applied</span><span>✓</span></div></div>
-      </li>
-      <li class="feature rv">
-        <svg class="ico" style="color:#FFFFFF" aria-hidden="true"><use href="#i-chart"/></svg>
-        <h3>Read the full analysis</h3>
-        <p>You see what the strategy would have earned, its worst fall, how long it took to recover and every operation it would have made. It is a simulation on past data, not a promise about the future.</p>
-        <div class="chip-ui" aria-hidden="true"><div class="two"><div>Total return<b>+71.4%</b></div><div>Worst drop<b class="neg">−21.8%</b></div></div></div>
-      </li>
-      <li class="feature rv">
-        <svg class="ico" style="color:#FFFFFF" aria-hidden="true"><use href="#i-sign"/></svg>
-        <h3>You decide</h3>
-        <p>If you like the result, you approve it with your signature from your own wallet. If you don't, nothing happens. Your money stays in an account only you control.</p>
-        <div class="chip-ui" aria-hidden="true">Approve: buy Nasdaq-100 and gold for 10,000 USDC<div class="wb"><span class="s">Sign</span><span class="c">Cancel</span></div></div>
-      </li>
-    </ol>
-    <p class="figure-note center">Product design preview · illustrative figures</p>
+    <div class="ch-body">
+      <p class="first">You start with a sentence and end with a complete strategy and five years of its history. In between, two very different pieces of technology do two very different jobs, and neither of them is allowed to spend your money.</p>
+      <ol class="timeline">
+        <li>
+          <span class="dot" aria-hidden="true">1</span>
+          <div class="tl-text"><h3>You describe your goal</h3><p>Write it the way you would say it to a person: how much you want to invest, in what, and how often to rebalance. No forms to fill in and no financial jargon to learn.</p></div>
+          <div class="frag" aria-hidden="true">I have 10,000 USDC. Put half in big US tech and half in gold, rebalance every three months, and show me how bad it would have got in a crash.<span class="send">Send</span></div>
+        </li>
+        <li>
+          <span class="dot" aria-hidden="true">2</span>
+          <div class="tl-text"><h3>The platform builds and tests it</h3><p>An AI model turns your words into a precise plan: which instruments, how much in each, when to rebalance. A separate engine with fixed rules then replays that plan on five years of real market data. The AI suggests; it never decides.</p></div>
+          <div class="frag" aria-hidden="true"><div class="row"><span>Request understood</span><span>✓</span></div><div class="row"><span>5 years of market data</span><span>✓</span></div><div class="row"><span>Simulation run</span><span>✓</span></div><div class="row"><span>Risk checks applied</span><span>✓</span></div></div>
+        </li>
+        <li>
+          <span class="dot" aria-hidden="true">3</span>
+          <div class="tl-text"><h3>You read the full analysis</h3><p>You see what the strategy would have earned, its worst fall, how long it took to recover and every operation it would have made. It is a simulation on past data, not a promise about the future.</p></div>
+          <div class="frag" aria-hidden="true"><div class="two"><div>Total return<b>+71.4%</b></div><div>Worst drop<b class="neg">−21.8%</b></div></div></div>
+        </li>
+        <li>
+          <span class="dot" aria-hidden="true">4</span>
+          <div class="tl-text"><h3>You decide</h3><p>If you like the result, you approve it with your signature from your own wallet. If you don't, nothing happens. Your money stays in an account only you control.</p></div>
+          <div class="frag" aria-hidden="true">Approve: buy Nasdaq-100 and gold for 10,000 USDC<div class="wb"><span class="s">Sign</span><span class="c">Cancel</span></div></div>
+        </li>
+      </ol>
+      <p class="aside">Product design preview · illustrative figures</p>
+    </div>
   </div>
 </section>
 
-<!-- Analysis -->
-<section class="section" id="analysis" aria-labelledby="analysis-title">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2 id="analysis-title" class="big h-lg">See the worst moment <span class="hl">before it happens.</span></h2>
-      <p class="lead">Every strategy is replayed on five years of real markets, through the 2022 crash and the recovery that followed. You see when it would have hurt, how much, and how long it took to come back.</p>
+<!-- 3. Analysis -->
+<section class="chapter" id="analysis" aria-labelledby="analysis-title">
+  <div class="wrap ch-grid">
+    <div class="ch-head">
+      <span class="ch-n">03</span>
+      <h2 id="analysis-title" class="ch-title">See the worst moment <span class="hl">before it happens.</span></h2>
     </div>
-    <figure class="panel an-panel rv">
+    <div class="ch-body">
+      <p class="first">Every strategy is replayed on the last five years of real markets, a period that includes the sharp fall of 2022 and the recovery that followed. Instead of a single number, you see the whole journey: when the strategy would have gained, when it would have lost, and how long each difficult stretch lasted.</p>
+      <p>Take the strategy from the conversation above. Its worst moment came in June 2022, when it was 21.8% below its previous high, and it took 14 months to get back. Over the five years it would have turned 10,000 USDC into about 17,140.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <figure class="an-figure">
       <div class="an-top">
         <div><div class="an-name">50/50 tech and gold</div><div class="an-mix">50% Nasdaq-100 · 50% gold · rebalanced quarterly · value of 10,000 USDC</div></div>
         <span class="an-badge">✓ Approved by the risk engine</span>
@@ -280,12 +281,17 @@
         <div><span class="k">Return per unit of risk</span><span class="v">0.82</span></div>
       </div>
     </figure>
-    <div class="explain">
-      <p><b>Why the worst moment matters.</b> It is easy to choose a strategy for its returns and give it up at its worst moment, often at a loss. Seeing in advance how deep the fall could be, and how long the recovery took, helps you pick a strategy you could actually stay with.</p>
-      <p><b>What else you can read.</b> Every analysis below is calculated by the same engine on the same five years of data. Choose one to see its chart and figures.</p>
+  </div>
+  <div class="wrap ch-grid">
+    <div class="ch-head"></div>
+    <div class="ch-body">
+      <p class="first">It is easy to choose a strategy for its returns and give it up at its worst moment, often at a loss. Seeing in advance how deep the fall could be, and how long the recovery took, helps you pick a strategy you could actually stay with.</p>
+      <p>The same engine calculates other views of the same five years. Choose one to see its chart and figures.</p>
     </div>
+  </div>
+  <div class="wrap">
     <div class="a-tabs" role="tablist" aria-label="Analyses"><button role="tab" id="at1" aria-controls="ap1" aria-selected="true">Distance from peak</button><button role="tab" id="at2" aria-controls="ap2" aria-selected="false" tabindex="-1">12-month returns</button><button role="tab" id="at3" aria-controls="ap3" aria-selected="false" tabindex="-1">Spread of results</button><button role="tab" id="at4" aria-controls="ap4" aria-selected="false" tabindex="-1">Sources of return</button><button role="tab" id="at5" aria-controls="ap5" aria-selected="false" tabindex="-1">Every operation</button></div>
-    <div class="panel a-box rv">
+    <div class="a-box rv">
       <div class="a-panel" role="tabpanel" id="ap1" aria-labelledby="at1">
         <div class="a-info"><h3>Distance from the highest point</h3><p class="d">How far below its best value the strategy was, day by day. The dashed line marks the deepest point.</p><div class="a-facts"><div><span class="k">Deepest point</span><span class="v neg">−21.8%</span></div><div><span class="k">When</span><span class="v">Jun 2022</span></div><div><span class="k">Time to recover</span><span class="v">14 months</span></div></div></div>
         <div class="a-visual"><svg role="img" aria-label="Distance from the highest point over five years; the deepest point is −21.8% in June 2022. Illustrative." width="100%" height="150" viewBox="0 0 956 140" preserveAspectRatio="none" style="display: block"><line x1="0" y1="8" x2="956" y2="8" stroke="#2A2D36" vector-effect="non-scaling-stroke"></line><line x1="0" y1="129.5" x2="956" y2="129.5" stroke="rgba(240,85,90,0.5)" stroke-dasharray="4 5" vector-effect="non-scaling-stroke"></line><path d="M0.0 8.0 L16.2 8.0 L32.4 10.7 L48.6 15.9 L64.8 38.9 L81.0 41.2 L97.2 8.0 L113.4 8.0 L129.6 8.0 L145.8 8.0 L162.0 8.0 L178.2 8.0 L194.4 52.3 L210.6 24.1 L226.8 8.0 L243.1 8.0 L259.3 53.0 L275.5 98.9 L291.7 120.2 L307.9 129.5 L324.1 117.3 L340.3 114.9 L356.5 96.6 L372.7 110.9 L388.9 98.5 L405.1 83.7 L421.3 98.6 L437.5 46.6 L453.7 26.9 L469.9 8.0 L486.1 22.1 L502.3 39.5 L518.5 45.6 L534.7 44.8 L550.9 22.9 L567.1 11.9 L583.3 21.0 L599.5 44.7 L615.7 55.8 L631.9 17.2 L648.1 36.7 L664.3 25.8 L680.5 9.7 L696.7 48.9 L712.9 43.7 L729.2 8.0 L745.4 62.4 L761.6 67.7 L777.8 67.0 L794.0 86.4 L810.2 68.6 L826.4 66.6 L842.6 104.3 L858.8 77.4 L875.0 54.7 L891.2 23.9 L907.4 8.0 L923.6 8.0 L939.8 8.0 L956.0 41.7 L956 8 L0 8 Z" fill="rgba(240,85,90,0.18)"></path><path d="M0.0 8.0 L16.2 8.0 L32.4 10.7 L48.6 15.9 L64.8 38.9 L81.0 41.2 L97.2 8.0 L113.4 8.0 L129.6 8.0 L145.8 8.0 L162.0 8.0 L178.2 8.0 L194.4 52.3 L210.6 24.1 L226.8 8.0 L243.1 8.0 L259.3 53.0 L275.5 98.9 L291.7 120.2 L307.9 129.5 L324.1 117.3 L340.3 114.9 L356.5 96.6 L372.7 110.9 L388.9 98.5 L405.1 83.7 L421.3 98.6 L437.5 46.6 L453.7 26.9 L469.9 8.0 L486.1 22.1 L502.3 39.5 L518.5 45.6 L534.7 44.8 L550.9 22.9 L567.1 11.9 L583.3 21.0 L599.5 44.7 L615.7 55.8 L631.9 17.2 L648.1 36.7 L664.3 25.8 L680.5 9.7 L696.7 48.9 L712.9 43.7 L729.2 8.0 L745.4 62.4 L761.6 67.7 L777.8 67.0 L794.0 86.4 L810.2 68.6 L826.4 66.6 L842.6 104.3 L858.8 77.4 L875.0 54.7 L891.2 23.9 L907.4 8.0 L923.6 8.0 L939.8 8.0 L956.0 41.7" fill="none" stroke="#F0555A" stroke-width="1.4" vector-effect="non-scaling-stroke"></path></svg></div>
@@ -314,32 +320,24 @@
           <div class="op more"><span class="date">…</span><span class="kind"></span><span>39 more operations, each with its date, reason and cost</span><span class="amt"></span></div></div></div>
       </div>
     </div>
-    <ul class="checks">
-      <li><span class="y" aria-hidden="true">✓</span>Maximum-loss check passed</li>
-      <li><span class="n" aria-hidden="true">–</span>Luck-or-skill check not needed for fixed allocations</li>
-      <li><span class="x" aria-hidden="true">✕</span>“All in Tesla” rejected: fell 73.6%, limit 35%</li>
-    </ul>
-    <p class="figure-note center">Product design preview · illustrative figures · simulated on real past market data, costs included · computed by a deterministic engine, never written by the AI · not a forecast.</p>
+    <p class="figure-note">Product design preview · illustrative figures · simulated on real past market data, costs included · computed by a deterministic engine, never written by the AI · not a forecast.</p>
   </div>
 </section>
 
-<!-- Your money -->
-<section class="section" id="your-money" aria-labelledby="money-title">
-  <div class="wrap">
-    <div class="panel rv">
-      <div class="money">
-        <div>
-          <h2 id="money-title" class="big h-md">Your money <span class="hl">never leaves your hands.</span></h2>
-          <p class="text" style="font-size:18px">We never hold your funds. You keep them in a vault only you can withdraw from, and nothing starts without your signature.</p>
-          <p class="text">Your vault is a small program on a public blockchain, created just for you. It holds your funds and follows one rule above all: only its owner, you, can take money out. IQ Finance can propose operations, but each one needs your approval first.</p>
-          <ul class="money-points">
-            <li><svg style="color:#C4B1FF" aria-hidden="true"><use href="#i-vault"/></svg><div><h4>An account only you own</h4><p>A personal digital vault, not a shared account controlled by us.</p></div></li>
-            <li><svg style="color:#C4B1FF" aria-hidden="true"><use href="#i-key"/></svg><div><h4>Nothing starts without your signature</h4><p>Every operation needs your approval in your own wallet.</p></div></li>
-            <li><svg style="color:#C4B1FF" aria-hidden="true"><use href="#i-ledger"/></svg><div><h4>A public record anyone can check</h4><p>Every operation leaves a trace you can verify yourself.</p></div></li>
-          </ul>
-          <p class="honest">Today on a test network with test funds. Your signature is checked by our servers; checking it inside your vault comes later. An independent security audit comes before any real money.</p>
-        </div>
-        <figure>
+<!-- 4. Your money -->
+<section class="chapter" id="your-money" aria-labelledby="money-title">
+  <div class="wrap ch-grid">
+    <div class="ch-head">
+      <span class="ch-n">04</span>
+      <h2 id="money-title" class="ch-title">Your money <span class="hl">never leaves your hands.</span></h2>
+    </div>
+    <div class="ch-body money-body">
+      <div>
+        <p class="first">We never hold your funds. When you start, a personal vault is created for you: a small program on a public blockchain that holds your money and answers to you alone.</p>
+        <p>The vault follows one rule above all: only its owner can take money out. IQ Finance can propose operations, such as buying or rebalancing, but each one needs your signature first. And because the vault lives on a public ledger, every operation leaves a record that anyone can check.</p>
+        <p class="aside">Today this runs on a test network with test funds. Your signature is checked by our servers; checking it inside your vault comes later. An independent security audit comes before any real money.</p>
+      </div>
+      <figure class="mock-sm">
           <div class="vault" aria-hidden="true">
             <div class="top"><b><svg width="18" height="18" style="color:#C4B1FF"><use href="#i-vault"/></svg>Your vault</b><span>Personal · on a public ledger</span></div>
             <div class="amt">10,000.00<small>USDC</small></div>
@@ -350,135 +348,110 @@
               <div><dt>Who approves each operation</dt><dd>You, with your signature</dd></div>
             </dl>
           </div>
-          <p class="sr-only">Preview of the personal vault: 10,000 USDC owned by you; only you can withdraw; IQ Finance cannot; you approve each operation with your signature.</p>
-          <figcaption class="figure-note">Product design preview · illustrative figures</figcaption>
-        </figure>
-      </div>
+        <p class="sr-only">Preview of the personal vault: 10,000 USDC owned by you; only you can withdraw; IQ Finance cannot; you approve each operation with your signature.</p>
+        <figcaption class="figure-note">Product design preview · illustrative figures</figcaption>
+      </figure>
     </div>
   </div>
 </section>
 
-<!-- Instruments -->
-<section class="section" id="instruments" aria-labelledby="inst-title">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2 id="inst-title" class="big h-lg">The markets that matter. <span class="hl">All in one place.</span></h2>
-      <p class="lead">At launch you'll be able to build strategies with the most important assets on the market. Strategy tests use real historical market data, adjusted for dividends and splits.</p>
+<!-- 5. Markets -->
+<section class="chapter" id="instruments" aria-labelledby="inst-title">
+  <div class="wrap ch-grid">
+    <div class="ch-head">
+      <span class="ch-n">05</span>
+      <h2 id="inst-title" class="ch-title">The markets that matter, <span class="hl">in one place.</span></h2>
     </div>
-    <div class="cats">
-      <article class="panel cat rv">
-        <svg class="ico" style="color:#9D6FFF" aria-hidden="true"><use href="#i-stocks"/></svg>
+    <div class="ch-body">
+      <p class="first">At launch you'll be able to build strategies with the most important assets on the market. Each one will be a tokenized version of the real asset: a digital token that represents it and sits in your own vault, next to the rest of your money.</p>
+      <p>Every test uses real historical prices, adjusted for dividends and splits. On the test network today there are 17 instruments, as test versions that don't yet follow the real price; the catalog grows as tokenized versions of each asset become available.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <ul class="cat-rows">
+      <li>
         <h3>Stocks</h3>
-        <p>Shares of the largest companies on the main markets, the names that move the world economy.</p>
-        <ul aria-label="Examples"><li>Apple</li><li>Microsoft</li><li>Nvidia</li><li>Amazon</li><li>JPMorgan Chase</li><li class="more">and more</li></ul>
-        <div class="spark" aria-hidden="true"><svg viewBox="0 0 956 180" preserveAspectRatio="none"><use href="#curve-area" fill="url(#g-area)"/><use href="#curve" fill="none" stroke="#9D6FFF" stroke-width="2" vector-effect="non-scaling-stroke"/></svg></div>
-      </article>
-      <article class="panel cat rv">
-        <svg class="ico" style="color:#C4B1FF" aria-hidden="true"><use href="#i-layers"/></svg>
+        <p>Shares of the largest companies on the main markets, the names that move the world economy. <span class="ex">Apple, Microsoft, Nvidia, Amazon, JPMorgan Chase and more.</span></p>
+        <svg viewBox="0 0 956 180" preserveAspectRatio="none" aria-hidden="true"><use href="#curve" fill="none" stroke="#9D6FFF" stroke-width="1.8" vector-effect="non-scaling-stroke"/></svg>
+      </li>
+      <li>
         <h3>Index funds</h3>
-        <p>Whole markets in a single instrument: the main stock indexes, plus funds that follow the US dollar and market volatility.</p>
-        <ul aria-label="Examples"><li>S&amp;P 500</li><li>Nasdaq-100</li><li>Dow Jones</li><li>Russell 2000</li><li>US dollar</li><li class="more">and more</li></ul>
-        <div class="spark" aria-hidden="true"><svg viewBox="0 0 956 180" preserveAspectRatio="none"><use href="#curve" fill="none" stroke="#C4B1FF" stroke-width="2" vector-effect="non-scaling-stroke" transform="translate(0 20) scale(1 0.8)"/></svg></div>
-      </article>
-      <article class="panel cat rv">
-        <svg class="ico" style="color:#D9B76A" aria-hidden="true"><use href="#i-gem"/></svg>
+        <p>Whole markets in a single instrument: the main stock indexes, plus funds that follow the US dollar and market volatility. <span class="ex">S&amp;P 500, Nasdaq-100, Dow Jones, Russell 2000 and more.</span></p>
+        <svg viewBox="0 0 956 180" preserveAspectRatio="none" aria-hidden="true"><use href="#curve" fill="none" stroke="#C4B1FF" stroke-width="1.8" vector-effect="non-scaling-stroke" transform="translate(0 20) scale(1 0.8)"/></svg>
+      </li>
+      <li>
         <h3>Commodities</h3>
-        <p>The leading raw materials, to protect and diversify a portfolio when stocks struggle.</p>
-        <ul aria-label="Examples"><li>Gold</li><li>Oil</li><li class="more">and the other leading commodities</li></ul>
-        <div class="spark" aria-hidden="true"><svg viewBox="0 0 956 180" preserveAspectRatio="none"><use href="#curve" fill="none" stroke="#D9B76A" stroke-width="2" vector-effect="non-scaling-stroke" transform="translate(0 40) scale(1 0.6)"/></svg></div>
-      </article>
-    </div>
-    <p class="cats-notes"><span>Held in your own vault, as tokenized versions of the real assets.</span><span>The catalog grows as tokenized versions become available.</span><span>On the test network today: 17 instruments, as test versions that don't yet follow the real price.</span></p>
+        <p>The leading raw materials, often used to protect and diversify a portfolio when stocks struggle. <span class="ex">Gold, oil and the other leading commodities.</span></p>
+        <svg viewBox="0 0 956 180" preserveAspectRatio="none" aria-hidden="true"><use href="#curve" fill="none" stroke="#D9B76A" stroke-width="1.8" vector-effect="non-scaling-stroke" transform="translate(0 40) scale(1 0.6)"/></svg>
+      </li>
+    </ul>
   </div>
 </section>
 
-<!-- Examples -->
-<section class="section" id="examples" aria-labelledby="ex-title">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2 id="ex-title" class="big h-lg">Same rules, <span class="hl">for every strategy.</span></h2>
-      <p class="lead">Three strategies the engine approved and one it refused. Each is tested the same way before you see it.</p>
+<!-- 6. Examples -->
+<section class="chapter" id="examples" aria-labelledby="ex-title">
+  <div class="wrap ch-grid">
+    <div class="ch-head">
+      <span class="ch-n">06</span>
+      <h2 id="ex-title" class="ch-title">Same rules, <span class="hl">for every strategy.</span></h2>
     </div>
+    <div class="ch-body">
+      <p class="first">Here are four strategies, written the way a person would ask for them. Three passed the engine's checks; one did not. Choose one to see its five years.</p>
+      <p>“All in Tesla” was rejected because over the five years it would have fallen 73.6% from its peak, more than twice the 35% limit. The engine does not judge whether a company is good or bad; it only checks the numbers, and the same rule applies to every strategy.</p>
+    </div>
+  </div>
+  <div class="wrap">
     <div class="ex-tabs" role="tablist" aria-label="Example strategies">
       <button role="tab" id="t1" aria-controls="p1" aria-selected="true">50/50 tech and gold</button>
       <button role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1">Broad market with gold</button>
       <button role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1">Three-way hold</button>
       <button role="tab" id="t4" aria-controls="p4" aria-selected="false" tabindex="-1" class="rej">All in Tesla</button>
     </div>
-    <div class="panel ex-panel" role="tabpanel" id="p1" aria-labelledby="t1">
+    <div class="ex-panel" role="tabpanel" id="p1" aria-labelledby="t1">
       <div class="ex-head"><div><div class="an-name">50/50 tech and gold</div><div class="an-mix">Nasdaq-100 50% · Gold 50% · rebalanced quarterly</div></div><span class="verdict ok">✓ Approved by the risk engine</span></div>
       <div class="ex-plot"><svg class="draw" viewBox="0 0 956 180" preserveAspectRatio="none" role="img" aria-label="Five-year replay of 50/50 tech and gold. Illustrative."><g stroke="#17181E"><line x1="0" y1="45" x2="956" y2="45" vector-effect="non-scaling-stroke"/><line x1="0" y1="90" x2="956" y2="90" vector-effect="non-scaling-stroke"/><line x1="0" y1="135" x2="956" y2="135" vector-effect="non-scaling-stroke"/></g><use href="#curve-area" fill="url(#g-area)"/><use href="#curve" fill="none" stroke="url(#g-line)" stroke-width="2.4" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg></div>
       <div class="axis-x" aria-hidden="true"><span>Sep 2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span><span>Sep 2026</span></div>
       <div class="ex-kpis"><div><div class="k">5-year total</div><div class="v">+71.4%</div></div><div><div class="k">Per year</div><div class="v">11.4%</div></div><div><div class="k">Worst drop</div><div class="v neg">−21.8%</div></div></div>
     </div>
-    <div class="panel ex-panel" role="tabpanel" id="p2" aria-labelledby="t2">
+    <div class="ex-panel" role="tabpanel" id="p2" aria-labelledby="t2">
       <div class="ex-head"><div><div class="an-name">Broad market with gold</div><div class="an-mix">S&amp;P 500 60% · Smaller US companies 20% · Gold 20% · rebalanced quarterly</div></div><span class="verdict ok">✓ Approved by the risk engine</span></div>
       <div class="ex-plot"><svg class="draw" viewBox="0 0 956 180" preserveAspectRatio="none" role="img" aria-label="Five-year replay of Broad market with gold. Illustrative."><g stroke="#17181E"><line x1="0" y1="45" x2="956" y2="45" vector-effect="non-scaling-stroke"/><line x1="0" y1="90" x2="956" y2="90" vector-effect="non-scaling-stroke"/><line x1="0" y1="135" x2="956" y2="135" vector-effect="non-scaling-stroke"/></g><g transform="translate(0 16) scale(1 0.86)"><use href="#curve-area" fill="url(#g-area)"/><use href="#curve" fill="none" stroke="url(#g-line)" stroke-width="2.4" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></g></svg></div>
       <div class="axis-x" aria-hidden="true"><span>Sep 2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span><span>Sep 2026</span></div>
       <div class="ex-kpis"><div><div class="k">5-year total</div><div class="v">+58.9%</div></div><div><div class="k">Per year</div><div class="v">9.7%</div></div><div><div class="k">Worst drop</div><div class="v neg">−20.4%</div></div></div>
     </div>
-    <div class="panel ex-panel" role="tabpanel" id="p3" aria-labelledby="t3">
+    <div class="ex-panel" role="tabpanel" id="p3" aria-labelledby="t3">
       <div class="ex-head"><div><div class="an-name">Three-way hold</div><div class="an-mix">S&amp;P 500 · Dow Jones · Gold, equal parts · held</div></div><span class="verdict ok">✓ Approved by the risk engine</span></div>
       <div class="ex-plot"><svg class="draw" viewBox="0 0 956 180" preserveAspectRatio="none" role="img" aria-label="Five-year replay of Three-way hold. Illustrative."><g stroke="#17181E"><line x1="0" y1="45" x2="956" y2="45" vector-effect="non-scaling-stroke"/><line x1="0" y1="90" x2="956" y2="90" vector-effect="non-scaling-stroke"/><line x1="0" y1="135" x2="956" y2="135" vector-effect="non-scaling-stroke"/></g><g transform="translate(0 34) scale(1 0.72)"><use href="#curve-area" fill="url(#g-area)"/><use href="#curve" fill="none" stroke="url(#g-line)" stroke-width="2.4" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></g></svg></div>
       <div class="axis-x" aria-hidden="true"><span>Sep 2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span><span>Sep 2026</span></div>
       <div class="ex-kpis"><div><div class="k">5-year total</div><div class="v">+54.2%</div></div><div><div class="k">Per year</div><div class="v">9.0%</div></div><div><div class="k">Worst drop</div><div class="v neg">−15.1%</div></div></div>
     </div>
-    <div class="panel ex-panel" role="tabpanel" id="p4" aria-labelledby="t4">
+    <div class="ex-panel" role="tabpanel" id="p4" aria-labelledby="t4">
       <div class="ex-head"><div><div class="an-name">All in Tesla</div><div class="an-mix">Tesla 100% · held</div></div><span class="verdict no">✕ Rejected · over the 35% loss limit</span></div>
       <div class="ex-plot"><div class="limit" style="top:52%"><span>Loss limit · −35%</span></div><svg class="draw" viewBox="0 0 956 180" preserveAspectRatio="none" role="img" aria-label="Five-year replay of All in Tesla. Illustrative."><g stroke="#17181E"><line x1="0" y1="45" x2="956" y2="45" vector-effect="non-scaling-stroke"/><line x1="0" y1="90" x2="956" y2="90" vector-effect="non-scaling-stroke"/><line x1="0" y1="135" x2="956" y2="135" vector-effect="non-scaling-stroke"/></g><path d="M0 50 L60 36 L120 22 L170 14 L215 30 L260 58 L300 92 L345 126 L390 152 L430 170 L470 160 L520 150 L560 162 L610 140 L660 150 L710 128 L760 142 L810 120 L860 136 L910 118 L956 128 L956 180 L0 180 Z" fill="rgba(242,73,92,0.12)"/><path d="M0 50 L60 36 L120 22 L170 14 L215 30 L260 58 L300 92 L345 126 L390 152 L430 170 L470 160 L520 150 L560 162 L610 140 L660 150 L710 128 L760 142 L810 120 L860 136 L910 118 L956 128" fill="none" stroke="#F2495C" stroke-width="2.4" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg></div>
       <div class="axis-x" aria-hidden="true"><span>Sep 2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span><span>Sep 2026</span></div>
       <div class="ex-kpis"><div><div class="k">5-year total</div><div class="v">—</div></div><div><div class="k">Per year</div><div class="v">—</div></div><div><div class="k">Worst drop</div><div class="v neg">−73.6%</div></div></div><p class="small" style="margin-top:16px">Rejected strategies never run.</p>
     </div>
-    <div class="explain center-explain"><p><b>Why was “All in Tesla” rejected?</b> Over the five years it would have fallen 73.6% from its peak, more than twice the 35% limit. The engine does not judge whether a company is good or bad; it only checks the numbers, and the same rule applies to every strategy.</p></div>
-    <p class="figure-note center">Illustrative figures · simulated on real past market data · not a forecast.</p>
+    <p class="figure-note">Illustrative figures · simulated on real past market data · not a forecast.</p>
   </div>
 </section>
 
-<!-- Plans -->
-<section class="section" id="plans" aria-labelledby="plans-title">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2 id="plans-title" class="big h-lg">Two plans. <span class="hl">One difference.</span></h2>
-      <p class="lead">When IQ Finance launches with real money, there will be two monthly plans. They include exactly the same features; the only difference is how much AI and analysis you can use each month.</p>
+<!-- 7. Plans -->
+<section class="chapter" id="plans" aria-labelledby="plans-title">
+  <div class="wrap ch-grid">
+    <div class="ch-head">
+      <span class="ch-n">07</span>
+      <h2 id="plans-title" class="ch-title">Two plans, <span class="hl">one difference.</span></h2>
     </div>
-    <div class="plans">
-      <article class="panel plan rv">
-        <div class="plan-top"><span class="plan-name">Pro</span><span class="tag">For regular use</span></div>
-        <p class="price"><span class="v">€20</span><span class="u">per month, VAT included</span></p>
-        <p class="for">Everything IQ Finance does, with a monthly amount of AI and analysis for building and checking your strategies.</p>
-        <ul>
-          <li>Describe a goal and get a strategy</li>
-          <li>Full analysis on five years of real market data</li>
-          <li>Scenario explorer: “what happens to my portfolio if…”</li>
-          <li>Automatic management within the limits you approve</li>
-          <li>Buy and sell yourself in Markets, even when your monthly use runs out</li>
-        </ul>
-      </article>
-      <article class="panel plan max rv">
-        <div class="plan-top"><span class="plan-name">Pro Max</span><span class="tag">For heavy use</span></div>
-        <p class="price"><span class="v">€85</span><span class="u">per month, VAT included</span></p>
-        <p class="for">The same features, with much more AI and analysis included each month, at a lower cost per use.</p>
-        <ul>
-          <li class="more">Everything in Pro</li>
-          <li>Much more AI and analysis included each month</li>
-          <li>A lower cost per use</li>
-          <li>Your strategies and analyses saved</li>
-          <li>Buy and sell yourself in Markets, even when your monthly use runs out</li>
-        </ul>
-      </article>
-    </div>
-    <div class="panel tokens rv">
-      <div>
-        <h3 class="big h-sm">Need more? <span class="hl">Extra usage tokens</span>, kept in your own wallet.</h3>
-        <p class="text">If you use up your plan's monthly amount, you'll be able to buy extra usage tokens. They are an IQ Finance utility token: a digital voucher that lives in your own wallet and pays only for the AI and analysis on IQ Finance. Each time the AI works for you, your balance goes down.</p>
-        <ul class="tok-points">
-          <li>Your plan's monthly amount is always used first.</li>
-          <li>They stay in your wallet, and you can send them to another wallet.</li>
-          <li>For using the service, not for investing: no promised value, no refunds, no exchange listing.</li>
-          <li>Markets stay open for your own buy and sell orders even with no tokens left.</li>
-        </ul>
+    <div class="ch-body">
+      <p class="first">When IQ Finance launches with real money, there will be two monthly plans. Both include everything the product does: strategies, the full analysis, the scenario explorer, automatic management within the limits you approve, and buying and selling on your own. The only difference is how much AI and analysis you can use each month.</p>
+      <div class="plan-cols">
+        <div><span class="plan-name">Pro</span><p class="price"><span class="v">€20</span><span class="u">per month, VAT included</span></p><p>For regular use: a monthly amount of AI and analysis for building and checking your strategies.</p></div>
+        <div><span class="plan-name">Pro Max</span><p class="price"><span class="v">€85</span><span class="u">per month, VAT included</span></p><p>For heavy use: much more AI and analysis included each month, at a lower cost per use.</p></div>
       </div>
-      <figure>
+      <p>If you use up your plan's monthly amount, you'll be able to buy extra usage tokens. They are an IQ Finance utility token: a digital voucher that lives in your own wallet and pays only for the AI and analysis on IQ Finance. Your plan's amount is always used first; each time the AI works for you after that, your token balance goes down.</p>
+      <div class="money-body">
+        <p>The tokens stay in your wallet and you can send them to another wallet. They are for using the service, not for investing: no promised value, no refunds and no exchange listing. Markets stay open for your own buy and sell orders even with no tokens left.</p>
+        <figure class="mock-sm">
         <div class="wallet" aria-hidden="true">
           <div class="top"><span>Your wallet</span><span>Usage tokens</span></div>
           <div class="amt">12.00<small>usage tokens</small></div>
@@ -488,29 +461,35 @@
             <div><dt>Last use</dt><dd>Strategy analysis</dd></div>
           </dl>
         </div>
-        <p class="sr-only">Preview of a wallet holding 12 extra usage tokens, used after the plan's monthly amount runs out. Illustrative.</p>
-        <figcaption class="figure-note">Product design preview · illustrative figures</figcaption>
-      </figure>
+          <p class="sr-only">Preview of a wallet holding 12 extra usage tokens, used after the plan's monthly amount runs out. Illustrative.</p>
+          <figcaption class="figure-note">Product design preview · illustrative figures</figcaption>
+        </figure>
+      </div>
+      <p class="aside">Plans and usage tokens start with the launch with real money. Today the prototype runs on a test network and nothing is for sale.</p>
     </div>
-    <p class="plans-note">Plans and usage tokens start with the launch with real money. Today the prototype runs on a test network and nothing is for sale.</p>
   </div>
 </section>
 
 <!-- Promise -->
-<section class="statement" aria-labelledby="promise-title">
+<section class="quote" aria-labelledby="promise-title">
   <div class="wrap">
-    <span class="k">Our promise</span>
-    <h2 id="promise-title" class="big h-lg" style="margin:22px auto 0;max-width:18ch">We would rather show you a rejected strategy <span class="hl">than lose your money.</span></h2>
+    <h2 id="promise-title" class="quote-text">We would rather show you a rejected strategy <span class="hl">than lose your money.</span></h2>
   </div>
 </section>
 
-<!-- Today -->
-<section class="section" id="today" aria-labelledby="today-title">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2 id="today-title" class="big h-lg">Built in the open. <span class="hl">Honest about what comes next.</span></h2>
-      <p class="lead">Everything that works today runs on a test network with test funds. No real money is involved yet.</p>
+<!-- 8. Today -->
+<section class="chapter" id="today" aria-labelledby="today-title">
+  <div class="wrap ch-grid">
+    <div class="ch-head">
+      <span class="ch-n">08</span>
+      <h2 id="today-title" class="ch-title">Built in the open. <span class="hl">Honest about what comes next.</span></h2>
     </div>
+    <div class="ch-body">
+      <p class="first">We would rather tell you exactly where IQ Finance stands. The whole flow already works on a test network with test funds: describing a goal, the five-year analysis, the safety checks, your signature and the execution on the blockchain.</p>
+      <p>What is still missing before real money is shown below, followed by the longer road: seven phases, from the foundations we are laying now to a product for funds and banks.</p>
+    </div>
+  </div>
+  <div class="wrap">
     <ol class="journey" aria-label="Before real money">
       <li class="here"><div class="line"><span class="pt"></span><span class="ln"></span></div><span class="you">YOU ARE HERE</span><h3>Prototype</h3><p>Strategies, analysis, signature and on-chain execution on a test network</p></li>
       <li><div class="line"><span class="pt"></span><span class="ln"></span></div><span class="you"></span><h3>Security</h3><p>Independent audit · signature checked inside the vault</p></li>
@@ -518,8 +497,8 @@
       <li><div class="line"><span class="pt"></span><span class="ln"></span></div><span class="you"></span><h3>Real prices</h3><p>Instruments that follow the real market price</p></li>
       <li><div class="line"><span class="pt"></span><span class="ln" style="background:transparent"></span></div><span class="you"></span><h3>Launch</h3><p>Real money, regulated partners</p></li>
     </ol>
-    <div class="panel road rv" style="margin-top:72px">
-      <h3 class="title">The road ahead, in seven phases.</h3>
+    <div class="road">
+      <h3 class="road-title">The road ahead</h3>
       <ol class="phase-list">
         <li><span class="p">00</span><div><h4>Foundations and compliance</h4><p>Legal opinion, review of the usage token, independent security audit, incorporation.</p></div></li>
         <li><span class="p">01</span><div><h4>Our own AI</h4><p>An open model specialised in finance, with a larger one as backup, retrained on real usage.</p></div></li>
@@ -529,24 +508,24 @@
         <li><span class="p">05</span><div><h4>Our own blockchain and exchange</h4><p>Bringing transactions and core technology in-house. Long term, not funded by this round.</p></div></li>
         <li><span class="p">06</span><div><h4>Funds and banks</h4><p>The same engine for institutions. The last phase.</p></div></li>
       </ol>
-      <a class="btn btn-line" href="technology/">How it is built <span class="arr" aria-hidden="true">›</span></a>
+      <p style="margin-top:24px"><a class="btn btn-line" href="technology/">How it is built <span class="arr" aria-hidden="true">›</span></a></p>
     </div>
   </div>
 </section>
 
-<!-- Investors -->
-<section class="section" id="investors" aria-labelledby="inv-title">
-  <div class="wrap">
-    <div class="panel rv">
-      <div class="inv">
-        <div>
-          <h2 id="inv-title" class="big h-md">We are raising <span class="hl" style="white-space:nowrap">€500,000 Pre&#8209;Seed.</span></h2>
-          <p class="text" style="font-size:18px">SAFE, released in two tranches against verifiable milestones: from a working prototype to a security-audited product ready for real money.</p>
-          <div class="btns"><a class="btn btn-white" href="mailto:marco.laporta06@gmail.com?subject=Deck%20request%20%E2%80%94%20IQ%20Finance">Request the deck</a><a class="btn btn-line" href="technology/">Technology</a></div>
-          <div class="founder"><div class="n">Marco La Porta</div><div class="r">Founder, CEO &amp; CTO · with external advisory on finance and regulation</div></div>
-        </div>
-        <div class="funds">
-          <span class="t">Use of funds · €500,000</span>
+<!-- 9. Investors -->
+<section class="chapter" id="investors" aria-labelledby="inv-title">
+  <div class="wrap ch-grid">
+    <div class="ch-head">
+      <span class="ch-n">09</span>
+      <h2 id="inv-title" class="ch-title">We are raising <span class="hl" style="white-space:nowrap">€500,000 Pre&#8209;Seed.</span></h2>
+    </div>
+    <div class="ch-body">
+      <p class="first">The round is a SAFE, released in two tranches against verifiable milestones. The first tranche covers the legal work, the independent security audit of the contracts and the launch with real money; the second funds reaching the first subscribers through partners.</p>
+      <p>The goal is simple: to take IQ Finance from a working prototype to a security-audited product ready for real money. The deck, with the plan and the numbers behind it, is available on request.</p>
+      <div class="inv-btns"><a class="btn btn-white" href="mailto:marco.laporta06@gmail.com?subject=Deck%20request%20%E2%80%94%20IQ%20Finance">Request the deck</a><a class="btn btn-line" href="technology/">Technology</a></div>
+      <div class="funds">
+        <span class="t">Use of funds · €500,000</span>
           <div class="bar" aria-hidden="true"><span style="width:9%;background:#E6DEFF"></span><span style="width:7%;background:#C4B1FF"></span><span style="width:22%;background:#9D6FFF"></span><span style="width:12%;background:#7C5BD6"></span><span style="width:40%;background:#5B3BB5"></span><span style="width:10%;background:#3A2A6B"></span></div>
           <ul>
             <li><i style="background:#E6DEFF"></i><span>Legal &amp; compliance</span><b>€45k</b></li>
@@ -556,21 +535,20 @@
             <li><i style="background:#5B3BB5"></i><span>Reaching the first subscribers, through partners</span><b>€200k</b></li>
             <li><i style="background:#3A2A6B"></i><span>Reserve</span><b>€50k</b></li>
           </ul>
-        </div>
       </div>
+      <p class="founder-line"><b>Marco La Porta</b>, Founder, CEO &amp; CTO, with external advisory on finance and regulation.</p>
     </div>
   </div>
 </section>
-
-</div><!-- /scope: the sub-navigation stays sticky only inside the content -->
+</div><!-- /scope -->
 
 <!-- Closing -->
 <div class="closing-stage" aria-hidden="true"></div>
 <section class="closing" id="early-access" aria-labelledby="close-title">
   <span id="waitlist"></span>
   <div class="wrap inner">
-    <h2 id="close-title" class="big h-xl">Institutional quant investing. <span class="hl">Built for everyone.</span></h2>
-    <p>See the worst before you invest. Decide with the full picture. Keep your money in your hands.</p>
+    <h2 id="close-title" class="big h-xl">See the worst before you invest. <span class="hl">Decide with the full picture.</span></h2>
+    <p>Keep your money in your hands. IQ Finance is a working prototype today; write to us and we will tell you when real access opens.</p>
     <a class="btn btn-ink" href="mailto:marco.laporta06@gmail.com?subject=Early%20access%20request%20%E2%80%94%20IQ%20Finance&amp;body=Hi%2C%20I%20would%20like%20early%20access%20to%20IQ%20Finance%20when%20it%20becomes%20available.">Request early access</a>
     <p class="disclaimer"><b>Important information</b>This document and website are for purely informational and strategic purposes. They do not constitute a solicitation of public savings, a public offering of financial products, or investment advice. The product currently operates exclusively on a test network (Arbitrum Sepolia): no real funds are involved or can be moved. Plans, prices and usage tokens described here are planned for the launch and do not exist today.</p>
   </div>
