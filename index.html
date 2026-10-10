@@ -139,6 +139,7 @@
 <div class="scope">
 <nav class="subnav" aria-label="On this page">
   <ul>
+    <li><a href="#what">Overview</a></li>
     <li><a href="#how">How it works</a></li>
     <li><a href="#analysis">Analysis</a></li>
     <li><a href="#your-money">Your money</a></li>
@@ -158,6 +159,30 @@
       <li><svg style="color:#C4B1FF" aria-hidden="true"><use href="#i-clock"/></svg><span class="v">5 years</span><span class="k">of real market data behind every test</span></li>
       <li><svg style="color:#C4B1FF" aria-hidden="true"><use href="#i-grid"/></svg><span class="v" data-count="17">17</span><span class="k">instruments on the test network</span></li>
       <li><svg style="color:#C4B1FF" aria-hidden="true"><use href="#i-link"/></svg><span class="v" data-count="4">4</span><span class="k">public example transactions</span><span class="tx"><a href="https://sepolia.arbiscan.io/tx/0x12e3d3833344535f590ee4ccbcbbd21758591d471f78d2ca8fb6af23638e3939" target="_blank" rel="noreferrer" aria-label="Example transaction 1 on Arbiscan (opens in a new tab)">1 ↗</a> <a href="https://sepolia.arbiscan.io/tx/0xce87e2015eba94db71b52ccdd520aa548d7414d248e82c0f2971eaa63604b563" target="_blank" rel="noreferrer" aria-label="Example transaction 2 on Arbiscan (opens in a new tab)">2 ↗</a> <a href="https://sepolia.arbiscan.io/tx/0x4d6455fd2acdf2fff3e7fa276e2c578f4a9f8b4a17d96813c2f2f4abe3986de7" target="_blank" rel="noreferrer" aria-label="Example transaction 3 on Arbiscan (opens in a new tab)">3 ↗</a> <a href="https://sepolia.arbiscan.io/tx/0xc04a77844d7bfc58361229fdeb19aaff4723a21e4b48c0e0749cde2767b22032" target="_blank" rel="noreferrer" aria-label="Example transaction 4 on Arbiscan (opens in a new tab)">4 ↗</a></span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- What it is -->
+<section class="section about" id="what" aria-labelledby="what-title">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-head">
+        <span class="kicker">What IQ Finance is</span>
+        <h2 id="what-title" class="big h-md">An investment assistant that shows you <span class="hl">the risks first.</span></h2>
+      </div>
+      <div class="about-body">
+        <p>IQ Finance lets you describe in your own words how you want to invest: how much to put in large technology companies, how much in gold, how often to rebalance. An AI turns that request into a precise strategy, with exact weights and rules.</p>
+        <p>Before anything happens, the strategy is replayed on the last five years of real market data. You see how it would have behaved in good years and bad ones: how much it would have earned, how far it would have fallen at its worst, and how long it took to recover.</p>
+        <p>A separate engine with fixed rules then checks the result. If the strategy would ever have lost more than 35% from its peak, it is blocked and never runs. If it passes, the decision is yours: you approve it with your own signature, or you simply do nothing.</p>
+        <p>Your money stays in a personal vault that only you can withdraw from. IQ Finance never holds your funds.</p>
+        <p class="about-note">Today IQ Finance is a working prototype on a test network: everything described here works with test funds, and no real money is involved yet.</p>
+      </div>
+    </div>
+    <ul class="compare">
+      <li><span class="ck">Compared with a broker</span><p>Your money is never in our hands. It stays in a vault in your name.</p></li>
+      <li><span class="ck">Compared with a robo-advisor</span><p>The rules are stated openly, the strategy is the one you asked for, and you see every result before deciding.</p></li>
+      <li><span class="ck">Compared with investing on your own</span><p>Every strategy is tested on real market data and checked against fixed limits before it can run.</p></li>
     </ul>
   </div>
 </section>
@@ -182,25 +207,25 @@
       <li class="feature rv">
         <svg class="ico" style="color:#FFFFFF" aria-hidden="true"><use href="#i-chat"/></svg>
         <h3>Describe your goal</h3>
-        <p>Write it the way you would say it. No forms, no jargon.</p>
+        <p>Write it the way you would say it to a person: how much you want to invest, in what, and how often to rebalance. No forms to fill in and no financial jargon to learn.</p>
         <div class="chip-ui" aria-hidden="true">I have 10,000 USDC. Put half in big US tech and half in gold, rebalance every three months, and show me how bad it would have got in a crash.<span class="send">Send</span></div>
       </li>
       <li class="feature rv">
         <svg class="ico" style="color:#FFFFFF" aria-hidden="true"><use href="#i-engine"/></svg>
         <h3>The platform builds and tests it</h3>
-        <p>An AI model turns your words into a precise plan. A separate engine with fixed rules tests it on five years of real market data.</p>
+        <p>An AI model turns your words into a precise plan: which instruments, how much in each, when to rebalance. A separate engine with fixed rules then replays that plan on five years of real market data. The AI suggests; it never decides.</p>
         <div class="chip-ui" aria-hidden="true"><div class="row"><span>Request understood</span><span>✓</span></div><div class="row"><span>5 years of market data</span><span>✓</span></div><div class="row"><span>Simulation run</span><span>✓</span></div><div class="row"><span>Risk checks applied</span><span>✓</span></div></div>
       </li>
       <li class="feature rv">
         <svg class="ico" style="color:#FFFFFF" aria-hidden="true"><use href="#i-chart"/></svg>
         <h3>Read the full analysis</h3>
-        <p>Returns, risk and every operation the strategy would have made, simulated on past data, not a promise.</p>
+        <p>You see what the strategy would have earned, its worst fall, how long it took to recover and every operation it would have made. It is a simulation on past data, not a promise about the future.</p>
         <div class="chip-ui" aria-hidden="true"><div class="two"><div>Total return<b>+71.4%</b></div><div>Worst drop<b class="neg">−21.8%</b></div></div></div>
       </li>
       <li class="feature rv">
         <svg class="ico" style="color:#FFFFFF" aria-hidden="true"><use href="#i-sign"/></svg>
         <h3>You decide</h3>
-        <p>Approve with your signature, or do nothing. Your money stays in an account only you control.</p>
+        <p>If you like the result, you approve it with your signature from your own wallet. If you don't, nothing happens. Your money stays in an account only you control.</p>
         <div class="chip-ui" aria-hidden="true">Approve: buy Nasdaq-100 and gold for 10,000 USDC<div class="wb"><span class="s">Sign</span><span class="c">Cancel</span></div></div>
       </li>
     </ol>
@@ -255,6 +280,10 @@
         <div><span class="k">Return per unit of risk</span><span class="v">0.82</span></div>
       </div>
     </figure>
+    <div class="explain">
+      <p><b>Why the worst moment matters.</b> It is easy to choose a strategy for its returns and give it up at its worst moment, often at a loss. Seeing in advance how deep the fall could be, and how long the recovery took, helps you pick a strategy you could actually stay with.</p>
+      <p><b>What else you can read.</b> Every analysis below is calculated by the same engine on the same five years of data. Choose one to see its chart and figures.</p>
+    </div>
     <div class="a-tabs" role="tablist" aria-label="Analyses"><button role="tab" id="at1" aria-controls="ap1" aria-selected="true">Distance from peak</button><button role="tab" id="at2" aria-controls="ap2" aria-selected="false" tabindex="-1">12-month returns</button><button role="tab" id="at3" aria-controls="ap3" aria-selected="false" tabindex="-1">Spread of results</button><button role="tab" id="at4" aria-controls="ap4" aria-selected="false" tabindex="-1">Sources of return</button><button role="tab" id="at5" aria-controls="ap5" aria-selected="false" tabindex="-1">Every operation</button></div>
     <div class="panel a-box rv">
       <div class="a-panel" role="tabpanel" id="ap1" aria-labelledby="at1">
@@ -302,6 +331,7 @@
         <div>
           <h2 id="money-title" class="big h-md">Your money <span class="hl">never leaves your hands.</span></h2>
           <p class="text" style="font-size:18px">We never hold your funds. You keep them in a vault only you can withdraw from, and nothing starts without your signature.</p>
+          <p class="text">Your vault is a small program on a public blockchain, created just for you. It holds your funds and follows one rule above all: only its owner, you, can take money out. IQ Finance can propose operations, but each one needs your approval first.</p>
           <ul class="money-points">
             <li><svg style="color:#C4B1FF" aria-hidden="true"><use href="#i-vault"/></svg><div><h4>An account only you own</h4><p>A personal digital vault, not a shared account controlled by us.</p></div></li>
             <li><svg style="color:#C4B1FF" aria-hidden="true"><use href="#i-key"/></svg><div><h4>Nothing starts without your signature</h4><p>Every operation needs your approval in your own wallet.</p></div></li>
@@ -399,6 +429,7 @@
       <div class="axis-x" aria-hidden="true"><span>Sep 2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span><span>Sep 2026</span></div>
       <div class="ex-kpis"><div><div class="k">5-year total</div><div class="v">—</div></div><div><div class="k">Per year</div><div class="v">—</div></div><div><div class="k">Worst drop</div><div class="v neg">−73.6%</div></div></div><p class="small" style="margin-top:16px">Rejected strategies never run.</p>
     </div>
+    <div class="explain center-explain"><p><b>Why was “All in Tesla” rejected?</b> Over the five years it would have fallen 73.6% from its peak, more than twice the 35% limit. The engine does not judge whether a company is good or bad; it only checks the numbers, and the same rule applies to every strategy.</p></div>
     <p class="figure-note center">Illustrative figures · simulated on real past market data · not a forecast.</p>
   </div>
 </section>
