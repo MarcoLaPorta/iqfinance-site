@@ -66,8 +66,19 @@
       if (e.target.hasAttribute('data-count')) countUp(e.target);
       io.unobserve(e.target);
     });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.rv, .draw, [data-count]').forEach(function (el) { io.observe(el); });
+  }, { threshold: 0, rootMargin: '0px 0px -12% 0px' });
+  document.querySelectorAll('.rv, [data-count]').forEach(function (el) { io.observe(el); });
+
+  // Charts: a clipped element has no visible area, so the observer never sees it.
+  // Watch the chart's container instead and reveal the chart from there.
+  var drawIo = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.querySelectorAll('.draw').forEach(function (d) { d.classList.add('in'); });
+      drawIo.unobserve(e.target);
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -12% 0px' });
+  document.querySelectorAll('.draw').forEach(function (d) { if (d.parentElement) drawIo.observe(d.parentElement); });
 
   function countUp(el) {
     var target = parseInt(el.getAttribute('data-count'), 10), start = null;

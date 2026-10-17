@@ -887,3 +887,78 @@ html.js:not(.no-motion) .draw.in { clip-path: inset(0 0 0 0); }
 .hsteps .frag .send { align-self: flex-start; }
 .cat li { line-height: 1.35; white-space: nowrap; }
 .cat ul { align-items: flex-start; align-content: flex-start; }
+
+/* ===== v7 — Apple × TradingView, institutional ===================================== */
+.nw { white-space: nowrap; }
+
+/* Section openings: centred, one label, one statement, one sentence. */
+.v7 .sec { padding: 160px 0 0; }
+.v7 .intro { max-width: 900px; margin: 0 auto; text-align: center; }
+.v7 .eyebrow { margin: 0 0 18px; font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--violet-2); }
+.v7 .sec-title { font-size: clamp(36px, 4.8vw, 66px); line-height: 1.03; letter-spacing: -0.038em; }
+.v7 .sec-text { margin: 24px auto 0; max-width: 700px; font-size: 20px; line-height: 1.55; }
+.v7 .sec-note { text-align: center; }
+
+/* "Read the full explanation": a quiet link, not a button. */
+.v7 details.more { margin-top: 44px; text-align: center; }
+.v7 details.more summary { border: 0; padding: 0; background: none; color: var(--violet-2); font-size: 16px; font-weight: 500; gap: 6px; }
+.v7 details.more summary:hover { color: #FFFFFF; }
+.v7 details.more summary::after { content: "›"; font-size: 20px; color: inherit; transition: transform .25s ease; }
+.v7 details.more[open] summary::after { transform: rotate(90deg); }
+.v7 details.more .more-body { max-width: 720px; margin: 28px auto 0; text-align: left; }
+
+/* Contrasts and steps sit on a centred axis. */
+.v7 .contrast { margin-top: 64px; }
+.v7 .hsteps { margin-top: 64px; }
+
+/* Quotes: the two emotional beats, centred, more air. */
+.v7 .bigquote { padding: 180px 0 30px; text-align: center; }
+.v7 .bigquote .bq { max-width: 1100px; margin: 0 auto; }
+
+/* Light from above on the sections that carry the product. */
+.v7 #analysis, .v7 #plans, .v7 #today {
+  background: radial-gradient(ellipse 60% 460px at 50% 40px, rgba(124,58,237,0.17), rgba(0,0,0,0) 72%);
+}
+
+/* Instrument cards: a coloured hairline on top, like a terminal panel. */
+.v7 .cat { position: relative; overflow: hidden; }
+.v7 .cat::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: linear-gradient(90deg, rgba(157,111,255,0), #9D6FFF, rgba(157,111,255,0)); }
+.v7 .cats .cat:nth-child(2)::before { background: linear-gradient(90deg, rgba(196,177,255,0), #C4B1FF, rgba(196,177,255,0)); }
+.v7 .cats .cat:nth-child(3)::before { background: linear-gradient(90deg, rgba(217,183,106,0), #D9B76A, rgba(217,183,106,0)); }
+
+/* Plans: Pro Max carries the brand light. */
+.v7 .plan.max {
+  background: linear-gradient(165deg, rgba(124,58,237,0.26) 0%, rgba(20,14,38,0.9) 38%, rgba(10,10,15,1) 75%);
+  border-color: rgba(157,111,255,0.55);
+  box-shadow: 0 40px 120px rgba(124,58,237,0.22), inset 0 1px 0 rgba(255,255,255,0.10);
+}
+
+/* Roadmap: a horizontal line of milestones on wide screens. */
+@media (min-width: 901px) {
+  .v7 .road-line { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 0; row-gap: 48px; margin-top: 72px; }
+  .v7 .road-line::before { display: none; }
+  .v7 .road-line li { display: flex; flex-direction: column; gap: 10px; padding: 30px 28px 0 0; border-top: 1px solid rgba(255,255,255,0.14); }
+  .v7 .road-line li::before { left: 0; top: -6px; }
+  .v7 .road-line .when { text-align: left; font-size: 26px; }
+  .v7 .road-line p { font-size: 14.5px; }
+  .v7 .road-line .now { border-top: 2px solid var(--violet-2); }
+  .v7 .road-line .now::before { top: -7px; }
+  .v7 .road-line .launch { border-top-color: rgba(157,111,255,0.6); }
+}
+.v7 #today .btn { margin-top: 20px; }
+.v7 #today > .wrap > p:last-child { text-align: center; }
+
+/* Investors: a dark-violet slab. */
+.v7 #investors .panel {
+  background: linear-gradient(150deg, #1D1338 0%, #0E0B1A 55%, #0A0A0F 100%);
+  border-color: rgba(157,111,255,0.35);
+  box-shadow: 0 50px 140px rgba(124,58,237,0.18), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+@media (max-width: 720px) {
+  .v7 .sec { padding-top: 104px; }
+  .v7 .sec-text { font-size: 17.5px; }
+  .v7 .bigquote { padding-top: 120px; }
+}
+.v7 details.more { display: flex; flex-direction: column; align-items: center; max-width: none; margin-left: auto; margin-right: auto; }
+.v7 details.more .more-body { width: 100%; }
