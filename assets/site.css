@@ -831,3 +831,6 @@ html,body{overflow-x:clip}
 /* code scene: balanced fade — content fully readable, only the outer edge dissolves */
 #engine .lin-scene{-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 74%,rgba(0,0,0,.75) 84%,transparent 100%);mask-image:linear-gradient(90deg,#000 0%,#000 74%,rgba(0,0,0,.75) 84%,transparent 100%)}
 #engine .cwr{-webkit-mask-image:linear-gradient(90deg,#000 0%,rgba(0,0,0,.8) 45%,rgba(0,0,0,.45) 100%);mask-image:linear-gradient(90deg,#000 0%,rgba(0,0,0,.8) 45%,rgba(0,0,0,.45) 100%)}
+/* navbar: pure white over the white opening, no flash on load */
+.hdr.on-light{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom-color:rgba(11,11,18,.06)}
+.logo i{display:none}
