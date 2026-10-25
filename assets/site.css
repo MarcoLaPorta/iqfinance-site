@@ -1156,3 +1156,22 @@ html,body{overflow-x:clip}
 .figs .fig:first-child svg{height:190px;margin-top:15px}
 #engine .codew{bottom:auto!important;height:600px}#engine .lin-scene{height:640px!important}
 #engine .llist{height:530px;overflow:hidden;-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 60%,transparent 100%)!important;mask-image:linear-gradient(180deg,#000 0%,#000 60%,transparent 100%)!important}
+/* keep both compositions inside the page column: same margin left and right */
+#product .lin-scene,#engine .lin-scene{overflow:hidden!important;width:100%}
+#product .kboard{left:300px;right:0;grid-template-columns:repeat(4,minmax(220px,1fr));gap:16px;overflow:hidden;
+ -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 50%,rgba(0,0,0,.4) 78%,transparent 100%),linear-gradient(180deg,#000 0%,#000 60%,transparent 100%)!important;
+ mask-image:linear-gradient(90deg,#000 0%,#000 50%,rgba(0,0,0,.4) 78%,transparent 100%),linear-gradient(180deg,#000 0%,#000 60%,transparent 100%)!important}
+#engine .codew{left:430px!important;right:0!important;width:auto!important;
+ -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 55%,rgba(0,0,0,.45) 80%,transparent 100%),linear-gradient(180deg,#000 0%,#000 70%,transparent 100%)!important;
+ mask-image:linear-gradient(90deg,#000 0%,#000 55%,rgba(0,0,0,.45) 80%,transparent 100%),linear-gradient(180deg,#000 0%,#000 70%,transparent 100%)!important}
+#engine .cwb{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
+#engine .cl span{overflow:hidden;text-overflow:clip}
+@media (max-width:1200px){#engine .codew{left:380px!important}#engine .llist{width:520px}#product .kboard{left:280px}}
+/* v36: AI comparison stays inside the viewport with equal side margins */
+.awrow{--aww:min(calc(100% + 520px),calc(100vw - 64px));width:var(--aww)!important;margin-left:calc((100% - var(--aww)) / 2)!important}
+@media (max-width:1000px){.awrow{grid-template-columns:1fr!important;--aww:100%}}
+/* v36b: side windows keep their natural width and are cropped at the edges, Linear-style */
+@media (min-width:1001px){.awrow{overflow:hidden;grid-template-columns:minmax(0,1fr) minmax(0,410px) minmax(0,410px) minmax(0,1fr)!important}.awrow>.aw.edge{width:410px;max-width:none}.awrow>.aw.edge.l{justify-self:end}.awrow>.aw.edge:not(.l){justify-self:start}}
+/* v37: keep generous side margins; below 1240px show only the two main windows */
+@media (min-width:1001px){.awrow{--aww:min(calc(100% + 520px),calc(100vw - 192px))}}
+@media (min-width:1001px) and (max-width:1240px){.awrow{--aww:100%;grid-template-columns:minmax(0,410px) minmax(0,410px)!important;justify-content:center;-webkit-mask-image:none;mask-image:none}.awrow>.aw.edge{display:none}}
